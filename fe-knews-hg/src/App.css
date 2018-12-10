@@ -1,3 +1,38 @@
 .App {
   text-align: center;
+  display: grid;
+  grid-template: 1fr 2fr 20fr 1fr / 1fr 1fr;
+  grid-template-areas:
+    "header header"
+    "navbar navbar"
+    "content sidebar";
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  background-color: aquamarine;
+  padding: 20px;
+}
+
+.navbar {
+  grid-area: navbar;
+  background-color: cornflowerblue;
+  padding: 20px;
+}
+.sidebar {
+  grid-area: sidebar;
+  background-color: coral;
+}
+
+.content {
+  grid-area: content;
+  background-color: thistle;
+  height: 100%;
+  col
+  
+}
+li {
+  margin: 10px;
+  list-style-type: none;
 }
