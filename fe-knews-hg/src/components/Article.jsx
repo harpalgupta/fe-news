@@ -37,9 +37,9 @@ class Article extends Component {
   }
 
   componentDidMount() {
-    // api.fetchArticleArticleID(this.props.article_id).then(article => {
-    //   this.setState({ article });
-    // });
+    api.fetchArticleArticleID(this.props.article_id).then(article => {
+      this.setState({ article });
+    });
     api.fetchCommentsByArticle(this.props.article_id).then(comments => {
       this.setState(comments);
     });

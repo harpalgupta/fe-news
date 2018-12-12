@@ -4,6 +4,8 @@ import { Router, Link } from "@reach/router";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ArticleEntry from "./ArticleEntry";
+import ArticleEntries from "./ArticleEntries";
+import { formatArticle } from "../utils";
 
 class Articles extends Component {
   state = {
@@ -23,33 +25,40 @@ class Articles extends Component {
           <div>
             {" "}
             <h2>Articles</h2>
-            <select
-              name="topicselector"
-              id="topicselector"
-              onChange={event => {
-                console.log(event.target.value);
-                this.handleTopic(event.target.value);
-              }}
-            >
-              <option key="all" value="">
-                all topics
-              </option>
-
-              {this.state.topics.map(topic => {
-                //  console.log(article);
-                return (
-                  <option key={topic.slug} value={topic.slug}>
-                    {topic.slug}
-                  </option>
-                );
-              })}
-            </select>
           </div>
         )}
-        {this.state.articles.articles.map(article => {
+        <select
+          name="topicselector"
+          id="topicselector"
+          onChange={event => {
+            console.log(event.target.value);
+            this.handleTopic(event.target.value);
+          }}
+        >
+          <option key="all" value="">
+            all topics
+          </option>
+
+          {this.state.topics.map(topic => {
+            //  console.log(article);
+            return (
+              <option key={topic.slug} value={topic.slug}>
+                {topic.slug}
+              </option>
+            );
+          })}
+        </select>
+        {this.state.articles.map(article => {
+          console.log(article, "THIS IS IN MAP OF ARTICLES");
           return (
-            <div>
-              <ArticleEntry article={article} article_id={article.article_id} />
+            <div key={article.article_id}>
+              {/* <ArticleEntry
+                article={article}
+                article_id={article.article_id}
+                topic={this.state.selectedTopic}
+              /> */}
+              {formatArticle(article)}
+              {/* <ArticleEntries topic={this.selectedTopic} /> */}
             </div>
           );
         })}
@@ -60,21 +69,21 @@ class Articles extends Component {
     this.setState({ selectedTopic: selectedTopic });
   };
   componentDidMount() {
-    api.fetchArticles(this.state.selectedTopic).then(articles => {
-      this.setState(articles);
-    });
-
     api
       .fetchAllTopics(this.state.selectedTopic)
       .then(topics => this.setState(topics));
+    api.fetchArticles(this.state.selectedTopic).then(articles => {
+      console.log(articles);
+      this.setState({ ...articles });
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.selectedTopic != this.state.selectedTopic) {
       console.log("NOT SAME", this.state.selectedTopic);
       api.fetchArticles(this.state.selectedTopic).then(articles => {
-        this.setState({
-          articles
+        this.setState({ ...articles }, () => {
+          console.log(this.state);
         });
       });
     }

@@ -13,29 +13,28 @@ import { formatArticle } from "../utils";
 
 // export default ArticleEntry;
 
-class ArticleEntry extends Component {
-  state = { article: {} };
+class ArticleEntries extends Component {
+  state = { articles: [] };
 
   render() {
-    // console.log("<<<<<<props<<<<<<<<", this.props);
-
-    // console.log(this.state);
-
-    return formatArticle(this.props.article);
+    // return this.state.articles.map(article => {
+    //   formatArticle(article);
+    // });
+    return <div>hi</div>;
   }
   componentDidMount() {
-    api.fetchArticleArticleID(this.props.article_id).then(article => {
-      this.setState({ article });
+    api.fetchArticles(this.props.topic).then(articles => {
+      this.setState({ articles });
     });
   }
   componentDidUpdate(prevProps, prevState) {
     //   console.log(prevState.article, this.state.article);
     if (prevProps.article_id != this.props.article_id) {
-      api.fetchArticleArticleID(this.props.article_id).then(article => {
-        this.setState({ article });
+      api.fetchArticles(this.props.topic).then(articles => {
+        this.setState({ articles });
       });
     }
   }
 }
 
-export default ArticleEntry;
+export default ArticleEntries;

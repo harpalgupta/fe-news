@@ -9,30 +9,37 @@ import { Router } from "@reach/router";
 import Comments from "./components/Comments";
 import Article from "./components/Article";
 import SubmitArticle from "./components/SubmitArticle";
+import Auth from "./components/Auth";
+import * as api from "./api";
 
 class App extends Component {
   state = {
     articles: [],
-    selectedTopic: ""
+    selectedTopic: "",
+    user: { username: "" },
+    users: []
   };
   render() {
     return (
       <div className="App">
+        {/* <div>{this.getUsers()}</div> */}
         <Header />
         <NavBar handleTopic={this.handleTopic} />
         <SideBar />
         {/* <Articles /> */}
         <>
-          <Router>
-            <Articles path="/articles" topic={this.state.selectedTopic} />
-            <Topics path="/topics/*" />
-            {/* <Articles path={`/topics/${this.state.selectedTopic}/articles`} /> */}
-            <Article path="/article/:article_id" />
-            <SubmitArticle
-              handleAddArticle={this.handleAddArticle}
-              path="/articles/submitArticle"
-            />
-          </Router>
+          <Auth login={this.login} user={this.state.user}>
+            <Router>
+              <Articles path="/articles" topic={this.state.selectedTopic} />
+              <Topics path="/topics/*" />
+              {/* <Articles path={`/topics/${this.state.selectedTopic}/articles`} /> */}
+              <Article path="/article/:article_id" />
+              <SubmitArticle
+                handleAddArticle={this.handleAddArticle}
+                path="/articles/submitArticle"
+              />
+            </Router>
+          </Auth>
         </>
       </div>
     );
@@ -41,6 +48,25 @@ class App extends Component {
   // componentDidUpdate(prevProps, prevState) {
   //   // if (prevState.selectedTopic!=this.state.selectedTopic){}
   // }
+  login = user => {
+    this.setState(user);
+  };
+
+  componentDidMount() {
+    {
+      api
+        .checkUserValid("jessjelly2")
+        .then(validuser => {
+          if (validuser) {
+            this.setState({ user: validuser });
+          }
+          //this.setState({ users }, () => console.log(this.state));
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
 }
 
 export default App;

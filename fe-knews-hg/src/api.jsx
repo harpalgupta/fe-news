@@ -19,6 +19,11 @@ export const fetchAllTopics = async () => {
   const { data } = await axios.get(url);
   return data;
 };
+export const checkUserValid = async username => {
+  const url = `${BASEURL}/users/${username}`;
+  const { data } = await axios.get(url);
+  return data;
+};
 
 export const fetchCommentsByArticle = async article_id => {
   // /api/articles/:article_id/comments
