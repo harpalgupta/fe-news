@@ -11,8 +11,10 @@ class NavBar extends Component {
     return (
       <div className="navbar">
         <Link to="/articles">Home</Link>
+        <Link to="/articles/submitArticle">Submit Article</Link>
+
         {" | "}
-        <select
+        {/* <select
           name="topicselector"
           id="topicselector"
           onChange={event => {
@@ -31,7 +33,7 @@ class NavBar extends Component {
               </option>
             );
           })}
-        </select>
+        </select> */}
         {/* <Link to="/topics">Topics</Link> */}
       </div>
     );

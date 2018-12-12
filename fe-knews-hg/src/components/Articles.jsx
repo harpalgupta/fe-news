@@ -3,96 +3,82 @@ import * as api from "../api";
 import { Router, Link } from "@reach/router";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ArticleEntry from "./ArticleEntry";
 
 class Articles extends Component {
   state = {
-    articles: []
+    articles: [],
+    topics: [],
+    selectedTopic: ""
   };
 
   render() {
     return (
       <div className="content">
-        {this.props.topic ? (
-          <h2>Articles By Topic {this.props.topic}</h2>
+        {this.state.selectedTopic ? (
+          <div>
+            <h2>Articles By Topic {this.state.selectedTopic}</h2>
+          </div>
         ) : (
-          <h2>Articles</h2>
+          <div>
+            {" "}
+            <h2>Articles</h2>
+            <select
+              name="topicselector"
+              id="topicselector"
+              onChange={event => {
+                console.log(event.target.value);
+                this.handleTopic(event.target.value);
+              }}
+            >
+              <option key="all" value="">
+                all topics
+              </option>
+
+              {this.state.topics.map(topic => {
+                //  console.log(article);
+                return (
+                  <option key={topic.slug} value={topic.slug}>
+                    {topic.slug}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         )}
-        {this.state.articles.map(article => {
+        {this.state.articles.articles.map(article => {
           return (
-            <div key={article.article_id} className="article-entry">
-              <div className="articletitle">{article.title}</div>
-              <div className="vote">
-                <button
-                  className="votearrow"
-                  onClick={() => {
-                    api
-                      .updateArticleVote(article.article_id, 1)
-                      .then(something => {
-                        console.log(something);
-                      });
-                  }}
-                >
-                  {" "}
-                  <FontAwesomeIcon icon={faArrowUp}>voteUp</FontAwesomeIcon>
-                </button>
-                Votes:{article.votes}
-                <button
-                  className="votearrow"
-                  onClick={() => {
-                    api
-                      .updateArticleVote(article.article_id, -1)
-                      .then(something => {
-                        console.log(something);
-                      });
-                  }}
-                >
-                  {" "}
-                  <FontAwesomeIcon icon={faArrowDown}>voteDown</FontAwesomeIcon>
-                </button>
-                <div />
-              </div>
-
-              <div className="article">
-                <Link
-                  key={article.article_id}
-                  state={{ article: article }}
-                  to={`/article/${article.article_id}`}
-                >
-                  {article.title}
-                  {article.body}
-                </Link>
-              </div>
-
-              <div key={article.article_id} className="article-foot">
-                <div>Comments:{article.comment_count}</div>
-                <div> Author:{article.author}</div>
-                <div> Created_at:{article.created_at}</div>
-              </div>
+            <div>
+              <ArticleEntry article={article} article_id={article.article_id} />
             </div>
           );
         })}
       </div>
     );
   }
+  handleTopic = selectedTopic => {
+    this.setState({ selectedTopic: selectedTopic });
+  };
   componentDidMount() {
-    api.fetchArticles(this.props.topic).then(articles => {
+    api.fetchArticles(this.state.selectedTopic).then(articles => {
       this.setState(articles);
     });
+
+    api
+      .fetchAllTopics(this.state.selectedTopic)
+      .then(topics => this.setState(topics));
   }
+
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.topic != this.props.topic)
-      api.fetchArticles(this.props.topic).then(articles => {
-        this.setState(articles);
+    if (prevState.selectedTopic != this.state.selectedTopic) {
+      console.log("NOT SAME", this.state.selectedTopic);
+      api.fetchArticles(this.state.selectedTopic).then(articles => {
+        this.setState({
+          articles
+        });
       });
+    }
   }
 }
 
 export default Articles;
-{
-  /* <Link
-state={{ article: article }}
-to={`/article/${article.article_id}`}
->
-
-                  </Link> */
-}

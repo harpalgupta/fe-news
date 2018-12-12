@@ -2,6 +2,7 @@ import axios from "axios";
 const BASEURL = "https://knews-prod.herokuapp.com/api";
 
 export const fetchArticles = async topic => {
+  console.log("in fetchArticles", topic);
   let url = "";
   if (topic) {
     url = `${BASEURL}/topics/${topic}/articles`;
@@ -9,7 +10,7 @@ export const fetchArticles = async topic => {
     url = `${BASEURL}/articles`;
   }
   const { data } = await axios.get(url);
-
+  console.log(data);
   return data;
 };
 
@@ -36,5 +37,13 @@ export const updateArticleVote = async (article_id, inc) => {
   const url = `${BASEURL}/articles/${article_id}`;
   const body = { inc_votes: inc };
   const { data } = await axios.patch(url, body);
+  return data;
+};
+
+export const addNewArticle = async (topic, newArticle) => {
+  ///api/topics/cats/articles
+  const url = `${BASEURL}/topics/${topic}/articles/`;
+
+  const { data } = await axios.post(url, newArticle);
   return data;
 };
