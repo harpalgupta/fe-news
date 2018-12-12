@@ -7,29 +7,39 @@ import Articles from "./components/Articles";
 import Topics from "./components/Topics";
 import * as api from "./api";
 import { Router } from "@reach/router";
+import Comments from "./components/Comments";
+import Article from "./components/Article";
 
 class App extends Component {
   state = {
-    articles: []
+    articles: [],
+    selectedTopic: ""
   };
   render() {
     return (
       <div className="App">
         <Header />
-        <NavBar />
-
+        <NavBar handleTopic={this.handleTopic} />
         <SideBar />
         {/* <Articles /> */}
         <>
           <Router>
-            <Articles path="/articles" />
+            <Articles path="/articles" topic={this.state.selectedTopic} />
             <Topics path="/topics/*" />
-            <Articles path="/topics/:topic/articles" />
+            {/* <Articles path={`/topics/${this.state.selectedTopic}/articles`} /> */}
+            <Article path="/article/:article_id" />
           </Router>
         </>
       </div>
     );
   }
+  handleTopic = selectedTopic => {
+    console.log(selectedTopic);
+    this.setState({ selectedTopic: selectedTopic });
+  };
+  // componentDidUpdate(prevProps, prevState) {
+  //   // if (prevState.selectedTopic!=this.state.selectedTopic){}
+  // }
 }
 
 export default App;
