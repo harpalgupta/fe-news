@@ -1,10 +1,15 @@
 import React, { Component } from "react";
+import Login from "./Login";
 
 class Auth extends Component {
-  state = { username: "jessjelly" };
+  state = { username: "" };
   render() {
-    if (this.props.user.username) return this.props.children;
-    return <div>not authorized</div>;
+    if (this.props.userValid) return this.props.children;
+    return (
+      <div>
+        <Login login={this.props.storeUser} />
+      </div>
+    );
   }
 }
 
