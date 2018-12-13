@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import * as api from "./api";
 import { Router, Link } from "@reach/router";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as api from "./api";
 
 export const formatArticle = article => {
   return (
@@ -40,7 +40,7 @@ export const formatArticle = article => {
       <div className="article">
         <Link
           key={`${article.article_id}article`}
-          state={{ article: article }}
+          // state={{ article: article }}
           to={`/article/${article.article_id}`}
         >
           {article.title}

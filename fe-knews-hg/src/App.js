@@ -9,14 +9,15 @@ import { Router } from "@reach/router";
 import Comments from "./components/Comments";
 import Article from "./components/Article";
 import SubmitArticle from "./components/SubmitArticle";
-import Auth from "./components/Auth";
 import * as api from "./api";
+import Login from "./components/Login";
 
 class App extends Component {
   state = {
     articles: [],
     selectedTopic: "",
-    user: { username: "" },
+    user: {},
+    userValid: false,
     users: []
   };
   render() {
@@ -26,21 +27,24 @@ class App extends Component {
         <Header />
         <NavBar handleTopic={this.handleTopic} />
         <SideBar />
-        {/* <Articles /> */}
-        <>
-          <Auth login={this.login} user={this.state.user}>
-            <Router>
-              <Articles path="/articles" topic={this.state.selectedTopic} />
-              <Topics path="/topics/*" />
-              {/* <Articles path={`/topics/${this.state.selectedTopic}/articles`} /> */}
-              <Article path="/article/:article_id" />
-              <SubmitArticle
-                handleAddArticle={this.handleAddArticle}
-                path="/articles/submitArticle"
-              />
-            </Router>
-          </Auth>
-        </>
+        {/* <Auth login="">
+          <div>
+            <Login />
+          </div>
+        </Auth> */}
+
+        <Login storeUser={this.storeUser} user={this.state.user}>
+          <Router>
+            <Articles path="/articles" topic={this.state.selectedTopic} />
+            <Topics path="/topics/*" />
+            {/* <Articles path={`/topics/${this.state.selectedTopic}/articles`} /> */}
+            <Article path="/article/:article_id" />
+            <SubmitArticle
+              handleAddArticle={this.handleAddArticle}
+              path="/articles/submitArticle"
+            />
+          </Router>
+        </Login>
       </div>
     );
   }
@@ -48,25 +52,53 @@ class App extends Component {
   // componentDidUpdate(prevProps, prevState) {
   //   // if (prevState.selectedTopic!=this.state.selectedTopic){}
   // }
-  login = user => {
-    this.setState(user);
+  storeUser = user => {
+    // this.setState(user, () => {
+    // console.log("ZZZZZZZZZZZZZZ", user);
+    this.setState({ user });
+    // });
   };
 
-  componentDidMount() {
-    {
-      api
-        .checkUserValid("jessjelly2")
-        .then(validuser => {
-          if (validuser) {
-            this.setState({ user: validuser });
-          }
-          //this.setState({ users }, () => console.log(this.state));
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  }
+  // componentDidMount() {
+  //   {
+  //     console.log("mounted");
+  //     api
+  //       //   .checkUserValid("jessjelly1")
+  //       .checkUserValid(this.state.user)
+  //       .then(validuser => {
+  //         console.log(validuser);
+  //         if (validuser) {
+  //           this.setState({ userValid: true });
+  //         }
+  //         //this.setState({ users }, () => console.log(this.state));
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   }
+  // }
+  // componentDidUpdate(prevProps, prevState) {
+  //   {
+  //     console.log("updated");
+  //     console.log(prevState.user, this.state.user);
+  //     if (prevState.userValid !== this.state.userValid) {
+  //       api
+  //         //   .checkUserValid("jessjelly1")
+  //         .checkUserValid(this.state.user)
+  //         .then(validuser => {
+  //           console.log(validuser);
+
+  //           if (validuser) {
+  //             this.setState({ userValid: true });
+  //           }
+  //           //this.setState({ users }, () => console.log(this.state));
+  //         })
+  //         .catch(err => {
+  //           console.log(err);
+  //         });
+  //     }
+  //   }
+  // }
 }
 
 export default App;
