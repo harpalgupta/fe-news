@@ -3,6 +3,7 @@ import * as api from "../api";
 import { Link } from "@reach/router";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { handleErrors } from "../utils";
 
 // import { formatArticle } from "../utils";
 
@@ -191,11 +192,15 @@ class Articles extends Component {
         .fetchArticles(this.state.selectedTopic, {
           p: this.state.p
         })
-        .then(articles => {
+        .then(({ articles }) => {
+          console.log(articles);
           this.setState(
-            { articles: [...this.state.articles], ...articles },
+            { articles: [...this.state.articles, ...articles] },
             () => {}
           );
+        })
+        .catch(err => {
+          handleErrors(err);
         });
     }
     if (prevState.selectedTopic !== this.state.selectedTopic) {
