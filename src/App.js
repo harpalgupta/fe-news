@@ -34,6 +34,7 @@ class App extends Component {
               path="/articles"
               topic={this.state.selectedTopic}
               loggedInAs={this.state.user.username}
+              user={this.state.user}
             />
             <Topics path="/topics/*" />
 

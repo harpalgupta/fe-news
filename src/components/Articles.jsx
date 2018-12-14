@@ -4,6 +4,7 @@ import { Link } from "@reach/router";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { handleErrors } from "../utils";
+import NewArticle from "./NewArticle";
 
 // import { formatArticle } from "../utils";
 
@@ -15,12 +16,17 @@ class Articles extends Component {
     selectedTopic: "",
     votes: 0,
     sortby: "",
-    p: 1
+    p: 1,
+    newArticle: {}
   };
 
   render() {
     return (
       <div className="content">
+        <NewArticle
+          handleAddArticle={this.handleAddArticle}
+          user={this.props.user}
+        />
         {this.state.selectedTopic ? (
           <div>
             <h2>Articles By Topic {this.state.selectedTopic}</h2>
@@ -164,6 +170,12 @@ class Articles extends Component {
     this.handleQuery("p", this.state.p + 1);
   };
 
+  handleAddArticle = newArticle => {
+    api
+      .addNewArticle(newArticle.topic, newArticle)
+      .then(this.setState(newArticle));
+  };
+
   componentDidMount() {
     console.log("mount");
 
@@ -176,13 +188,18 @@ class Articles extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (prevState.NewArticle !== this.state.NewArticle) {
+      this.setState({
+        articles: [...this.state.articles, this.state.NewArticle]
+      });
+    }
     if (prevState.sortby !== this.state.sortby) {
       console.log("detected new sort");
       api
         .fetchArticles(this.state.selectedTopic, {
           sortby: this.state.sortby
         })
-        .then(articles => {
+        .then(({ articles }) => {
           this.setState({ ...articles }, () => {});
         });
     }
