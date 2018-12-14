@@ -1,16 +1,31 @@
 import axios from "axios";
 const BASEURL = "https://knews-prod.herokuapp.com/api";
 
-export const fetchArticles = async topic => {
-  console.log("in fetchArticles", topic);
+export const fetchArticles = async (topic, params) => {
+  //const { sortby } = params.sortby;
   let url = "";
+  let queryStr = "";
+
   if (topic) {
     url = `${BASEURL}/topics/${topic}/articles`;
   } else {
     url = `${BASEURL}/articles`;
   }
+  if (params) {
+    queryStr = "?";
+    if (params.sortby) {
+      queryStr += `sort_by=${params.sortby}&`;
+      console.log(params);
+    }
+    if (params.p) {
+      queryStr += `p=${params.p}&`;
+      console.log(params);
+    }
+    queryStr.replace(/\&$/, "");
+    url += queryStr;
+    console.log(url);
+  }
   const { data } = await axios.get(url);
-  console.log(data);
   return data;
 };
 
@@ -50,5 +65,24 @@ export const addNewArticle = async (topic, newArticle) => {
   const url = `${BASEURL}/topics/${topic}/articles/`;
 
   const { data } = await axios.post(url, newArticle);
+  return data;
+};
+
+export const deleteArticle = async article_id => {
+  ///api/topics/cats/articles
+  console.log("in api delete article");
+  const url = `${BASEURL}/articles/${article_id}`;
+  const everything = await axios.delete(url, { params: {} });
+  console.log(everything.error);
+  return everything.data;
+};
+
+export const addNewComment = async (article_id, body, user_id) => {
+  console.log("in add new comment");
+  ///api/topics/cats/articles
+  const newComment = { user_id, body };
+  const url = `${BASEURL}/articles/${article_id}/comments`;
+
+  const { data } = await axios.post(url, newComment);
   return data;
 };

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Router, Link } from "@reach/router";
+import React from "react";
+import { Link, navigate } from "@reach/router";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as api from "./api";
@@ -55,4 +55,19 @@ export const formatArticle = article => {
       </div>
     </div>
   );
+};
+
+export const handleErrors = err => {
+  {
+    const errcontent = {
+      errstatus: err.response.status,
+      errMsg: err.response.data.msg
+    };
+    navigate("/error", {
+      state: {
+        errcontent,
+        replace: false
+      }
+    });
+  }
 };

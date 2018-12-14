@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   display: grid;
-  grid-template: 1fr 2fr 20fr 1fr / 3fr 1fr;
+  grid-template: 1fr 2fr 40fr 1fr / 5fr 1fr;
   grid-template-areas:
     "header header"
     "navbar navbar"
@@ -63,7 +63,8 @@ article {
   flex-basis: 80%;
   text-decoration: none;
 }
-.article-foot {
+.article-foot,
+.comment-foot {
   text-align: left;
   /* border: 1px solid black; */
   margin-top: 10px;
@@ -105,4 +106,24 @@ h2 {
 .votearrow {
   font-size: 20pt;
   font-weight: bolder;
+}
+
+.newArticleForm {
+  flex-direction: row;
+  flex: 0 0 80%;
+  padding: 20px;
+}
+.newArticleForm > div {
+  padding: 10px;
+}
+.newArticleForm input[name="body"] {
+  height: 200px;
+  width: 500px;
+}
+
+.LoginHeader {
+  text-align: right;
+  justify-content: right;
+  font-weight: bolder;
+  color: darkblue;
 }

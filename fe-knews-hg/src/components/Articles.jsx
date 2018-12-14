@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import * as api from "../api";
-import { Router, Link } from "@reach/router";
+import { Link } from "@reach/router";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ArticleEntry from "./ArticleEntry";
-import ArticleEntries from "./ArticleEntries";
+
 // import { formatArticle } from "../utils";
 
 class Articles extends Component {
   state = {
+    loggedInAs: "",
     articles: [],
     topics: [],
     selectedTopic: "",
-    votes: 0
+    votes: 0,
+    sortby: "",
+    p: 1
   };
 
   render() {
@@ -32,7 +34,6 @@ class Articles extends Component {
           name="topicselector"
           id="topicselector"
           onChange={event => {
-            console.log(event.target.value);
             this.handleTopic(event.target.value);
           }}
         >
@@ -49,12 +50,37 @@ class Articles extends Component {
             );
           })}
         </select>
+        <label>Sort by</label>
+        <select
+          name="sortby"
+          id="sortby"
+          onChange={event => {
+            this.handleQuery("sortby", event.target.value);
+          }}
+        >
+          <option key="all" value="">
+            Default(created_at)
+          </option>
+          <option key="article_id" value="article_id">
+            article_id
+          </option>
+          <option key="title" value="title">
+            title
+          </option>
+          <option key="votes" value="votes">
+            votes
+          </option>
+          <option key="topics" value="topics">
+            topic
+          </option>
+        </select>
         {this.state.articles.map(article => {
-          console.log(article, "THIS IS IN MAP OF ARTICLES");
           return (
             <div key={article.article_id}>{this.formatArticle(article)}</div>
           );
         })}
+
+        <button onClick={this.fetchMoreArticles}>More</button>
       </div>
     );
   }
@@ -107,7 +133,16 @@ class Articles extends Component {
 
         <div key={article.article_id} className="article-foot">
           <div>Comments:{article.comment_count}</div>
-          <div> Author:{article.author}</div>
+          {article.author === this.props.loggedInAs ? (
+            <div>
+              ME!!!
+              <Link to={`/articles/${article.article_id}/delete`}>
+                DELETE
+              </Link>{" "}
+            </div>
+          ) : (
+            <div> Author:{article.author}</div>
+          )}
           <div> Created_at:{article.created_at}</div>
         </div>
       </div>
@@ -117,33 +152,62 @@ class Articles extends Component {
   handleTopic = selectedTopic => {
     this.setState({ selectedTopic: selectedTopic });
   };
+  handleQuery = (queryItem, value) => {
+    this.setState({ [queryItem]: value }, () => {
+      console.log(this.state);
+    });
+  };
+
+  fetchMoreArticles = () => {
+    //this.setState({ page: this.state.page + 1 });
+    this.handleQuery("p", this.state.p + 1);
+  };
+
   componentDidMount() {
+    console.log("mount");
+
     api
       .fetchAllTopics(this.state.selectedTopic)
       .then(topics => this.setState(topics));
     api.fetchArticles(this.state.selectedTopic).then(articles => {
-      console.log(articles);
       this.setState({ ...articles });
     });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.selectedTopic != this.state.selectedTopic) {
-      console.log("NOT SAME", this.state.selectedTopic);
-      api.fetchArticles(this.state.selectedTopic).then(articles => {
-        this.setState({ ...articles }, () => {
-          console.log(this.state);
+    if (prevState.sortby !== this.state.sortby) {
+      console.log("detected new sort");
+      api
+        .fetchArticles(this.state.selectedTopic, {
+          sortby: this.state.sortby
+        })
+        .then(articles => {
+          this.setState({ ...articles }, () => {});
         });
-      });
     }
-
-    if (prevState.votes !== this.state.votes) {
-      console.log("vote detected");
-      api.fetchArticles(this.state.selectedTopic).then(articles => {
-        this.setState({ ...articles }, () => {
-          console.log(this.state);
+    if (prevState.p !== this.state.p) {
+      console.log("detected new page");
+      api
+        .fetchArticles(this.state.selectedTopic, {
+          p: this.state.p
+        })
+        .then(articles => {
+          this.setState(
+            { articles: [...this.state.articles], ...articles },
+            () => {}
+          );
         });
+    }
+    if (prevState.selectedTopic !== this.state.selectedTopic) {
+      api.fetchArticles(this.state.selectedTopic).then(articles => {
+        this.setState({ ...articles }, () => {});
       });
+
+      if (prevState.selectedTopic !== this.state.selectedTopic) {
+        api.fetchArticles(this.state.selectedTopic).then(articles => {
+          this.setState({ ...articles }, () => {});
+        });
+      }
     }
   }
 }
