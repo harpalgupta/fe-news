@@ -6,7 +6,6 @@ class Login extends Component {
     user: ""
   };
   render() {
-    console.log(this.props);
     if (this.props.user.username) return this.props.children;
 
     return (

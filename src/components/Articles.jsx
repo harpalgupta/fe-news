@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { handleErrors } from "../utils";
 import NewArticle from "./NewArticle";
 import TopicSelector from "./TopicSelector";
+import DeleteArticle from "./DeleteArticle";
 
 // import { formatArticle } from "../utils";
 
@@ -182,9 +183,11 @@ class Articles extends Component {
           {article.author === this.props.loggedInAs ? (
             <div>
               ME!!!
-              <Link to={`/articles/${article.article_id}/delete`}>
-                DELETE
-              </Link>{" "}
+              <DeleteArticle
+                handleDeleteArticle={this.handleDeleteArticle}
+                article_id={article.article_id}
+                index={index}
+              />
             </div>
           ) : (
             <div> Author:{article.author}</div>
@@ -220,6 +223,20 @@ class Articles extends Component {
         console.log(this.state);
       });
     });
+  };
+
+  handleDeleteArticle = (article_id, index) => {
+    console.log("in handle delete article");
+    console.log(article_id, index);
+    const tmpArticles = this.state.articles;
+    tmpArticles.splice(index, 1);
+    console.log(tmpArticles);
+    this.setState({ articles: tmpArticles });
+    // article.author = this.props.user.username;
+    // article.comment_count = 0;
+    // const formattedArticle = this.formatArticle(article);
+    // console.log(formattedArticle);
+    // this.setState({ articles: [article, ...this.state.articles] }, () => {});
   };
 
   componentDidMount() {
