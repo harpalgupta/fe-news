@@ -1,7 +1,7 @@
 import axios from "axios";
 const BASEURL = "https://knews-prod.herokuapp.com/api";
 
-export const fetchArticles = async (topic, params) => {
+export const fetchArticles = async (topic, queries) => {
   //const { sortby } = params.sortby;
   let url = "";
   let queryStr = "";
@@ -11,18 +11,15 @@ export const fetchArticles = async (topic, params) => {
   } else {
     url = `${BASEURL}/articles`;
   }
-  if (params) {
+  if (queries) {
     queryStr = "?";
-    if (params.sortby) {
-      queryStr += `sort_by=${params.sortby}&`;
-      console.log(params);
+    for (let query in queries) {
+      queryStr += `${query}=${queries[query]}&`;
     }
-    if (params.p) {
-      queryStr += `p=${params.p}&`;
-      console.log(params);
-    }
-    queryStr.replace(/\&$/, "");
+
     url += queryStr;
+    url = url.replace(/\&$/, "");
+
     console.log(url);
   }
   const { data } = await axios.get(url);
@@ -65,6 +62,7 @@ export const addNewArticle = async (topic, newArticle) => {
   const url = `${BASEURL}/topics/${topic}/articles/`;
 
   const { data } = await axios.post(url, newArticle);
+  console.log("add new article data back", data);
   return data;
 };
 

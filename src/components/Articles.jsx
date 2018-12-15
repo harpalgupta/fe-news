@@ -5,6 +5,7 @@ import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { handleErrors } from "../utils";
 import NewArticle from "./NewArticle";
+import TopicSelector from "./TopicSelector";
 
 // import { formatArticle } from "../utils";
 
@@ -17,15 +18,20 @@ class Articles extends Component {
     votes: 0,
     sortby: "",
     p: 1,
-    newArticle: {}
+    newArticle: {},
+    sort_ascending: "true",
+    queries: {}
   };
 
   render() {
+    console.log("app render");
     return (
       <div className="content">
         <NewArticle
           handleAddArticle={this.handleAddArticle}
           user={this.props.user}
+          topics={this.state.topics}
+          handleTopic={this.handleTopic}
         />
         {this.state.selectedTopic ? (
           <div>
@@ -57,12 +63,16 @@ class Articles extends Component {
             );
           })}
         </select>
+        {/* <TopicSelector
+          handleTopic={this.handleTopic}
+          topics={this.state.topics}
+        /> */}
         <label>Sort by</label>
         <select
-          name="sortby"
-          id="sortby"
+          name="sort_by"
+          id="sort_by"
           onChange={event => {
-            this.handleQuery("sortby", event.target.value);
+            this.handleQuery("sort_by", event.target.value);
           }}
         >
           <option key="all" value="">
@@ -81,9 +91,28 @@ class Articles extends Component {
             topic
           </option>
         </select>
-        {this.state.articles.map(article => {
+
+        <label>Sort Ascending/Descending</label>
+        <select
+          name="sort_ascending"
+          id="sort_ascending"
+          onChange={event => {
+            this.handleQuery("sort_ascending", event.target.value);
+          }}
+        >
+          <option key="sort_descending" value="false">
+            descending
+          </option>
+          <option key="sort_ascending" value="true">
+            ascending
+          </option>
+        </select>
+        {this.state.articles.map((article, index) => {
+          console.log("articlein map ", article);
           return (
-            <div key={article.article_id}>{this.formatArticle(article)}</div>
+            <div key={article.article_id}>
+              {this.formatArticle(article, index)}
+            </div>
           );
         })}
 
@@ -92,7 +121,8 @@ class Articles extends Component {
     );
   }
 
-  formatArticle = article => {
+  formatArticle = (article, index) => {
+    console.log("article in format article pre touched ", article);
     return (
       <div key={article.article_id} className="article-entry">
         <div className="articletitle">{article.title}</div>
@@ -102,8 +132,12 @@ class Articles extends Component {
             className="votearrow"
             onClick={() => {
               api.updateArticleVote(article.article_id, 1).then(article => {
-                this.setState({ article: { ...article } });
-                this.setState({ votes: this.state.votes + 1 });
+                const tmpArticles = [...this.state.articles];
+                tmpArticles[index] = article;
+                this.setState({
+                  articles: [...tmpArticles]
+                });
+                // this.setState({ votes: this.state.votes + 1 });
               });
             }}
           >
@@ -116,8 +150,14 @@ class Articles extends Component {
             className="votearrow"
             onClick={() => {
               api.updateArticleVote(article.article_id, -1).then(article => {
-                this.setState({ article: { ...article } });
-                this.setState({ votes: this.state.votes + 1 });
+                const tmpArticles = [...this.state.articles];
+                tmpArticles[index] = article;
+                this.setState({
+                  articles: [...tmpArticles]
+                });
+                // this.setState({ votes: this.state.votes + 1 }, () => {
+                //   console.log(this.state);
+                // });
               });
             }}
           >
@@ -133,7 +173,6 @@ class Articles extends Component {
             // state={{ article: article }}
             to={`/article/${article.article_id}`}
           >
-            {article.title}
             {article.body}
           </Link>
         </div>
@@ -160,9 +199,12 @@ class Articles extends Component {
     this.setState({ selectedTopic: selectedTopic });
   };
   handleQuery = (queryItem, value) => {
-    this.setState({ [queryItem]: value }, () => {
-      console.log(this.state);
-    });
+    this.setState(
+      { queries: { ...this.state.queries, [queryItem]: value } },
+      () => {
+        console.log(this.state.queries);
+      }
+    );
   };
 
   fetchMoreArticles = () => {
@@ -171,9 +213,13 @@ class Articles extends Component {
   };
 
   handleAddArticle = newArticle => {
-    api
-      .addNewArticle(newArticle.topic, newArticle)
-      .then(this.setState(newArticle));
+    console.log("<<<<<<<<<<<<<", newArticle);
+
+    api.addNewArticle(newArticle.topic, newArticle).then(({ article }) => {
+      this.setState({ articles: [article, ...this.state.articles] }, () => {
+        console.log(this.state);
+      });
+    });
   };
 
   componentDidMount() {
@@ -188,38 +234,69 @@ class Articles extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.NewArticle !== this.state.NewArticle) {
+    if (prevState.newArticle !== this.state.newArticle) {
       this.setState({
-        articles: [...this.state.articles, this.state.NewArticle]
+        articles: [...this.state.articles, this.state.newArticle]
       });
     }
-    if (prevState.sortby !== this.state.sortby) {
-      console.log("detected new sort");
+    if (prevState.queries !== this.state.queries) {
       api
-        .fetchArticles(this.state.selectedTopic, {
-          sortby: this.state.sortby
-        })
+        .fetchArticles(this.state.selectedTopic, this.state.queries)
         .then(({ articles }) => {
-          this.setState({ ...articles }, () => {});
-        });
-    }
-    if (prevState.p !== this.state.p) {
-      console.log("detected new page");
-      api
-        .fetchArticles(this.state.selectedTopic, {
-          p: this.state.p
-        })
-        .then(({ articles }) => {
-          console.log(articles);
-          this.setState(
-            { articles: [...this.state.articles, ...articles] },
-            () => {}
-          );
+          //console.log(articles);
+          this.setState({ articles: [...articles] }, () => {
+            console.log(this.state);
+          });
         })
         .catch(err => {
           handleErrors(err);
         });
     }
+    // if (
+    //   prevState.queries.sort_ascending !== this.state.queries.sort_ascending
+    // ) {
+    //   api
+    //     .fetchArticles(this.state.selectedTopic, {
+    //       sort_ascending: this.state.queries.sort_ascending
+    //     })
+    //     .then(({ articles }) => {
+    //       console.log(articles);
+    //       this.setState(
+    //         { articles: [...this.state.articles, ...articles] },
+    //         () => {}
+    //       );
+    //     })
+    //     .catch(err => {
+    //       handleErrors(err);
+    //     });
+    // }
+    // // if (prevState.queries.sortby !== this.state.queries.sortby) {
+    //   console.log("detected new sort");
+    //   api
+    //     .fetchArticles(this.state.selectedTopic, {
+    //       sortby: this.queries.state.sortby
+    //     })
+    //     .then(({ articles }) => {
+    //       this.setState({ ...articles }, () => {});
+    //     });
+    // }
+    // if (prevState.queries.p !== this.state.queries.p) {
+    //   console.log("detected new page");
+    //   api
+    //     .fetchArticles(this.state.selectedTopic, {
+    //       p: this.state.queries.p
+    //     })
+    //     .then(({ articles }) => {
+    //       console.log(articles);
+    //       this.setState(
+    //         { articles: [...this.state.articles, ...articles] },
+    //         () => {}
+    //       );
+    //     })
+    //     .catch(err => {
+    //       handleErrors(err);
+    //     });
+    // }
     if (prevState.selectedTopic !== this.state.selectedTopic) {
       api.fetchArticles(this.state.selectedTopic).then(articles => {
         this.setState({ ...articles }, () => {});

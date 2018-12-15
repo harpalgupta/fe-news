@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import TopicSelector from "./TopicSelector";
 
 class NewArticle extends Component {
   state = {
     body: "",
     topic: "",
-    user: {}
+    user: {},
+    selectedTopic: ""
   };
   render() {
     return (
@@ -30,13 +32,17 @@ class NewArticle extends Component {
               }}
             />
 
-            <label htmlFor="topic">Topic</label>
+            {/* <label htmlFor="topic">Topic</label>
             <input
               value={this.state.topic}
               name="topic"
               onChange={event => {
                 this.handleChange(event);
               }}
+            /> */}
+            <TopicSelector
+              handleTopic={this.handleTopic}
+              topics={this.props.topics}
             />
             <button type="submit">Add New Article</button>
           </form>
@@ -44,16 +50,19 @@ class NewArticle extends Component {
       </div>
     );
   }
+  handleTopic = selectedTopic => {
+    this.setState({ selectedTopic: selectedTopic });
+  };
   handleChange = event => {
+    //console.log(this.props.user.user_id);
+
     console.log("in handle change");
     const { name, value } = event.target;
     this.setState(
       {
         [name]: value
       },
-      () => {
-        console.log(this.state);
-      }
+      () => {}
     );
   };
   handleSubmit = event => {
@@ -61,8 +70,17 @@ class NewArticle extends Component {
       title: this.state.title,
       body: this.state.body,
       user_id: this.props.user.user_id,
-      topic: this.state.topic
+      topic: this.state.selectedTopic
     };
+    let msg = "";
+    for (let article_item in newart) {
+      if (!newart[article_item]) {
+        if (article_item === "body") msg += `Article text, `;
+        else msg += `${article_item}, `;
+      }
+    }
+    if (msg) alert(`please enter ${msg}`);
+
     event.preventDefault();
     this.props.handleAddArticle(newart);
   };

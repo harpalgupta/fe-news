@@ -11,6 +11,7 @@ class DeleteArticle extends Component {
       .then(output => {
         // this.setState({ output });
         // console.dir(output);
+        console.log(output);
       })
       .catch(err => {
         handleErrors(err);

@@ -23,7 +23,7 @@ class Header extends Component {
   //   this.setState({ username: this.props.loggedInAs });
   // }
   componentWillReceiveProps(props) {
-    this.setState({ username: props.loggedInAs });
+    this.setState({ username: props.user.username });
   }
 }
 
