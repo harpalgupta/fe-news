@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import { handleErrors } from "../utils";
 
 class Login extends Component {
   state = {
@@ -11,7 +12,7 @@ class Login extends Component {
     return (
       <div>
         Login Page
-        <form onSubmit={this.handleSubmit}>
+        <form className="loginForm" onSubmit={this.handleSubmit}>
           <input value={this.state.user} onChange={this.handleChange} />
           <button type="submit">Login</button>
         </form>
@@ -23,7 +24,13 @@ class Login extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    api.checkUserValid(this.state.user).then(this.props.storeUser);
+    api
+      .checkUserValid(this.state.user)
+      .then(this.props.storeUser)
+      .catch(err => {
+        console.log(err);
+        handleErrors(err);
+      });
     //this.props.login(this.state.user);
     // this.setState({ user: event.target.value });
   };

@@ -8,7 +8,6 @@ import Topics from "./components/Topics";
 import { Router } from "@reach/router";
 
 import Article from "./components/Article";
-import SubmitArticle from "./components/SubmitArticle";
 import Login from "./components/Login";
 import DeleteArticle from "./components/DeleteArticle";
 import Errors from "./components/Errors";
@@ -30,34 +29,41 @@ class App extends Component {
         />
         <NavBar handleTopic={this.handleTopic} />
         <SideBar />
+        <div className="content">
+          <Login
+            storeUser={this.storeUser}
+            // user={this.state.user}
+            user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ""}
+          >
+            <Router>
+              <Articles
+                path="/articles"
+                topic={this.state.selectedTopic}
+                //loggedInAs={JSON.parse(sessionStorage.user).username}
+                user={
+                  sessionStorage.user ? JSON.parse(sessionStorage.user) : ""
+                }
+                default
+              />
+              <Topics path="/topics/*" />
 
-        <Login
-          storeUser={this.storeUser}
-          // user={this.state.user}
-          user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ""}
-        >
-          <Router>
-            <Articles
-              path="/articles"
-              topic={this.state.selectedTopic}
-              //loggedInAs={JSON.parse(sessionStorage.user).username}
-              user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ""}
-            />
-            <Topics path="/topics/*" />
+              <Article
+                path="/article/:article_id"
+                user={
+                  sessionStorage.user ? JSON.parse(sessionStorage.user) : ""
+                }
+              />
 
-            <Article
-              path="/article/:article_id"
-              user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ""}
-            />
-            <SubmitArticle
-              handleAddArticle={this.handleAddArticle}
-              path="/articles/submitArticle"
-              user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ""}
-            />
-            <DeleteArticle path="/articles/:article_id/delete" />
-            <Errors path="/error" />
-          </Router>
-        </Login>
+              <DeleteArticle path="/articles/:article_id/delete" />
+            </Router>
+          </Login>
+
+          <>
+            <Router>
+              <Errors path="/error" />
+            </Router>
+          </>
+        </div>
       </div>
     );
   }

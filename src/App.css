@@ -41,39 +41,47 @@
 }
 .article-entry,
 .comment-entry {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template: 1fr 3fr 1fr / 1fr 20fr;
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: min-content 1fr;
+
+  grid-template-areas:
+    "articletitle articletitle"
+    "vote article"
+    "foot foot";
+
+  /* "navbar navbar"
+    "content sidebar"; */
+
+  /* flex: 1 0 100%;
+  flex-direction: row; */
   margin-bottom: 10px;
   margin-left: 8%;
   margin-right: 8%;
   border: 1px solid black;
   background-color: rgb(248, 248, 248);
-  padding: 5px;
+  padding: 20px;
   color: black;
-  flex-wrap: wrap;
-  max-width: 90%;
+  /* flex-flow: row wrap; */
+  max-width: 70%;
+  min-height: 20%;
 }
-article {
-  margin-bottom: 10px;
-  margin-left: 8%;
-  list-style-type: none;
-  border: 1px solid black;
-  background-color: bisque;
-  padding: 5px;
-  flex-basis: 80%;
-  text-decoration: none;
-}
+
 .article-foot,
 .comment-foot {
-  text-align: left;
+  grid-area: foot;
+  display: flex;
+  flex: 1;
+
+  /* text-align: left; */
   /* border: 1px solid black; */
   margin-top: 10px;
   text-decoration: none;
   color: blue;
-  display: flex;
-  flex-direction: row;
-  flex: 1;
+
   justify-content: space-between;
+  flex-direction: row;
 }
 
 a {
@@ -86,21 +94,37 @@ h2 {
   padding: 12px;
 }
 .articletitle {
-  flex: 0 0 100%;
+  grid-area: articletitle;
+
   font-weight: bolder;
+  height: 10px;
 }
 .vote {
-  flex: 1 0;
-  max-height: 10%;
-  background-color: rgb(236, 245, 242);
+  grid-area: vote;
+  /* background-color: rgb(236, 245, 242); */
   /* justify-content: flex-end; */
-  padding: 20px;
+  padding: 1%;
 }
 
 .article {
-  flex: 1 1 80%;
-  padding: 10px;
-  /* width: 80%; */
+  grid-area: article;
+
+  padding: 20px;
+}
+.comment {
+  grid-area: article;
+
+  padding: 20px;
+}
+article {
+  margin-bottom: 10px;
+  margin-left: 8%;
+  list-style-type: none;
+  border: 1px solid black;
+  background-color: bisque;
+  padding: 5px;
+  flex-basis: 80%;
+  text-decoration: none;
 }
 
 .votearrow {
@@ -108,22 +132,21 @@ h2 {
   font-weight: bolder;
 }
 
-.newArticleForm {
-  flex-direction: row;
-  flex: 0 0 80%;
-  padding: 20px;
-}
-.newArticleForm > div {
-  padding: 10px;
-}
-.newArticleForm input[name="body"] {
-  height: 200px;
-  width: 500px;
-}
-
 .LoginHeader {
   text-align: right;
   justify-content: right;
   font-weight: bolder;
   color: darkblue;
+}
+.loginForm {
+  max-height: 20%;
+}
+.newForm {
+  grid-area: articletitle;
+  direction: flex;
+}
+.newForm > div {
+  flex-direction: row;
+  justify-content: left;
+  justify-items: left;
 }

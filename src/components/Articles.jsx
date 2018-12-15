@@ -18,22 +18,24 @@ class Articles extends Component {
     selectedTopic: "",
     votes: 0,
     sortby: "",
-    p: 1,
+
     newArticle: {},
     sort_ascending: "true",
-    queries: {}
+    queries: { p: 1 }
   };
 
   render() {
     console.log("app render");
     return (
       <div className="content">
-        <NewArticle
-          handleAddArticle={this.handleAddArticle}
-          user={this.props.user}
-          topics={this.state.topics}
-          handleTopic={this.handleTopic}
-        />
+        <div className="new-article">
+          <NewArticle
+            handleAddArticle={this.handleAddArticle}
+            user={this.props.user}
+            topics={this.state.topics}
+            handleTopic={this.handleTopic}
+          />
+        </div>
         {this.state.selectedTopic ? (
           <div>
             <h2>Articles By Topic {this.state.selectedTopic}</h2>
@@ -212,7 +214,7 @@ class Articles extends Component {
 
   fetchMoreArticles = () => {
     //this.setState({ page: this.state.page + 1 });
-    this.handleQuery("p", this.state.p + 1);
+    this.handleQuery("p", this.state.queries.p + 1);
   };
 
   handleAddArticle = newArticle => {
@@ -232,11 +234,6 @@ class Articles extends Component {
     tmpArticles.splice(index, 1);
     console.log(tmpArticles);
     this.setState({ articles: tmpArticles });
-    // article.author = this.props.user.username;
-    // article.comment_count = 0;
-    // const formattedArticle = this.formatArticle(article);
-    // console.log(formattedArticle);
-    // this.setState({ articles: [article, ...this.state.articles] }, () => {});
   };
 
   componentDidMount() {
@@ -256,7 +253,23 @@ class Articles extends Component {
         articles: [...this.state.articles, this.state.newArticle]
       });
     }
-    if (prevState.queries !== this.state.queries) {
+    if (prevState.queries.p !== this.state.queries.p) {
+      console.log("detected new page");
+      api
+        .fetchArticles(this.state.selectedTopic, {
+          p: this.state.queries.p
+        })
+        .then(({ articles }) => {
+          this.setState(
+            { articles: [...this.state.articles, ...articles] },
+            () => {}
+          );
+        })
+        .catch(err => {
+          alert("No More Articles");
+          //handleErrors(err);
+        });
+    } else if (prevState.queries !== this.state.queries) {
       api
         .fetchArticles(this.state.selectedTopic, this.state.queries)
         .then(({ articles }) => {
@@ -269,51 +282,7 @@ class Articles extends Component {
           handleErrors(err);
         });
     }
-    // if (
-    //   prevState.queries.sort_ascending !== this.state.queries.sort_ascending
-    // ) {
-    //   api
-    //     .fetchArticles(this.state.selectedTopic, {
-    //       sort_ascending: this.state.queries.sort_ascending
-    //     })
-    //     .then(({ articles }) => {
-    //       console.log(articles);
-    //       this.setState(
-    //         { articles: [...this.state.articles, ...articles] },
-    //         () => {}
-    //       );
-    //     })
-    //     .catch(err => {
-    //       handleErrors(err);
-    //     });
-    // }
-    // // if (prevState.queries.sortby !== this.state.queries.sortby) {
-    //   console.log("detected new sort");
-    //   api
-    //     .fetchArticles(this.state.selectedTopic, {
-    //       sortby: this.queries.state.sortby
-    //     })
-    //     .then(({ articles }) => {
-    //       this.setState({ ...articles }, () => {});
-    //     });
-    // }
-    // if (prevState.queries.p !== this.state.queries.p) {
-    //   console.log("detected new page");
-    //   api
-    //     .fetchArticles(this.state.selectedTopic, {
-    //       p: this.state.queries.p
-    //     })
-    //     .then(({ articles }) => {
-    //       console.log(articles);
-    //       this.setState(
-    //         { articles: [...this.state.articles, ...articles] },
-    //         () => {}
-    //       );
-    //     })
-    //     .catch(err => {
-    //       handleErrors(err);
-    //     });
-    // }
+
     if (prevState.selectedTopic !== this.state.selectedTopic) {
       api.fetchArticles(this.state.selectedTopic).then(articles => {
         this.setState({ ...articles }, () => {});

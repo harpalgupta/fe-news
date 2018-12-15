@@ -84,3 +84,12 @@ export const addNewComment = async (article_id, body, user_id) => {
   const { data } = await axios.post(url, newComment);
   return data;
 };
+
+export const deleteComment = async (article_id, comment_id) => {
+  ///api/topics/cats/articles
+  console.log("in api delete comment");
+  const url = `${BASEURL}/articles/${article_id}/comments/${comment_id}`;
+  const everything = await axios.delete(url, { params: {} });
+  console.log(everything.error);
+  return everything.data;
+};

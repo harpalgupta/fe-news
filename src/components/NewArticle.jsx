@@ -15,24 +15,25 @@ class NewArticle extends Component {
 
         <div className="article-entry">
           <form className="newForm" onSubmit={this.handleSubmit}>
-            <label htmlFor="title">Title</label>
-            <input
-              value={this.state.title}
-              name="title"
-              onChange={event => {
-                this.handleChange(event);
-              }}
-            />
-            <label htmlFor="body">Article Text</label>
-            <input
-              value={this.state.body}
-              name="body"
-              onChange={event => {
-                this.handleChange(event);
-              }}
-            />
+            <div>
+              <label htmlFor="title">Title</label>
+              <input
+                value={this.state.title}
+                name="title"
+                onChange={event => {
+                  this.handleChange(event);
+                }}
+              />
+              <label htmlFor="body">Article Text</label>
+              <input
+                value={this.state.body}
+                name="body"
+                onChange={event => {
+                  this.handleChange(event);
+                }}
+              />
 
-            {/* <label htmlFor="topic">Topic</label>
+              {/* <label htmlFor="topic">Topic</label>
             <input
               value={this.state.topic}
               name="topic"
@@ -40,11 +41,12 @@ class NewArticle extends Component {
                 this.handleChange(event);
               }}
             /> */}
-            <TopicSelector
-              handleTopic={this.handleTopic}
-              topics={this.props.topics}
-            />
-            <button type="submit">Add New Article</button>
+              <TopicSelector
+                handleTopic={this.handleTopic}
+                topics={this.props.topics}
+              />
+              <button type="submit">Add New Article</button>
+            </div>
           </form>
         </div>
       </div>
