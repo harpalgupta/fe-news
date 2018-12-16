@@ -140,6 +140,7 @@ article {
 }
 .loginForm {
   max-height: 20%;
+  align-content: center;
 }
 .newForm {
   grid-area: articletitle;
@@ -149,4 +150,11 @@ article {
   flex-direction: row;
   justify-content: left;
   justify-items: left;
+}
+.user-list {
+  text-align: left;
+  margin: auto;
+}
+.user-list-div {
+  align-items: center;
 }

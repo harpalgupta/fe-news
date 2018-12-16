@@ -4,27 +4,53 @@ import { handleErrors } from "../utils";
 
 class Login extends Component {
   state = {
-    user: ""
+    user: "",
+    users: []
   };
   render() {
     if (this.props.user.username) return this.props.children;
 
     return (
       <div>
-        Login Page
-        <form className="loginForm" onSubmit={this.handleSubmit}>
-          <input
-            value={this.state.user}
-            onChange={this.handleChange}
-            pattern=".{4,}"
-            required
-            title="4 characters minimum"
-          />
-          <button type="submit">Login</button>
-        </form>
+        <h2>Login Page</h2>
+        <div className="login-page">
+          <form className="loginForm" onSubmit={this.handleSubmit}>
+            <input
+              value={this.state.user}
+              onChange={this.handleChange}
+              pattern=".{4,}"
+              required
+              title="4 characters minimum"
+            />
+            <button type="submit">Login</button>
+          </form>
+          <div className="user-list">
+            <ul>
+              {this.state.users.map(user => (
+                <li key={user.user_id}>{user.username}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }
+  componentDidMount() {
+    this.fetchUsers();
+  }
+
+  fetchUsers = () => {
+    console.log("in fetch users");
+    api
+      .getUsers()
+      .then(users => {
+        this.setState({ users: users });
+      })
+      .catch(err => {
+        console.log(err);
+        handleErrors(err);
+      });
+  };
   handleChange = event => {
     this.setState({ user: event.target.value });
   };

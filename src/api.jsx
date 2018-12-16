@@ -110,3 +110,9 @@ export const deleteComment = async (article_id, comment_id) => {
   console.log(everything.error);
   return everything.data;
 };
+
+export const getUsers = async () => {
+  const url = `${BASEURL}/users`;
+  const { data } = await axios.get(url);
+  return data;
+};
