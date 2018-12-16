@@ -37,9 +37,20 @@ export const checkUserValid = async username => {
   return data;
 };
 
-export const fetchCommentsByArticle = async article_id => {
+export const fetchCommentsByArticle = async (article_id, queries) => {
   // /api/articles/:article_id/comments
-  const url = `${BASEURL}/articles/${article_id}/comments`;
+  let url = `${BASEURL}/articles/${article_id}/comments`;
+  let queryStr = "";
+  if (queries) {
+    queryStr = "?";
+    for (let query in queries) {
+      queryStr += `${query}=${queries[query]}&`;
+    }
+
+    url += queryStr;
+    url = url.replace(/\&$/, "");
+  }
+
   const { data } = await axios.get(url);
   return data;
 };
