@@ -5,10 +5,23 @@ import { handleErrors } from "../utils";
 
 class DeleteArticle extends Component {
   state = { output: "", errMsg: {} };
+
   render() {
+    let artId = this.props.article_id * 1;
+    if (isNaN(artId)) {
+      const err = { response: { status: 0, data: { msg: "" } } };
+
+      err.response.status = 400;
+      err.response.data.msg = "Local Error Article Id must be a number";
+      handleErrors(err);
+      return <div />;
+    }
+
     return (
       <div>
-        <button onClick={this.goDeleteArticle}>DELETE</button>
+        <button onClick={this.goDeleteArticle}>
+          DELETE Article ID {this.props.article_id}
+        </button>
       </div>
     );
   }
@@ -27,6 +40,7 @@ class DeleteArticle extends Component {
         }
       })
       .catch(err => {
+        console.log("ERROR DETECTED");
         handleErrors(err);
       });
   // handleErrors = err => {

@@ -6,6 +6,19 @@ import { handleErrors } from "../utils";
 class DeleteComment extends Component {
   state = { output: "", errMsg: {} };
   render() {
+    let artId = this.props.article_id * 1;
+    let comId = this.props.comment_id * 1;
+
+    if (isNaN(artId || comId)) {
+      const err = { response: { status: 0, data: { msg: "" } } };
+
+      err.response.status = 400;
+      err.response.data.msg =
+        "Local Error Article and Comment Id must be a number";
+      handleErrors(err);
+      return <div />;
+    }
+
     return (
       <div>
         <button onClick={this.goDeleteComment}>DELETE</button>
@@ -25,19 +38,8 @@ class DeleteComment extends Component {
           );
           return `${this.props.comment_id} deleted`;
         }
-      });
-  handleErrors = err => {
-    const errcontent = {
-      errstatus: err.response.status,
-      errMsg: err.response.data.msg
-    };
-    navigate("/error", {
-      state: {
-        errcontent,
-        replace: false
-      }
-    });
-  };
+      })
+      .catch(err => handleErrors(err));
 }
 
 export default DeleteComment;

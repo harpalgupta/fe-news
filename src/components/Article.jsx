@@ -3,8 +3,9 @@ import * as api from "../api";
 import Comments from "./Comments";
 
 import { Link } from "@reach/router";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import Votes from "./Votes";
+import { handleErrors } from "../utils";
 
 class Article extends Component {
   state = {
@@ -12,6 +13,17 @@ class Article extends Component {
     comments: []
   };
   render() {
+    console.log("<<<<<<<<<<<<<<<<<<<<", this.props);
+    let artId = this.props.article_id * 1;
+    if (isNaN(artId)) {
+      const err = { response: { status: 0, data: { msg: "" } } };
+
+      err.response.status = 400;
+      err.response.data.msg = "Local Error Article Id must be a number";
+      handleErrors(err);
+      return <div />;
+    }
+
     return (
       <div className="content">
         <h2>Article: {this.state.article.title}</h2>
@@ -26,36 +38,7 @@ class Article extends Component {
   formatArticle = article => {
     return (
       <div key={article.article_id} className="article-entry">
-        <div className="articletitle">{article.title}</div>
-        <div className="vote">
-          <button
-            key={`${article.article_id}UP`}
-            className="votearrow"
-            onClick={() => {
-              api.updateArticleVote(article.article_id, 1).then(article => {
-                this.setState({ article: { ...article } });
-                this.forceUpdate();
-              });
-            }}
-          >
-            {" "}
-            <FontAwesomeIcon icon={faArrowUp}>voteUp</FontAwesomeIcon>
-          </button>
-          Votes:{article.votes}
-          <button
-            key={`${article.article_id}Down`}
-            className="votearrow"
-            onClick={() => {
-              api.updateArticleVote(article.article_id, -1).then(article => {
-                this.setState({ article: { ...article } });
-              });
-            }}
-          >
-            {" "}
-            <FontAwesomeIcon icon={faArrowDown}>voteDown</FontAwesomeIcon>
-          </button>
-          <div />
-        </div>
+        <Votes article={article} handleUpdateVotes={this.handleUpdateVotes} />
 
         <div className="article">
           <Link
@@ -76,16 +59,19 @@ class Article extends Component {
       </div>
     );
   };
+
+  handleUpdateVotes = (article, index, votes) => {
+    console.log("in handle update votes, new updated article", article);
+
+    this.setState({ article: { ...article } });
+  };
+
   componentDidMount() {
     api.fetchArticleArticleID(this.props.article_id).then(article => {
       this.setState({ article });
     });
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.article.votes !== this.state.article.votes) {
-      this.setState({ article: { ...this.state.article } });
-    }
-  }
+  componentDidUpdate(prevProps, prevState) {}
 }
 
 export default Article;

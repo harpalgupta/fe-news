@@ -67,6 +67,12 @@ export const updateArticleVote = async (article_id, inc) => {
   const { data } = await axios.patch(url, body);
   return data;
 };
+export const updateCommentVote = async (article_id, comment_id, inc) => {
+  const url = `${BASEURL}/articles/${article_id}/comments/${comment_id}`;
+  const body = { inc_votes: inc };
+  const { data } = await axios.patch(url, body);
+  return data;
+};
 
 export const addNewArticle = async (topic, newArticle) => {
   ///api/topics/cats/articles

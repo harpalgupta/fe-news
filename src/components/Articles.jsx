@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import { Link } from "@reach/router";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { handleErrors } from "../utils";
 import NewArticle from "./NewArticle";
-import TopicSelector from "./TopicSelector";
 import DeleteArticle from "./DeleteArticle";
+import Votes from "./Votes";
 
 // import { formatArticle } from "../utils";
 
@@ -21,7 +20,8 @@ class Articles extends Component {
 
     newArticle: {},
     sort_ascending: "true",
-    queries: { p: 1 }
+    queries: { p: 1 },
+    sessionVotes: {}
   };
 
   render() {
@@ -111,7 +111,6 @@ class Articles extends Component {
           </option>
         </select>
         {this.state.articles.map((article, index) => {
-          console.log("articlein map ", article);
           return (
             <div key={article.article_id}>
               {this.formatArticle(article, index)}
@@ -125,56 +124,20 @@ class Articles extends Component {
   }
 
   formatArticle = (article, index) => {
-    console.log("article in format article pre touched ", article);
     return (
       <div key={article.article_id} className="article-entry">
         <div className="articletitle">{article.title}</div>
-        <div className="vote">
-          <button
-            key={`${article.article_id}UP`}
-            className="votearrow"
-            onClick={() => {
-              api.updateArticleVote(article.article_id, 1).then(article => {
-                const tmpArticles = [...this.state.articles];
-                tmpArticles[index] = article;
-                this.setState({
-                  articles: [...tmpArticles]
-                });
-                // this.setState({ votes: this.state.votes + 1 });
-              });
-            }}
-          >
-            {" "}
-            <FontAwesomeIcon icon={faArrowUp}>voteUp</FontAwesomeIcon>
-          </button>
-          Votes:{article.votes}
-          <button
-            key={`${article.article_id}Down`}
-            className="votearrow"
-            onClick={() => {
-              api.updateArticleVote(article.article_id, -1).then(article => {
-                const tmpArticles = [...this.state.articles];
-                tmpArticles[index] = article;
-                this.setState({
-                  articles: [...tmpArticles]
-                });
-                // this.setState({ votes: this.state.votes + 1 }, () => {
-                //   console.log(this.state);
-                // });
-              });
-            }}
-          >
-            {" "}
-            <FontAwesomeIcon icon={faArrowDown}>voteDown</FontAwesomeIcon>
-          </button>
-          <div />
-        </div>
-
+        <Votes
+          article={article}
+          handleUpdateVotes={this.handleUpdateVotes}
+          index={index}
+          type="article"
+        />
         <div className="article">
           <Link
             key={`${article.article_id}article`}
             // state={{ article: article }}
-            to={`/article/${article.article_id}`}
+            to={`/articles/${article.article_id}`}
           >
             {article.body}
           </Link>
@@ -234,6 +197,16 @@ class Articles extends Component {
     tmpArticles.splice(index, 1);
     console.log(tmpArticles);
     this.setState({ articles: tmpArticles });
+  };
+
+  handleUpdateVotes = (article, index) => {
+    console.log("in handle update votes");
+
+    const tmpArticles = [...this.state.articles];
+    tmpArticles[index] = article;
+    this.setState({
+      articles: [...tmpArticles]
+    });
   };
 
   componentDidMount() {

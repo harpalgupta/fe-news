@@ -3,6 +3,7 @@ import * as api from "../api";
 import NewComment from "./NewComment";
 import { handleErrors } from "../utils";
 import DeleteComment from "./DeleteComment";
+import Votes from "./Votes";
 
 class Comments extends Component {
   state = {
@@ -57,6 +58,13 @@ class Comments extends Component {
         {this.state.comments.map((comment, index) => {
           return (
             <div key={comment.comment_id} className="comment-entry">
+              <Votes
+                type="comment"
+                comment={comment}
+                index={index}
+                handleUpdateVotes={this.handleUpdateVotes}
+                article_id={this.props.article_id}
+              />
               <div className="comment">
                 <p key={comment.comment_id}>{comment.body}</p>
                 <div className="comment-foot">
@@ -83,6 +91,42 @@ class Comments extends Component {
       </div>
     );
   }
+
+  // formatComment = comment => {
+  //   return (
+  //     <div key={comment.comment_id} className="comment-entry">
+  //       {/* <Votes article={article} handleUpdateVotes={this.handleUpdateVotes} /> */}
+
+  //       <div className="comment">
+  //         <Link
+  //           key={`${article.article_id}article`}
+  //           state={{ article: article }}
+  //           to={`/article/${article.article_id}`}
+  //         >
+  //           {article.title}
+  //           {article.body}
+  //         </Link>
+  //       </div>
+
+  //       <div key={article.article_id} className="article-foot">
+  //         <div>Comments:{article.comment_count}</div>
+  //         <div> Author:{article.author}</div>
+  //         <div> Created_at:{article.created_at}</div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
+
+  handleUpdateVotes = (comment, index) => {
+    console.log("in handle update votes");
+
+    const tmpComments = [...this.state.comments];
+    tmpComments[index] = comment;
+    this.setState({
+      comments: [...tmpComments]
+    });
+  };
+
   handleAddComment = newComment => {
     console.log("in handle add comment");
     api

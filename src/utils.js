@@ -57,7 +57,7 @@ export const formatArticle = article => {
   );
 };
 
-export const handleErrors = err => {
+export const handleErrors = (err, localerr) => {
   {
     console.log("in handle error", err);
     const errcontent = {

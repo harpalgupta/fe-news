@@ -11,6 +11,7 @@ import Article from "./components/Article";
 import Login from "./components/Login";
 import DeleteArticle from "./components/DeleteArticle";
 import Errors from "./components/Errors";
+import DeleteComment from "./components/DeleteComment";
 
 class App extends Component {
   state = {
@@ -43,18 +44,18 @@ class App extends Component {
                 user={
                   sessionStorage.user ? JSON.parse(sessionStorage.user) : ""
                 }
-                default
               />
               <Topics path="/topics/*" />
 
               <Article
-                path="/article/:article_id"
+                path="/articles/:article_id"
                 user={
                   sessionStorage.user ? JSON.parse(sessionStorage.user) : ""
                 }
               />
 
               <DeleteArticle path="/articles/:article_id/delete" />
+              <DeleteComment path="/articles/:article_id/comments/:comment_id/delete" />
             </Router>
           </Login>
 

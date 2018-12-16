@@ -13,7 +13,13 @@ class Login extends Component {
       <div>
         Login Page
         <form className="loginForm" onSubmit={this.handleSubmit}>
-          <input value={this.state.user} onChange={this.handleChange} />
+          <input
+            value={this.state.user}
+            onChange={this.handleChange}
+            pattern=".{4,}"
+            required
+            title="4 characters minimum"
+          />
           <button type="submit">Login</button>
         </form>
       </div>
