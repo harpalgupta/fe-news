@@ -61,6 +61,19 @@ export const fetchArticleArticleID = async article_id => {
   return data;
 };
 
+export const updateVotes = async (type, article_id, inc, comment_id) => {
+  if (type === "article") {
+    const url = `${BASEURL}/articles/${article_id}`;
+    const body = { inc_votes: inc };
+    const { data } = await axios.patch(url, body);
+    return data;
+  } else if (type === "comment") {
+    const url = `${BASEURL}/articles/${article_id}/comments/${comment_id}`;
+    const body = { inc_votes: inc };
+    const { data } = await axios.patch(url, body);
+    return data;
+  }
+};
 export const updateArticleVote = async (article_id, inc) => {
   const url = `${BASEURL}/articles/${article_id}`;
   const body = { inc_votes: inc };

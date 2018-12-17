@@ -5,19 +5,36 @@ import * as api from "../api";
 import React, { Component } from "react";
 
 class Votes extends Component {
+  state = {
+    storeUserVotes: {}
+  };
   render() {
-    const { article, index, handleUpdateVotes, type, comment } = this.props;
+    const {
+      article,
+      index,
+      handleUpdateVotes,
+      type,
+      comment,
+      storeUserVotes
+    } = this.props;
     if (type === "article") {
       return (
         <div className="vote">
           <button
             key={`${article.article_id}UP`}
             className="votearrow"
+            // disabled={
+            //   this.state.storeUserVotes.article[article.article_id] === 1
+            //     ? 1
+            //     : 0
+            // }
             onClick={() => {
-              console.log(article.sessionVote);
               api.updateArticleVote(article.article_id, 1).then(article => {
                 handleUpdateVotes(article, index);
-                // this.setState({ votes: this.state.votes + 1 });
+
+                storeUserVotes(this.props.username, this.props.article_id, 1);
+
+                this.setState({ storeUserVotes: { [article.article_id]: 1 } });
               });
             }}
           >
@@ -86,6 +103,19 @@ class Votes extends Component {
     }
     return <div />;
   }
+  componentDidMount() {
+    console.log("votes loaded", this.props.article.article_id);
+    // const tmpStoreVote = { [this.props.article.article_id]: 0 };
+    // this.setState(
+    //   {
+    //     storeUserVotes: { ...this.state.storeUserVotes, tmpStoreVote }
+    //   },
+    //   () => console.log(this.state)
+    // );
+  }
+  // componentWillReceiveProps(props) {
+  //   this.setState({ username: props.user.username });
+  // }
 }
 
 export default Votes;

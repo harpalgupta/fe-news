@@ -24,8 +24,9 @@ class Login extends Component {
             />
             <button type="submit">Login</button>
           </form>
-          <div className="user-list">
-            <ul>
+          <div>
+            <h3>Valid Users</h3>
+            <ul className="user-list">
               {this.state.users.map(user => (
                 <li key={user.user_id}>{user.username}</li>
               ))}

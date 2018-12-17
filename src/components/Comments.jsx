@@ -64,6 +64,7 @@ class Comments extends Component {
                 index={index}
                 handleUpdateVotes={this.handleUpdateVotes}
                 article_id={this.props.article_id}
+                comment_id={comment.comment_id}
               />
               <div className="comment">
                 <p key={comment.comment_id}>{comment.body}</p>

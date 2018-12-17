@@ -27,6 +27,7 @@ class App extends Component {
         <Header
           loggedInAs={this.state.user.username}
           user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ""}
+          logOut={this.logOut}
         />
         <NavBar handleTopic={this.handleTopic} />
         <SideBar />
@@ -74,6 +75,11 @@ class App extends Component {
     if (sessionStorage.user)
       this.setState({ user: JSON.parse(sessionStorage.user) });
     // });
+  };
+
+  logOut = () => {
+    sessionStorage.removeItem("user");
+    this.setState({ user: {} });
   };
 }
 

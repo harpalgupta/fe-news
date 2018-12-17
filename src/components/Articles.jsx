@@ -6,6 +6,7 @@ import { handleErrors } from "../utils";
 import NewArticle from "./NewArticle";
 import DeleteArticle from "./DeleteArticle";
 import Votes from "./Votes";
+import Article from "./Article";
 
 // import { formatArticle } from "../utils";
 
@@ -128,10 +129,14 @@ class Articles extends Component {
       <div key={article.article_id} className="article-entry">
         <div className="articletitle">{article.title}</div>
         <Votes
+          article_id={article.article_id}
           article={article}
           handleUpdateVotes={this.handleUpdateVotes}
           index={index}
           type="article"
+          username={this.props.user.username}
+          storeUserVotes={this.storeUserVotes}
+          sessionVotes={this.state.sessionVotes}
         />
         <div className="article">
           <Link
@@ -207,6 +212,20 @@ class Articles extends Component {
     this.setState({
       articles: [...tmpArticles]
     });
+  };
+
+  storeUserVotes = (username, article_id, vote) => {
+    console.log("in store User Votes");
+
+    this.setState(
+      {
+        sessionVotes: {
+          ...this.state.sessionVotes,
+          [username]: { article_id, vote }
+        }
+      },
+      () => console.log(this.state)
+    );
   };
 
   componentDidMount() {

@@ -38,7 +38,10 @@ class Article extends Component {
   formatArticle = article => {
     return (
       <div key={article.article_id} className="article-entry">
-        <Votes article={article} handleUpdateVotes={this.handleUpdateVotes} />
+        <Votes
+          article_id={article.article_id}
+          handleUpdateVotes={this.handleUpdateVotes}
+        />
 
         <div className="article">
           <Link

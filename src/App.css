@@ -11,8 +11,28 @@
 
 .header {
   grid-area: header;
-  background-color: lightyellow;
+  display: flex;
+  flex-direction: row;
+  background-color: grey;
   padding: 20px;
+  height: 40px;
+  flex: space-around;
+}
+.header-img {
+  flex: 0 0;
+  height: 40px;
+}
+.header-text {
+  /* margin-top: 15px; */
+
+  flex: 1 1;
+  font-weight: bolder;
+
+  height: 40px;
+  font-family: "gotham-bold";
+  font-size: 20px;
+  color: white;
+  padding-top: 15px;
 }
 
 .navbar {
@@ -137,6 +157,7 @@ article {
   justify-content: right;
   font-weight: bolder;
   color: darkblue;
+  padding-top: 15px;
 }
 .loginForm {
   max-height: 20%;
@@ -152,9 +173,14 @@ article {
   justify-items: left;
 }
 .user-list {
-  text-align: left;
   margin: auto;
+  list-style-type: none;
 }
 .user-list-div {
   align-items: center;
+}
+
+.votearrow-hidden {
+  background-color: black;
+  color: yellow;
 }

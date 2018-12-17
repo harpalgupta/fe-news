@@ -8,17 +8,23 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-        <FontAwesomeIcon icon={faHome} />
-        NC Knews
-        {this.props.user.username ? (
-          <div className="LoginHeader">
-            logged in as {this.props.user.username}{" "}
-          </div>
-        ) : (
-          <div className="LoginHeader">
-            Not Logged in {this.props.user.username}
-          </div>
-        )}
+        <img
+          className="header-img"
+          src="https://northcoders.com/images/logos/learn_to_code_manchester_rw_second.png"
+        />
+        <div className="header-text"> Knews</div>
+        <div className="LoginHeader">
+          {this.props.user.username ? (
+            <>
+              logged in as {this.props.user.username}
+              <div>
+                <button onClick={this.props.logOut}>Log Out</button>
+              </div>
+            </>
+          ) : (
+            <>Not Logged in {this.props.user.username}</>
+          )}
+        </div>
       </div>
     );
   }
