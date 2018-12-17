@@ -17,7 +17,9 @@ class Header extends Component {
           {this.props.user.username ? (
             <>
               logged in as {this.props.user.username}
-              <div>
+              {console.log(this.props.user)}
+              <img className="userAvatar" src={this.props.user.avatar_url} />
+              <div className="logout-button">
                 <button onClick={this.props.logOut}>Log Out</button>
               </div>
             </>

@@ -15,7 +15,7 @@
   flex-direction: row;
   background-color: grey;
   padding: 20px;
-  height: 40px;
+  height: 60px;
   flex: space-around;
 }
 .header-img {
@@ -37,18 +37,24 @@
 
 .navbar {
   grid-area: navbar;
-  background-color: cornflowerblue;
+  background-color: darkgray;
+
   padding: 20px;
   display: flex;
   flex: space-around;
 }
 
-.navbar :first-child {
+.navbar-link {
   margin-right: 20px;
+}
+.sort-bar {
+  padding-bottom: 15px;
 }
 .sidebar {
   grid-area: sidebar;
-  background-color: coral;
+  background-color: rgb(70, 70, 70);
+  border-style: none none none solid;
+  border-color: white;
 }
 
 .content {
@@ -159,6 +165,9 @@ article {
   color: darkblue;
   padding-top: 15px;
 }
+.logout-button {
+  padding: 5px;
+}
 .loginForm {
   max-height: 20%;
   align-content: center;
@@ -175,6 +184,8 @@ article {
 .user-list {
   margin: auto;
   list-style-type: none;
+  width: 150px;
+  text-align: left;
 }
 .user-list-div {
   align-items: center;
@@ -183,4 +194,9 @@ article {
 .votearrow-hidden {
   background-color: black;
   color: yellow;
+}
+
+.userAvatar {
+  height: 20px;
+  padding-left: 5px;
 }

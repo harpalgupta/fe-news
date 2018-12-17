@@ -47,70 +47,74 @@ class Articles extends Component {
             <h2>Articles</h2>
           </div>
         )}
-        <select
-          name="topicselector"
-          id="topicselector"
-          onChange={event => {
-            this.handleTopic(event.target.value);
-          }}
-        >
-          <option key="all" value="">
-            all topics
-          </option>
 
-          {this.state.topics.map(topic => {
-            //  console.log(article);
-            return (
-              <option key={topic.slug} value={topic.slug}>
-                {topic.slug}
-              </option>
-            );
-          })}
-        </select>
-        {/* <TopicSelector
+        <div className="sort-bar">
+          <select
+            name="topicselector"
+            id="topicselector"
+            onChange={event => {
+              this.handleTopic(event.target.value);
+            }}
+          >
+            <option key="all" value="">
+              all topics
+            </option>
+
+            {this.state.topics.map(topic => {
+              //  console.log(article);
+              return (
+                <option key={topic.slug} value={topic.slug}>
+                  {topic.slug}
+                </option>
+              );
+            })}
+          </select>
+          {/* <TopicSelector
           handleTopic={this.handleTopic}
           topics={this.state.topics}
         /> */}
-        <label>Sort by</label>
-        <select
-          name="sort_by"
-          id="sort_by"
-          onChange={event => {
-            this.handleQuery("sort_by", event.target.value);
-          }}
-        >
-          <option key="all" value="">
-            Default(created_at)
-          </option>
-          <option key="article_id" value="article_id">
-            article_id
-          </option>
-          <option key="title" value="title">
-            title
-          </option>
-          <option key="votes" value="votes">
-            votes
-          </option>
-          <option key="topics" value="topics">
-            topic
-          </option>
-        </select>
+          <label>Sort by</label>
+          <select
+            name="sort_by"
+            id="sort_by"
+            onChange={event => {
+              this.handleQuery("sort_by", event.target.value);
+            }}
+          >
+            <option key="all" value="">
+              Default(created_at)
+            </option>
+            <option key="article_id" value="article_id">
+              article_id
+            </option>
+            <option key="title" value="title">
+              title
+            </option>
+            <option key="votes" value="votes">
+              votes
+            </option>
+            <option key="topics" value="topics">
+              topic
+            </option>
+          </select>
 
-        <label>Sort Ascending/Descending</label>
-        <select
-          name="sort_ascending"
-          id="sort_ascending"
-          onChange={event => {
-            this.handleQuery("sort_ascending", event.target.value);
-          }}
-        >
-          <option key="sort_descending" value="false">
-            descending
-          </option>
-          <option key="sort_ascending" value="true">
-            ascending
-          </option>
-        </select>
+          <label>Sort Ascending/Descending</label>
+          <select
+            name="sort_ascending"
+            id="sort_ascending"
+            onChange={event => {
+              this.handleQuery("sort_ascending", event.target.value);
+            }}
+          >
+            <option key="sort_descending" value="false">
+              descending
+            </option>
+            <option key="sort_ascending" value="true">
+              ascending
+            </option>
+          </select>
+        </div>
+
         {this.state.articles.map((article, index) => {
           return (
             <div key={article.article_id}>

@@ -28,7 +28,13 @@ class Login extends Component {
             <h3>Valid Users</h3>
             <ul className="user-list">
               {this.state.users.map(user => (
-                <li key={user.user_id}>{user.username}</li>
+                <div className="user-entry">
+                  <li key={user.user_id}>
+                    {" "}
+                    <img className="userAvatar" src={user.avatar_url} />
+                    {user.username}
+                  </li>
+                </div>
               ))}
             </ul>
           </div>

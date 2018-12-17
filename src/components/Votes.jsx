@@ -104,7 +104,7 @@ class Votes extends Component {
     return <div />;
   }
   componentDidMount() {
-    console.log("votes loaded", this.props.article.article_id);
+    // console.log("votes loaded", this.props.article.article_id);
     // const tmpStoreVote = { [this.props.article.article_id]: 0 };
     // this.setState(
     //   {
