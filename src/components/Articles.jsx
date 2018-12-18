@@ -5,8 +5,9 @@ import { Link } from "@reach/router";
 import { handleErrors } from "../utils";
 import NewArticle from "./NewArticle";
 import DeleteArticle from "./DeleteArticle";
-import Votes from "./Votes";
+// import Votes from "./Votes";
 import Article from "./Article";
+import Votes2 from "./Votes2";
 
 // import { formatArticle } from "../utils";
 
@@ -132,7 +133,7 @@ class Articles extends Component {
     return (
       <div key={article.article_id} className="article-entry">
         <div className="articletitle">{article.title}</div>
-        <Votes
+        {/* <Votes
           article_id={article.article_id}
           article={article}
           handleUpdateVotes={this.handleUpdateVotes}
@@ -141,6 +142,13 @@ class Articles extends Component {
           username={this.props.user.username}
           storeUserVotes={this.storeUserVotes}
           sessionVotes={this.state.sessionVotes}
+        /> */}
+        <Votes2 article_id={article.article_id}
+        type="article"
+        votes={article.votes}
+        index={index}
+        handleUpdateVotes={this.handleUpdateVotes}
+
         />
         <div className="article">
           <Link

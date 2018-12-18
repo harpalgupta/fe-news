@@ -4,7 +4,7 @@ import Comments from "./Comments";
 
 import { Link } from "@reach/router";
 
-import Votes from "./Votes";
+import Votes2 from "./Votes2";
 import { handleErrors } from "../utils";
 
 class Article extends Component {
@@ -38,9 +38,14 @@ class Article extends Component {
   formatArticle = article => {
     return (
       <div key={article.article_id} className="article-entry">
-        <Votes
-          article_id={article.article_id}
-          handleUpdateVotes={this.handleUpdateVotes}
+ 
+
+<Votes2 article_id={article.article_id}
+        type="article"
+        votes={article.votes}
+        // index={index}
+        handleUpdateVotes={this.handleUpdateVotes}
+
         />
 
         <div className="article">

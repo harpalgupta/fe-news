@@ -3,7 +3,8 @@ import * as api from "../api";
 import NewComment from "./NewComment";
 import { handleErrors } from "../utils";
 import DeleteComment from "./DeleteComment";
-import Votes from "./Votes";
+// import Votes from "./Votes";
+import Votes2 from "./Votes2";
 
 class Comments extends Component {
   state = {
@@ -58,19 +59,32 @@ class Comments extends Component {
         {this.state.comments.map((comment, index) => {
           return (
             <div key={comment.comment_id} className="comment-entry">
-              <Votes
+              {/* <Votes
                 type="comment"
                 comment={comment}
                 index={index}
                 handleUpdateVotes={this.handleUpdateVotes}
                 article_id={this.props.article_id}
                 comment_id={comment.comment_id}
+              /> */}
+
+              <Votes2
+                type="comment"
+                index={index}
+                id={comment.comment_id}
+                handleUpdateVotes={this.handleUpdateVotes}
+                votes={comment.votes}
+                author={comment.author}
+                article_id={this.props.article_id}
               />
+
               <div className="comment">
                 <p key={comment.comment_id}>{comment.body}</p>
-                <div className="comment-foot">
+                
+              </div>
+              <div className="comment-foot">
                   {comment.author === this.props.user.username ? (
-                    <div>
+                    <div className="foot-item">
                       Comment Author: ME!!!
                       <DeleteComment
                         handleDeleteComment={this.handleDeleteComment}
@@ -80,12 +94,11 @@ class Comments extends Component {
                       />
                     </div>
                   ) : (
-                    <div>Comment Author:{comment.author}</div>
+                    <div className="foot-item"> Comment Author:{comment.author}</div>
                   )}
 
-                  <div>Comment Created_at :{comment.created_at}</div>
+                  <div className="foot-item">Comment Created_at :{comment.created_at}</div>
                 </div>
-              </div>
             </div>
           );
         })}
@@ -93,33 +106,9 @@ class Comments extends Component {
     );
   }
 
-  // formatComment = comment => {
-  //   return (
-  //     <div key={comment.comment_id} className="comment-entry">
-  //       {/* <Votes article={article} handleUpdateVotes={this.handleUpdateVotes} /> */}
-
-  //       <div className="comment">
-  //         <Link
-  //           key={`${article.article_id}article`}
-  //           state={{ article: article }}
-  //           to={`/article/${article.article_id}`}
-  //         >
-  //           {article.title}
-  //           {article.body}
-  //         </Link>
-  //       </div>
-
-  //       <div key={article.article_id} className="article-foot">
-  //         <div>Comments:{article.comment_count}</div>
-  //         <div> Author:{article.author}</div>
-  //         <div> Created_at:{article.created_at}</div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
 
   handleUpdateVotes = (comment, index) => {
-    console.log("in handle update votes");
+    console.log("in handle update votes", comment, index);
 
     const tmpComments = [...this.state.comments];
     tmpComments[index] = comment;
