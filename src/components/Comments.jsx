@@ -59,15 +59,7 @@ class Comments extends Component {
         {this.state.comments.map((comment, index) => {
           return (
             <div key={comment.comment_id} className="comment-entry">
-              {/* <Votes
-                type="comment"
-                comment={comment}
-                index={index}
-                handleUpdateVotes={this.handleUpdateVotes}
-                article_id={this.props.article_id}
-                comment_id={comment.comment_id}
-              /> */}
-
+           
               <Votes2
                 type="comment"
                 index={index}
@@ -108,7 +100,6 @@ class Comments extends Component {
 
 
   handleUpdateVotes = (comment, index) => {
-    console.log("in handle update votes", comment, index);
 
     const tmpComments = [...this.state.comments];
     tmpComments[index] = comment;
@@ -139,16 +130,14 @@ class Comments extends Component {
     this.setState(
       { queries: { ...this.state.queries, [queryItem]: value } },
       () => {
-        console.log(this.state.queries);
+        
       }
     );
   };
   handleDeleteComment = (comment_id, index) => {
-    console.log("in handle delete comment");
-    console.log(comment_id, index);
+
     const tmpComments = this.state.comments;
     tmpComments.splice(index, 1);
-    console.log(tmpComments);
     this.setState({ comments: tmpComments });
   };
   componentDidUpdate(prevProps, prevState) {

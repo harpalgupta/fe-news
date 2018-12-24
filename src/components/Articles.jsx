@@ -5,11 +5,8 @@ import { Link } from "@reach/router";
 import { handleErrors } from "../utils";
 import NewArticle from "./NewArticle";
 import DeleteArticle from "./DeleteArticle";
-// import Votes from "./Votes";
-import Article from "./Article";
 import Votes2 from "./Votes2";
 
-// import { formatArticle } from "../utils";
 
 class Articles extends Component {
   state = {
@@ -70,10 +67,7 @@ class Articles extends Component {
               );
             })}
           </select>
-          {/* <TopicSelector
-          handleTopic={this.handleTopic}
-          topics={this.state.topics}
-        /> */}
+          
           <label>Sort by</label>
           <select
             name="sort_by"
@@ -133,16 +127,7 @@ class Articles extends Component {
     return (
       <div key={article.article_id} className="article-entry">
         <div className="articletitle">{article.title}</div>
-        {/* <Votes
-          article_id={article.article_id}
-          article={article}
-          handleUpdateVotes={this.handleUpdateVotes}
-          index={index}
-          type="article"
-          username={this.props.user.username}
-          storeUserVotes={this.storeUserVotes}
-          sessionVotes={this.state.sessionVotes}
-        /> */}
+       
         <Votes2 article_id={article.article_id}
         type="article"
         votes={article.votes}
@@ -153,7 +138,6 @@ class Articles extends Component {
         <div className="article">
           <Link
             key={`${article.article_id}article`}
-            // state={{ article: article }}
             to={`/articles/${article.article_id}`}
           >
             {article.body}

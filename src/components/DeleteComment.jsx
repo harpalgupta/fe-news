@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { navigate } from "@reach/router";
 import * as api from "../api";
 import { handleErrors } from "../utils";
 

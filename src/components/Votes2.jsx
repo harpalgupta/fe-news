@@ -6,12 +6,9 @@ import React, { Component } from "react";
 class Votes2 extends Component {
   render() {
     const {
-      id,
-      handleUpdateVotes,
-      index,
+    
       votes,
       article_id,
-      author,
       type
     } = this.props;
     return (

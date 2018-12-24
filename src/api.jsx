@@ -18,7 +18,7 @@ export const fetchArticles = async (topic, queries) => {
     }
 
     url += queryStr;
-    url = url.replace(/\&$/, "");
+    url = url.replace(/&$/, "");
 
     console.log(url);
   }
@@ -48,7 +48,7 @@ export const fetchCommentsByArticle = async (article_id, queries) => {
     }
 
     url += queryStr;
-    url = url.replace(/\&$/, "");
+    url = url.replace(/&$/, "");
   }
 
   const { data } = await axios.get(url);

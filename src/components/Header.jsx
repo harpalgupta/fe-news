@@ -12,11 +12,11 @@ class Header extends Component {
           className="header-img"
           src="https://northcoders.com/images/logos/learn_to_code_manchester_rw_second.png"
         />
-        <div className="header-text"> Knews</div>
+        <div className="header-text">K-News</div>
         <div className="LoginHeader">
           {this.props.user.username ? (
             <>
-              logged in as {this.props.user.username}
+              Logged In As {this.props.user.username}
               {console.log(this.props.user)}
               <img className="userAvatar" src={this.props.user.avatar_url} />
               <div className="logout-button">

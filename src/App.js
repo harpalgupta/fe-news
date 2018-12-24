@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import DeleteArticle from "./components/DeleteArticle";
 import Errors from "./components/Errors";
 import DeleteComment from "./components/DeleteComment";
+import Footer from "./components/Footer";
 
 class App extends Component {
   state = {
@@ -65,7 +66,10 @@ class App extends Component {
               <Errors path="/error" />
             </Router>
           </>
+
         </div>
+        <Footer/>
+
       </div>
     );
   }

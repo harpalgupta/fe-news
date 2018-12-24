@@ -13,10 +13,14 @@ class NewArticle extends Component {
       <div>
         <h2>Add New Article</h2>
 
-        <div className="article-entry">
+        <div className="article-entry new-entry">
           <form className="newForm" onSubmit={this.handleSubmit}>
             <div>
+              <div>
+              <div>
+
               <label htmlFor="title">Title</label>
+              
               <input
                 value={this.state.title}
                 name="title"
@@ -24,6 +28,10 @@ class NewArticle extends Component {
                   this.handleChange(event);
                 }}
               />
+              </div>
+              
+              </div>
+              
               <label htmlFor="body">Article Text</label>
               <input
                 value={this.state.body}
