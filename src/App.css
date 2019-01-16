@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   display: grid;
-  grid-template: 1fr 2fr 10fr 5fr 1fr / 5fr 1fr;
+  grid-template: 1fr 2fr 10fr 1fr / 5fr 1fr;
   grid-template-areas:
     "header header" "navbar navbar" "content sidebar" "pfoot pfoot" ;
   height: 100vh;
@@ -40,10 +40,14 @@
 .navbar {
   grid-area: navbar;
   background-color: darkgray;
-
   padding: 20px;
   display: flex;
   flex: space-around;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bolder;
+  font-size: 15px;
+  color: white;
+
 }
 
 .navbar-link {
