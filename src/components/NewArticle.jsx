@@ -13,11 +13,10 @@ class NewArticle extends Component {
       <div>
         <h2>Add New Article</h2>
 
-        <div className="article-entry new-entry">
+        <div className="article-entry">
           <form className="newForm" onSubmit={this.handleSubmit}>
             <div>
-              <div>
-              <div>
+              <div className="newFormLine">
 
               <label htmlFor="title">Title</label>
               
@@ -28,10 +27,9 @@ class NewArticle extends Component {
                   this.handleChange(event);
                 }}
               />
-              </div>
               
               </div>
-              
+              <div className="newFormLine">
               <label htmlFor="body">Article Text</label>
               <input
                 value={this.state.body}
@@ -40,6 +38,7 @@ class NewArticle extends Component {
                   this.handleChange(event);
                 }}
               />
+              </div>
 
               {/* <label htmlFor="topic">Topic</label>
             <input
@@ -49,11 +48,18 @@ class NewArticle extends Component {
                 this.handleChange(event);
               }}
             /> */}
-              <TopicSelector
+            <div className="newArticleOptions"> 
+            <div className="newArticleTopicSelect">
+
+            <TopicSelector
                 handleTopic={this.handleTopic}
                 topics={this.props.topics}
               />
-              <button type="submit">Add New Article</button>
+              </div>
+            
+              <button className="newArticleSubmitButton" type="submit">Add New Article</button>
+            </div>
+              
             </div>
           </form>
         </div>

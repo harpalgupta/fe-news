@@ -187,12 +187,27 @@ h2 {
 .newForm {
   grid-area: articletitle;
   direction: flex;
+  text-align: left;
 }
-.newForm > div {
-  flex-direction: row;
-  justify-content: left;
+
+.newFormLine {
+
   justify-items: left;
+  padding: 10px;
+  align-items: left;
 }
+.newFormLine >label {
+padding-right: 10px;
+  
+}
+
+.newArticleTopicSelect{
+  align-items: left;
+}
+.newArticleSubmitButton{
+  align-items: right;
+}
+
 .user-list {
   margin: auto;
   list-style-type: none;
