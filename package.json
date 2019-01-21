@@ -10,13 +10,13 @@
     "@fortawesome/react-fontawesome": "^0.1.3",
     "@reach/router": "^1.2.1",
     "axios": "^0.18.0",
+    "eslint-config-airbnb": "^17.1.0",
     "i": "^0.3.6",
     "npm": "^6.5.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-dotdotdot": "^1.2.3",
     "react-expand-collapse": "^0.2.0",
-    "react-expand-text": "^1.0.0",
     "react-scripts": "2.1.1"
   },
   "scripts": {

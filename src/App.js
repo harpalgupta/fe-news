@@ -1,32 +1,42 @@
-import React, { Component } from "react";
-import "./App.css";
-import Header from "./components/Header";
-import NavBar from "./components/NavBar";
-import SideBar from "./components/SideBar";
-import Articles from "./components/Articles";
-import Topics from "./components/Topics";
-import { Router } from "@reach/router";
+import React, { Component } from 'react';
+import './App.css';
+import { Router } from '@reach/router';
+import Header from './components/Header';
+import NavBar from './components/NavBar';
+import SideBar from './components/SideBar';
+import Articles from './components/Articles';
+import Topics from './components/Topics';
 
-import Article from "./components/Article";
-import Login from "./components/Login";
-import DeleteArticle from "./components/DeleteArticle";
-import Errors from "./components/Errors";
-import DeleteComment from "./components/DeleteComment";
-import Footer from "./components/Footer";
+import Article from './components/Article';
+import Login from './components/Login';
+import DeleteArticle from './components/DeleteArticle';
+import Errors from './components/Errors';
+import DeleteComment from './components/DeleteComment';
+import Footer from './components/Footer';
 
 class App extends Component {
   state = {
-    articles: [],
-    selectedTopic: "",
+    selectedTopic: '',
     user: {},
-    userValid: false,
-    users: []
   };
+
+
+  storeUser = (user) => {
+    sessionStorage.setItem('user', JSON.stringify(user));
+    if (sessionStorage.user) this.setState({ user: JSON.parse(sessionStorage.user) });
+    // });
+  };
+
+  logOut = () => {
+    sessionStorage.removeItem('user');
+    this.setState({ user: {} });
+  };
+
   render() {
     return (
       <div className="App">
         <Header
-          user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ""}
+          user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ''}
           logOut={this.logOut}
         />
         <NavBar handleTopic={this.handleTopic} />
@@ -35,15 +45,15 @@ class App extends Component {
           <Login
             storeUser={this.storeUser}
             // user={this.state.user}
-            user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ""}
+            user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ''}
           >
             <Router>
               <Articles
                 path="/articles"
                 topic={this.state.selectedTopic}
                 user={
-                  sessionStorage.user ? JSON.parse(sessionStorage.user) : ""
-                
+                  sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
+
                 }
                 default
               />
@@ -52,7 +62,7 @@ class App extends Component {
               <Article
                 path="/articles/:article_id"
                 user={
-                  sessionStorage.user ? JSON.parse(sessionStorage.user) : ""
+                  sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
                 }
               />
 
@@ -68,23 +78,11 @@ class App extends Component {
           </>
 
         </div>
-        <Footer/>
+        <Footer />
 
       </div>
     );
   }
-
-  storeUser = user => {
-    sessionStorage.setItem("user", JSON.stringify(user));
-    if (sessionStorage.user)
-      this.setState({ user: JSON.parse(sessionStorage.user) });
-    // });
-  };
-
-  logOut = () => {
-    sessionStorage.removeItem("user");
-    this.setState({ user: {} });
-  };
 }
 
 export default App;
