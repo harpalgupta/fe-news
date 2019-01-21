@@ -26,7 +26,6 @@ class App extends Component {
     return (
       <div className="App">
         <Header
-          loggedInAs={this.state.user.username}
           user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ""}
           logOut={this.logOut}
         />
@@ -42,10 +41,11 @@ class App extends Component {
               <Articles
                 path="/articles"
                 topic={this.state.selectedTopic}
-                //loggedInAs={JSON.parse(sessionStorage.user).username}
                 user={
                   sessionStorage.user ? JSON.parse(sessionStorage.user) : ""
+                
                 }
+                default
               />
               <Topics path="/topics/*" />
 

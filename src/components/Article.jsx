@@ -4,7 +4,7 @@ import Comments from "./Comments";
 
 import { Link } from "@reach/router";
 
-import Votes2 from "./Votes2";
+import Votes from "./Votes";
 import { handleErrors } from "../utils";
 
 class Article extends Component {
@@ -13,7 +13,6 @@ class Article extends Component {
     comments: []
   };
   render() {
-    console.log("<<<<<<<<<<<<<<<<<<<<", this.props);
     let artId = this.props.article_id * 1;
     if (isNaN(artId)) {
       const err = { response: { status: 0, data: { msg: "" } } };
@@ -30,7 +29,7 @@ class Article extends Component {
 
         <div>{this.formatArticle(this.state.article)}</div>
 
-        <Comments article_id={this.props.article_id} user={this.props.user} />
+        <Comments article_id={this.props.article_id} user={this.props.user} /> 
       </div>
     );
   }
@@ -40,13 +39,14 @@ class Article extends Component {
       <div key={article.article_id} className="article-entry">
  
 
-<Votes2 article_id={article.article_id}
+ <Votes article_id={article.article_id}
         type="article"
         votes={article.votes}
-        // index={index}
         handleUpdateVotes={this.handleUpdateVotes}
+        user={this.props.user}
+        author={article.author}
 
-        />
+        /> 
 
         <div className="article">
           <Link
@@ -69,7 +69,6 @@ class Article extends Component {
   };
 
   handleUpdateVotes = (article, index, votes) => {
-    console.log("in handle update votes, new updated article", article);
 
     this.setState({ article: { ...article } });
   };

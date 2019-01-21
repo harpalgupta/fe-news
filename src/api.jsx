@@ -2,7 +2,6 @@ import axios from "axios";
 const BASEURL = "https://knews-prod.herokuapp.com/api";
 
 export const fetchArticles = async (topic, queries) => {
-  //const { sortby } = params.sortby;
   let url = "";
   let queryStr = "";
 
@@ -20,7 +19,6 @@ export const fetchArticles = async (topic, queries) => {
     url += queryStr;
     url = url.replace(/&$/, "");
 
-    console.log(url);
   }
   const { data } = await axios.get(url);
   return data;
@@ -38,7 +36,6 @@ export const checkUserValid = async username => {
 };
 
 export const fetchCommentsByArticle = async (article_id, queries) => {
-  // /api/articles/:article_id/comments
   let url = `${BASEURL}/articles/${article_id}/comments`;
   let queryStr = "";
   if (queries) {
@@ -55,7 +52,6 @@ export const fetchCommentsByArticle = async (article_id, queries) => {
   return data;
 };
 export const fetchArticleArticleID = async article_id => {
-  // /api/articles/:article_id/comments
   const url = `${BASEURL}/articles/${article_id}`;
   const { data } = await axios.get(url);
   return data;
@@ -88,26 +84,23 @@ export const updateCommentVote = async (article_id, comment_id, inc) => {
 };
 
 export const addNewArticle = async (topic, newArticle) => {
-  ///api/topics/cats/articles
   const url = `${BASEURL}/topics/${topic}/articles/`;
 
   const { data } = await axios.post(url, newArticle);
-  console.log("add new article data back", data);
   return data;
 };
 
 export const deleteArticle = async article_id => {
-  ///api/topics/cats/articles
-  console.log("in api delete article");
+
   const url = `${BASEURL}/articles/${article_id}`;
   const everything = await axios.delete(url, { params: {} });
-  console.log(everything.error);
+
   return everything.data;
 };
 
 export const addNewComment = async (article_id, body, user_id) => {
-  console.log("in add new comment");
-  ///api/topics/cats/articles
+
+
   const newComment = { user_id, body };
   const url = `${BASEURL}/articles/${article_id}/comments`;
 
@@ -116,11 +109,10 @@ export const addNewComment = async (article_id, body, user_id) => {
 };
 
 export const deleteComment = async (article_id, comment_id) => {
-  ///api/topics/cats/articles
-  console.log("in api delete comment");
+
   const url = `${BASEURL}/articles/${article_id}/comments/${comment_id}`;
   const everything = await axios.delete(url, { params: {} });
-  console.log(everything.error);
+
   return everything.data;
 };
 

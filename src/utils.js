@@ -59,7 +59,6 @@ export const formatArticle = article => {
 
 export const handleErrors = (err, localerr) => {
   {
-    console.log("in handle error", err);
     const errcontent = {
       errstatus: err.response.status,
       errMsg: err.response.data.msg

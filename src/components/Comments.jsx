@@ -3,8 +3,7 @@ import * as api from "../api";
 import NewComment from "./NewComment";
 import { handleErrors } from "../utils";
 import DeleteComment from "./DeleteComment";
-// import Votes from "./Votes";
-import Votes2 from "./Votes2";
+import Votes from "./Votes";
 
 class Comments extends Component {
   state = {
@@ -40,6 +39,7 @@ class Comments extends Component {
               </option>
             ))}
           </select>
+          <div>
           <label>Sort Ascending/Descending</label>
           <select
             name="sort_ascending"
@@ -48,19 +48,22 @@ class Comments extends Component {
               this.handleQuery("sort_ascending", event.target.value);
             }}
           >
-            <option key="sort_descending" value="false">
+             <option key="sort_descending" value="false">
               descending
             </option>
             <option key="sort_ascending" value="true">
               ascending
             </option>
           </select>
+          </div>
+          
+         
         </div>
         {this.state.comments.map((comment, index) => {
           return (
             <div key={comment.comment_id} className="comment-entry">
            
-              <Votes2
+              <Votes
                 type="comment"
                 index={index}
                 id={comment.comment_id}
@@ -68,6 +71,7 @@ class Comments extends Component {
                 votes={comment.votes}
                 author={comment.author}
                 article_id={this.props.article_id}
+                user={this.props.user}
               />
 
               <div className="comment">
@@ -109,17 +113,12 @@ class Comments extends Component {
   };
 
   handleAddComment = newComment => {
-    console.log("in handle add comment");
     api
       .addNewComment(this.props.article_id, newComment, this.props.user.user_id)
       .then(newComm => {
-        console.log(this.props.user);
         newComm.comment.author = this.props.user.username;
         this.setState(
-          { comments: [newComm.comment, ...this.state.comments] },
-          () => {
-            console.log(this.state.comments);
-          }
+          { comments: [newComm.comment, ...this.state.comments] }
         );
       })
       .catch(err => {

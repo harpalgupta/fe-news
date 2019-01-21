@@ -40,7 +40,6 @@ class DeleteArticle extends Component {
         }
       })
       .catch(err => {
-        console.log("ERROR DETECTED");
         handleErrors(err);
       });
   // handleErrors = err => {

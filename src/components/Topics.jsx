@@ -9,7 +9,6 @@ class Topics extends Component {
         <h2>Topics</h2>
         <ul>
           {this.state.topics.map(topic => {
-            //  console.log(article);
             return <li key={topic.slug}>{topic.slug}</li>;
           })}
         </ul>

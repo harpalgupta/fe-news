@@ -15,7 +15,6 @@ class TopicSelector extends Component {
         </option>
 
         {this.props.topics.map(topic => {
-          //  console.log(article);
           return (
             <option key={topic.slug} value={topic.slug}>
               {topic.slug}

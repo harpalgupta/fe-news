@@ -17,8 +17,10 @@ class NewArticle extends Component {
           <form className="newForm" onSubmit={this.handleSubmit}>
             <div>
               <div className="newFormLine">
+                <div>
+                <label htmlFor="title">Title</label>
 
-              <label htmlFor="title">Title</label>
+                </div>
               
               <input
                 value={this.state.title}
@@ -30,13 +32,19 @@ class NewArticle extends Component {
               
               </div>
               <div className="newFormLine">
+              <div>
               <label htmlFor="body">Article Text</label>
-              <input
+
+
+              </div>
+              <textarea className="newArticleText"
                 value={this.state.body}
                 name="body"
                 onChange={event => {
                   this.handleChange(event);
                 }}
+                rows="5" cols="50" wrap="soft"
+              
               />
               </div>
 
@@ -70,9 +78,7 @@ class NewArticle extends Component {
     this.setState({ selectedTopic: selectedTopic });
   };
   handleChange = event => {
-    //console.log(this.props.user.user_id);
-
-    console.log("in handle change");
+   
     const { name, value } = event.target;
     this.setState(
       {

@@ -5,12 +5,13 @@ import { Link } from "@reach/router";
 import { handleErrors } from "../utils";
 import NewArticle from "./NewArticle";
 import DeleteArticle from "./DeleteArticle";
-import Votes2 from "./Votes2";
+import Votes from "./Votes";
+import Dotdotdot from 'react-dotdotdot'
+
 
 
 class Articles extends Component {
   state = {
-    loggedInAs: "",
     articles: [],
     topics: [],
     selectedTopic: "",
@@ -20,11 +21,11 @@ class Articles extends Component {
     newArticle: {},
     sort_ascending: "true",
     queries: { p: 1 },
-    sessionVotes: {}
+    sessionVotes: {},
+    disableMoreButton:false
   };
 
   render() {
-    console.log("app render");
     return (
       <div className="content">
         <div className="new-article">
@@ -59,7 +60,6 @@ class Articles extends Component {
             </option>
 
             {this.state.topics.map(topic => {
-              //  console.log(article);
               return (
                 <option key={topic.slug} value={topic.slug}>
                   {topic.slug}
@@ -117,8 +117,10 @@ class Articles extends Component {
             </div>
           );
         })}
+        <div className="moreButton">
+        <button  disabled={this.state.disableMoreButton} onClick={this.fetchMoreArticles}>More Articles</button>
 
-        <button onClick={this.fetchMoreArticles}>More</button>
+        </div>
       </div>
     );
   }
@@ -128,7 +130,7 @@ class Articles extends Component {
       <div key={article.article_id} className="article-entry">
         <div className="articletitle">{article.title}</div>
        
-        <Votes2 article_id={article.article_id}
+        <Votes article_id={article.article_id}
         type="article"
         votes={article.votes}
         index={index}
@@ -142,13 +144,18 @@ class Articles extends Component {
             key={`${article.article_id}article`}
             to={`/articles/${article.article_id}`}
           >
-            {article.body}
+          <Dotdotdot
+          clamp={5}
+            >
+                     {article.body}
+
+            </Dotdotdot>
           </Link>
         </div>
 
         <div key={article.article_id} className="article-foot">
           <div>Comments:{article.comment_count}</div>
-          {article.author === this.props.loggedInAs ? (
+          {article.author === this.props.user.username ? (
             <div>
               ME!!!
               <DeleteArticle
@@ -171,10 +178,7 @@ class Articles extends Component {
   };
   handleQuery = (queryItem, value) => {
     this.setState(
-      { queries: { ...this.state.queries, [queryItem]: value } },
-      () => {
-        console.log(this.state.queries);
-      }
+      { queries: { ...this.state.queries, [queryItem]: value } }
     );
   };
 
@@ -184,26 +188,20 @@ class Articles extends Component {
   };
 
   handleAddArticle = newArticle => {
-    console.log("<<<<<<<<<<<<<", newArticle);
 
     api.addNewArticle(newArticle.topic, newArticle).then(({ article }) => {
-      this.setState({ articles: [article, ...this.state.articles] }, () => {
-        console.log(this.state);
-      });
+      this.setState({ articles: [article, ...this.state.articles] });
     });
   };
 
   handleDeleteArticle = (article_id, index) => {
-    console.log("in handle delete article");
-    console.log(article_id, index);
+   
     const tmpArticles = this.state.articles;
     tmpArticles.splice(index, 1);
-    console.log(tmpArticles);
     this.setState({ articles: tmpArticles });
   };
 
   handleUpdateVotes = (article, index) => {
-    console.log("in handle update votes");
 
     const tmpArticles = [...this.state.articles];
     tmpArticles[index] = article;
@@ -213,7 +211,6 @@ class Articles extends Component {
   };
 
   storeUserVotes = (username, article_id, vote) => {
-    console.log("in store User Votes");
 
     this.setState(
       {
@@ -221,13 +218,11 @@ class Articles extends Component {
           ...this.state.sessionVotes,
           [username]: { article_id, vote }
         }
-      },
-      () => console.log(this.state)
+      }
     );
   };
 
   componentDidMount() {
-    console.log("mount");
 
     api
       .fetchAllTopics(this.state.selectedTopic)
@@ -244,7 +239,6 @@ class Articles extends Component {
       });
     }
     if (prevState.queries.p !== this.state.queries.p) {
-      console.log("detected new page");
       api
         .fetchArticles(this.state.selectedTopic, {
           p: this.state.queries.p
@@ -256,17 +250,13 @@ class Articles extends Component {
           );
         })
         .catch(err => {
-          alert("No More Articles");
-          //handleErrors(err);
+          this.setState({disableMoreButton:true});
         });
     } else if (prevState.queries !== this.state.queries) {
       api
         .fetchArticles(this.state.selectedTopic, this.state.queries)
         .then(({ articles }) => {
-          //console.log(articles);
-          this.setState({ articles: [...articles] }, () => {
-            console.log(this.state);
-          });
+          this.setState({ articles: [...articles] });
         })
         .catch(err => {
           handleErrors(err);

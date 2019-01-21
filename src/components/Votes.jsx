@@ -3,7 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as api from "../api";
 import React, { Component } from "react";
 
-class Votes2 extends Component {
+class Votes extends Component {
+  state={
+    sessionVote:0
+  }
   render() {
     const {
     
@@ -11,19 +14,27 @@ class Votes2 extends Component {
       article_id,
       type,
       user,
-      author
+      author,
+      currentVote
     } = this.props;
-    console.log("<<<<<<<<<<<<<<<<<<",user,author)
+    console.log(currentVote)
     return (
       <div className="vote">
         <button
           key={`${this.props.id}UP`}
           className="votearrow"
-          disabled={user.username===author}
+          disabled={user.username===author||this.state.sessionVote===1}
           onClick={() => {
-            type === "comment"
-              ? this.goUpdateCommentVotes(1)
-              : this.goUpdateArticleVotes(1);
+            if (type === "comment"){
+              this.goUpdateCommentVotes(1); 
+              this.setState({sessionVote:this.state.sessionVote+1})
+              
+            }
+              else{
+             this.goUpdateArticleVotes(1);
+             this.setState({sessionVote:this.state.sessionVote+1})
+              }
+              
           }}
         >
           {" "}
@@ -33,11 +44,18 @@ class Votes2 extends Component {
         <button
           key={`${article_id}Down`}
           className="votearrow"
-          disabled={user.username===author}
+          disabled={user.username===author||this.state.sessionVote===-1||votes <= 0}
           onClick={() => {
-            type === "comment"
-              ? this.goUpdateCommentVotes(-1)
-              : this.goUpdateArticleVotes(-1);
+            if (type === "comment"){
+              this.goUpdateCommentVotes(-1); 
+              this.setState({sessionVote:this.state.sessionVote-1})
+              
+            }
+              else{
+             this.goUpdateArticleVotes(-1);
+             this.setState({sessionVote:this.state.sessionVote-1})
+            }
+              
           }}
         >
           {" "}
@@ -56,7 +74,6 @@ class Votes2 extends Component {
         this.props.handleUpdateVotes(comment, this.props.index);
         // this.setState({ votes: this.state.votes + 1 });
       });
-    console.log("updatecommentvotes");
   };
 
   goUpdateArticleVotes = vote => {
@@ -67,4 +84,4 @@ class Votes2 extends Component {
   };
 }
 
-export default Votes2;
+export default Votes;
