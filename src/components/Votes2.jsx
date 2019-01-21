@@ -9,13 +9,17 @@ class Votes2 extends Component {
     
       votes,
       article_id,
-      type
+      type,
+      user,
+      author
     } = this.props;
+    console.log("<<<<<<<<<<<<<<<<<<",user,author)
     return (
       <div className="vote">
         <button
           key={`${this.props.id}UP`}
           className="votearrow"
+          disabled={user.username===author}
           onClick={() => {
             type === "comment"
               ? this.goUpdateCommentVotes(1)
@@ -29,6 +33,7 @@ class Votes2 extends Component {
         <button
           key={`${article_id}Down`}
           className="votearrow"
+          disabled={user.username===author}
           onClick={() => {
             type === "comment"
               ? this.goUpdateCommentVotes(-1)

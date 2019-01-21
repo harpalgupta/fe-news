@@ -133,6 +133,8 @@ class Articles extends Component {
         votes={article.votes}
         index={index}
         handleUpdateVotes={this.handleUpdateVotes}
+        user={this.props.user}
+        author={article.author}
 
         />
         <div className="article">
