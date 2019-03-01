@@ -1,11 +1,15 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Errors extends Component {
   render() {
     const { errcontent } = this.props.location.state;
     return (
       <div>
-        Error {errcontent.errstatus} {errcontent.errMsg}
+        Error
+        {' '}
+        {errcontent.errstatus}
+        {' '}
+        {errcontent.errMsg}
       </div>
     );
   }

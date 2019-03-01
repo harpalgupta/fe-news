@@ -1,12 +1,12 @@
-//{ title: 'harpal the GEEK', user_id: '2', body: 'so Geeky' }
+// { title: 'harpal the GEEK', user_id: '2', body: 'so Geeky' }
 
-import React, { Component } from "react";
-import * as api from "../api";
-import { handleErrors } from "../utils";
+import React, { Component } from 'react';
+import * as api from '../api';
+import { handleErrors } from '../utils';
 
 class SubmitArticle extends Component {
   state = {
-    newForm: { title: "", user_id: this.props.user.user_id, body: "" }
+    newForm: { title: '', user_id: this.props.user.user_id, body: '' }
   };
 
   render() {
@@ -15,7 +15,7 @@ class SubmitArticle extends Component {
         <div>
           <form
             className="newArticleForm"
-            onSubmit={event => {
+            onSubmit={(event) => {
               this.handleSubmit(event);
             }}
           >
@@ -24,7 +24,7 @@ class SubmitArticle extends Component {
               <input
                 value={this.state.newForm.topic}
                 name="topic"
-                onChange={event => {
+                onChange={(event) => {
                   this.handleChange(event);
                 }}
               />
@@ -32,7 +32,7 @@ class SubmitArticle extends Component {
               <input
                 value={this.state.newForm.title}
                 name="title"
-                onChange={event => {
+                onChange={(event) => {
                   this.handleChange(event);
                 }}
               />
@@ -42,7 +42,7 @@ class SubmitArticle extends Component {
               <input
                 value={this.state.newForm.user_id}
                 name="user_id"
-                onChange={event => {
+                onChange={(event) => {
                   this.handleChange(event);
                 }}
                 disabled
@@ -53,7 +53,7 @@ class SubmitArticle extends Component {
               <input
                 value={this.state.newForm.body}
                 name="body"
-                onChange={event => {
+                onChange={(event) => {
                   this.handleChange(event);
                 }}
               />
@@ -65,7 +65,8 @@ class SubmitArticle extends Component {
       </div>
     );
   }
-  handleChange = event => {
+
+  handleChange = (event) => {
     const { name, value } = event.target;
     this.setState(
       prevState => ({
@@ -77,16 +78,17 @@ class SubmitArticle extends Component {
       () => {}
     );
   };
-  handleSubmit = event => {
+
+  handleSubmit = (event) => {
     event.preventDefault();
     this.handleAddArticle(this.state.newForm);
   };
 
-  handleAddArticle = newArticle => {
+  handleAddArticle = (newArticle) => {
     api
       .addNewArticle(newArticle.topic, newArticle)
       .then()
-      .catch(err => {
+      .catch((err) => {
         handleErrors(err);
       });
   };

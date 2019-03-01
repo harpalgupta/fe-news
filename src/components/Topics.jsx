@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import * as api from "../api";
+import React, { Component } from 'react';
+import * as api from '../api';
+
 class Topics extends Component {
   state = { topics: [] };
 
@@ -8,13 +9,12 @@ class Topics extends Component {
       <div className="content">
         <h2>Topics</h2>
         <ul>
-          {this.state.topics.map(topic => {
-            return <li key={topic.slug}>{topic.slug}</li>;
-          })}
+          {this.state.topics.map(topic => <li key={topic.slug}>{topic.slug}</li>)}
         </ul>
       </div>
     );
   }
+
   componentDidMount() {
     api.fetchAllTopics(this.props.topic).then(topics => this.setState(topics));
   }

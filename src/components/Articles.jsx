@@ -1,28 +1,27 @@
-import React, { Component } from "react";
-import * as api from "../api";
-import { Link } from "@reach/router";
+import React, { Component } from 'react';
+import { Link } from '@reach/router';
+import Dotdotdot from 'react-dotdotdot';
+import * as api from '../api';
 
-import { handleErrors } from "../utils";
-import NewArticle from "./NewArticle";
-import DeleteArticle from "./DeleteArticle";
-import Votes from "./Votes";
-import Dotdotdot from 'react-dotdotdot'
-
+import { handleErrors } from '../utils';
+import NewArticle from './NewArticle';
+import DeleteArticle from './DeleteArticle';
+import Votes from './Votes';
 
 
 class Articles extends Component {
   state = {
     articles: [],
     topics: [],
-    selectedTopic: "",
+    selectedTopic: '',
     votes: 0,
-    sortby: "",
+    sortby: '',
 
     newArticle: {},
-    sort_ascending: "true",
+    sort_ascending: 'true',
     queries: { p: 1 },
     sessionVotes: {},
-    disableMoreButton:false
+    disableMoreButton: false
   };
 
   render() {
@@ -38,11 +37,14 @@ class Articles extends Component {
         </div>
         {this.state.selectedTopic ? (
           <div>
-            <h2>Articles By Topic {this.state.selectedTopic}</h2>
+            <h2>
+Articles By Topic
+              {this.state.selectedTopic}
+            </h2>
           </div>
         ) : (
           <div>
-            {" "}
+            {' '}
             <h2>Articles</h2>
           </div>
         )}
@@ -51,7 +53,7 @@ class Articles extends Component {
           <select
             name="topicselector"
             id="topicselector"
-            onChange={event => {
+            onChange={(event) => {
               this.handleTopic(event.target.value);
             }}
           >
@@ -59,21 +61,19 @@ class Articles extends Component {
               all topics
             </option>
 
-            {this.state.topics.map(topic => {
-              return (
-                <option key={topic.slug} value={topic.slug}>
-                  {topic.slug}
-                </option>
-              );
-            })}
+            {this.state.topics.map(topic => (
+              <option key={topic.slug} value={topic.slug}>
+                {topic.slug}
+              </option>
+            ))}
           </select>
-          
+
           <label>Sort by</label>
           <select
             name="sort_by"
             id="sort_by"
-            onChange={event => {
-              this.handleQuery("sort_by", event.target.value);
+            onChange={(event) => {
+              this.handleQuery('sort_by', event.target.value);
             }}
           >
             <option key="all" value="">
@@ -97,8 +97,8 @@ class Articles extends Component {
           <select
             name="sort_ascending"
             id="sort_ascending"
-            onChange={event => {
-              this.handleQuery("sort_ascending", event.target.value);
+            onChange={(event) => {
+              this.handleQuery('sort_ascending', event.target.value);
             }}
           >
             <option key="sort_descending" value="false">
@@ -110,72 +110,80 @@ class Articles extends Component {
           </select>
         </div>
 
-        {this.state.articles.map((article, index) => {
-          return (
-            <div key={article.article_id}>
-              {this.formatArticle(article, index)}
-            </div>
-          );
-        })}
+        {this.state.articles.map((article, index) => (
+          <div key={article.article_id}>
+            {this.formatArticle(article, index)}
+          </div>
+        ))}
         <div className="moreButton">
-        <button  disabled={this.state.disableMoreButton} onClick={this.fetchMoreArticles}>More Articles</button>
+          <button disabled={this.state.disableMoreButton} onClick={this.fetchMoreArticles}>More Articles</button>
 
         </div>
       </div>
     );
   }
 
-  formatArticle = (article, index) => {
-    return (
-      <div key={article.article_id} className="article-entry">
-        <div className="articletitle">{article.title}</div>
-       
-        <Votes article_id={article.article_id}
+  formatArticle = (article, index) => (
+    <div key={article.article_id} className="article-entry">
+      <div className="articletitle">{article.title}</div>
+
+      <Votes
+        article_id={article.article_id}
         type="article"
         votes={article.votes}
         index={index}
         handleUpdateVotes={this.handleUpdateVotes}
         user={this.props.user}
         author={article.author}
-
-        />
-        <div className="article">
-          <Link
-            key={`${article.article_id}article`}
-            to={`/articles/${article.article_id}`}
-          >
+      />
+      <div className="article">
+        <Link
+          key={`${article.article_id}article`}
+          to={`/articles/${article.article_id}`}
+        >
           <Dotdotdot
-          clamp={5}
-            >
-                     {article.body}
+            clamp={5}
+          >
+            {article.body}
 
-            </Dotdotdot>
-          </Link>
+          </Dotdotdot>
+        </Link>
+      </div>
+
+      <div key={article.article_id} className="article-foot">
+        <div>
+Comments:
+          {article.comment_count}
         </div>
-
-        <div key={article.article_id} className="article-foot">
-          <div>Comments:{article.comment_count}</div>
-          {article.author === this.props.user.username ? (
-            <div>
+        {article.author === this.props.user.username ? (
+          <div>
               ME!!!
-              <DeleteArticle
-                handleDeleteArticle={this.handleDeleteArticle}
-                article_id={article.article_id}
-                index={index}
-              />
-            </div>
-          ) : (
-            <div> Author:{article.author}</div>
-          )}
-          <div> Created_at:{article.created_at}</div>
+            <DeleteArticle
+              handleDeleteArticle={this.handleDeleteArticle}
+              article_id={article.article_id}
+              index={index}
+            />
+          </div>
+        ) : (
+          <div>
+            {' '}
+Author:
+            {article.author}
+          </div>
+        )}
+        <div>
+          {' '}
+Created_at:
+          {article.created_at}
         </div>
       </div>
-    );
+    </div>
+  );
+
+  handleTopic = (selectedTopic) => {
+    this.setState({ selectedTopic });
   };
 
-  handleTopic = selectedTopic => {
-    this.setState({ selectedTopic: selectedTopic });
-  };
   handleQuery = (queryItem, value) => {
     this.setState(
       { queries: { ...this.state.queries, [queryItem]: value } }
@@ -183,26 +191,23 @@ class Articles extends Component {
   };
 
   fetchMoreArticles = () => {
-    //this.setState({ page: this.state.page + 1 });
-    this.handleQuery("p", this.state.queries.p + 1);
+    // this.setState({ page: this.state.page + 1 });
+    this.handleQuery('p', this.state.queries.p + 1);
   };
 
-  handleAddArticle = newArticle => {
-
+  handleAddArticle = (newArticle) => {
     api.addNewArticle(newArticle.topic, newArticle).then(({ article }) => {
       this.setState({ articles: [article, ...this.state.articles] });
     });
   };
 
   handleDeleteArticle = (article_id, index) => {
-   
     const tmpArticles = this.state.articles;
     tmpArticles.splice(index, 1);
     this.setState({ articles: tmpArticles });
   };
 
   handleUpdateVotes = (article, index) => {
-
     const tmpArticles = [...this.state.articles];
     tmpArticles[index] = article;
     this.setState({
@@ -211,7 +216,6 @@ class Articles extends Component {
   };
 
   storeUserVotes = (username, article_id, vote) => {
-
     this.setState(
       {
         sessionVotes: {
@@ -223,11 +227,10 @@ class Articles extends Component {
   };
 
   componentDidMount() {
-
     api
       .fetchAllTopics(this.state.selectedTopic)
       .then(topics => this.setState(topics));
-    api.fetchArticles(this.state.selectedTopic).then(articles => {
+    api.fetchArticles(this.state.selectedTopic).then((articles) => {
       this.setState({ ...articles });
     });
   }
@@ -249,8 +252,8 @@ class Articles extends Component {
             () => {}
           );
         })
-        .catch(err => {
-          this.setState({disableMoreButton:true});
+        .catch((err) => {
+          this.setState({ disableMoreButton: true });
         });
     } else if (prevState.queries !== this.state.queries) {
       api
@@ -258,18 +261,18 @@ class Articles extends Component {
         .then(({ articles }) => {
           this.setState({ articles: [...articles] });
         })
-        .catch(err => {
+        .catch((err) => {
           handleErrors(err);
         });
     }
 
     if (prevState.selectedTopic !== this.state.selectedTopic) {
-      api.fetchArticles(this.state.selectedTopic).then(articles => {
+      api.fetchArticles(this.state.selectedTopic).then((articles) => {
         this.setState({ ...articles }, () => {});
       });
 
       if (prevState.selectedTopic !== this.state.selectedTopic) {
-        api.fetchArticles(this.state.selectedTopic).then(articles => {
+        api.fetchArticles(this.state.selectedTopic).then((articles) => {
           this.setState({ ...articles }, () => {});
         });
       }

@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import Login from "./Login";
+import React, { Component } from 'react';
+import Login from './Login';
 
 class Auth extends Component {
-  state = { username: "" };
+  state = { username: '' };
+
   render() {
     if (this.props.userValid) return this.props.children;
     return (

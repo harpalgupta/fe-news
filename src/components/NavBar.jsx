@@ -1,10 +1,10 @@
-import { Link } from "@reach/router";
-import * as api from "../api";
+import { Link } from '@reach/router';
+import React, { Component } from 'react';
+import * as api from '../api';
 
-import React, { Component } from "react";
 
 class NavBar extends Component {
-  state = { topics: [], selectedTopic: "" };
+  state = { topics: [], selectedTopic: '' };
 
   render() {
     return (

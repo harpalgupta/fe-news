@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class TopicSelector extends Component {
   render() {
@@ -6,7 +6,7 @@ class TopicSelector extends Component {
       <select
         name="topicselector"
         id="topicselector"
-        onChange={event => {
+        onChange={(event) => {
           this.props.handleTopic(event.target.value);
         }}
       >
@@ -14,13 +14,11 @@ class TopicSelector extends Component {
           all topics
         </option>
 
-        {this.props.topics.map(topic => {
-          return (
-            <option key={topic.slug} value={topic.slug}>
-              {topic.slug}
-            </option>
-          );
-        })}
+        {this.props.topics.map(topic => (
+          <option key={topic.slug} value={topic.slug}>
+            {topic.slug}
+          </option>
+        ))}
       </select>
     );
   }

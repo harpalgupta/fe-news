@@ -1,9 +1,10 @@
-import axios from "axios";
-const BASEURL = "https://knews-prod.herokuapp.com/api";
+import axios from 'axios';
+
+const BASEURL = 'https://knews-prod.herokuapp.com/api';
 
 export const fetchArticles = async (topic, queries) => {
-  let url = "";
-  let queryStr = "";
+  let url = '';
+  let queryStr = '';
 
   if (topic) {
     url = `${BASEURL}/topics/${topic}/articles`;
@@ -11,14 +12,13 @@ export const fetchArticles = async (topic, queries) => {
     url = `${BASEURL}/articles`;
   }
   if (queries) {
-    queryStr = "?";
-    for (let query in queries) {
+    queryStr = '?';
+    for (const query in queries) {
       queryStr += `${query}=${queries[query]}&`;
     }
 
     url += queryStr;
-    url = url.replace(/&$/, "");
-
+    url = url.replace(/&$/, '');
   }
   const { data } = await axios.get(url);
   return data;
@@ -29,7 +29,7 @@ export const fetchAllTopics = async () => {
   const { data } = await axios.get(url);
   return data;
 };
-export const checkUserValid = async username => {
+export const checkUserValid = async (username) => {
   const url = `${BASEURL}/users/${username}`;
   const { data } = await axios.get(url);
   return data;
@@ -37,33 +37,33 @@ export const checkUserValid = async username => {
 
 export const fetchCommentsByArticle = async (article_id, queries) => {
   let url = `${BASEURL}/articles/${article_id}/comments`;
-  let queryStr = "";
+  let queryStr = '';
   if (queries) {
-    queryStr = "?";
-    for (let query in queries) {
+    queryStr = '?';
+    for (const query in queries) {
       queryStr += `${query}=${queries[query]}&`;
     }
 
     url += queryStr;
-    url = url.replace(/&$/, "");
+    url = url.replace(/&$/, '');
   }
 
   const { data } = await axios.get(url);
   return data;
 };
-export const fetchArticleArticleID = async article_id => {
+export const fetchArticleArticleID = async (article_id) => {
   const url = `${BASEURL}/articles/${article_id}`;
   const { data } = await axios.get(url);
   return data;
 };
 
 export const updateVotes = async (type, article_id, inc, comment_id) => {
-  if (type === "article") {
+  if (type === 'article') {
     const url = `${BASEURL}/articles/${article_id}`;
     const body = { inc_votes: inc };
     const { data } = await axios.patch(url, body);
     return data;
-  } else if (type === "comment") {
+  } if (type === 'comment') {
     const url = `${BASEURL}/articles/${article_id}/comments/${comment_id}`;
     const body = { inc_votes: inc };
     const { data } = await axios.patch(url, body);
@@ -90,8 +90,7 @@ export const addNewArticle = async (topic, newArticle) => {
   return data;
 };
 
-export const deleteArticle = async article_id => {
-
+export const deleteArticle = async (article_id) => {
   const url = `${BASEURL}/articles/${article_id}`;
   const everything = await axios.delete(url, { params: {} });
 
@@ -99,8 +98,6 @@ export const deleteArticle = async article_id => {
 };
 
 export const addNewComment = async (article_id, body, user_id) => {
-
-
   const newComment = { user_id, body };
   const url = `${BASEURL}/articles/${article_id}/comments`;
 
@@ -109,7 +106,6 @@ export const addNewComment = async (article_id, body, user_id) => {
 };
 
 export const deleteComment = async (article_id, comment_id) => {
-
   const url = `${BASEURL}/articles/${article_id}/comments/${comment_id}`;
   const everything = await axios.delete(url, { params: {} });
 

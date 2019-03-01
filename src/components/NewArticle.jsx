@@ -1,13 +1,14 @@
-import React, { Component } from "react";
-import TopicSelector from "./TopicSelector";
+import React, { Component } from 'react';
+import TopicSelector from './TopicSelector';
 
 class NewArticle extends Component {
   state = {
-    body: "",
-    topic: "",
+    body: '',
+    topic: '',
     user: {},
-    selectedTopic: ""
+    selectedTopic: ''
   };
+
   render() {
     return (
       <div>
@@ -18,34 +19,36 @@ class NewArticle extends Component {
             <div>
               <div className="newFormLine">
                 <div>
-                <label htmlFor="title">Title</label>
+                  <label htmlFor="title">Title</label>
 
                 </div>
-              
-              <input
-                value={this.state.title}
-                name="title"
-                onChange={event => {
-                  this.handleChange(event);
-                }}
-              />
-              
+
+                <input
+                  value={this.state.title}
+                  name="title"
+                  onChange={(event) => {
+                    this.handleChange(event);
+                  }}
+                />
+
               </div>
               <div className="newFormLine">
-              <div>
-              <label htmlFor="body">Article Text</label>
+                <div>
+                  <label htmlFor="body">Article Text</label>
 
 
-              </div>
-              <textarea className="newArticleText"
-                value={this.state.body}
-                name="body"
-                onChange={event => {
-                  this.handleChange(event);
-                }}
-                rows="5" cols="50" wrap="soft"
-              
-              />
+                </div>
+                <textarea
+                  className="newArticleText"
+                  value={this.state.body}
+                  name="body"
+                  onChange={(event) => {
+                    this.handleChange(event);
+                  }}
+                  rows="5"
+                  cols="50"
+                  wrap="soft"
+                />
               </div>
 
               {/* <label htmlFor="topic">Topic</label>
@@ -56,29 +59,30 @@ class NewArticle extends Component {
                 this.handleChange(event);
               }}
             /> */}
-            <div className="newArticleOptions"> 
-            <div className="newArticleTopicSelect">
+              <div className="newArticleOptions">
+                <div className="newArticleTopicSelect">
 
-            <TopicSelector
-                handleTopic={this.handleTopic}
-                topics={this.props.topics}
-              />
+                  <TopicSelector
+                    handleTopic={this.handleTopic}
+                    topics={this.props.topics}
+                  />
+                </div>
+
+                <button className="newArticleSubmitButton" type="submit">Add New Article</button>
               </div>
-            
-              <button className="newArticleSubmitButton" type="submit">Add New Article</button>
-            </div>
-              
+
             </div>
           </form>
         </div>
       </div>
     );
   }
-  handleTopic = selectedTopic => {
-    this.setState({ selectedTopic: selectedTopic });
+
+  handleTopic = (selectedTopic) => {
+    this.setState({ selectedTopic });
   };
-  handleChange = event => {
-   
+
+  handleChange = (event) => {
     const { name, value } = event.target;
     this.setState(
       {
@@ -87,17 +91,18 @@ class NewArticle extends Component {
       () => {}
     );
   };
-  handleSubmit = event => {
+
+  handleSubmit = (event) => {
     const newart = {
       title: this.state.title,
       body: this.state.body,
       user_id: this.props.user.user_id,
       topic: this.state.selectedTopic
     };
-    let msg = "";
-    for (let article_item in newart) {
+    let msg = '';
+    for (const article_item in newart) {
       if (!newart[article_item]) {
-        if (article_item === "body") msg += `Article text, `;
+        if (article_item === 'body') msg += 'Article text, ';
         else msg += `${article_item}, `;
       }
     }

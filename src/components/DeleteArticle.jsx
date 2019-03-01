@@ -1,18 +1,18 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import * as api from "../api";
-import { handleErrors } from "../utils";
+import * as api from '../api';
+import { handleErrors } from '../utils';
 
 class DeleteArticle extends Component {
-  state = { output: "", errMsg: {} };
+  state = { output: '', errMsg: {} };
 
   render() {
-    let artId = this.props.article_id * 1;
+    const artId = this.props.article_id * 1;
     if (isNaN(artId)) {
-      const err = { response: { status: 0, data: { msg: "" } } };
+      const err = { response: { status: 0, data: { msg: '' } } };
 
       err.response.status = 400;
-      err.response.data.msg = "Local Error Article Id must be a number";
+      err.response.data.msg = 'Local Error Article Id must be a number';
       handleErrors(err);
       return <div />;
     }
@@ -20,28 +20,30 @@ class DeleteArticle extends Component {
     return (
       <div>
         <button onClick={this.goDeleteArticle}>
-          DELETE Article ID {this.props.article_id}
+          DELETE Article ID
+          {' '}
+          {this.props.article_id}
         </button>
       </div>
     );
   }
-  goDeleteArticle = async =>
-    api
-      .deleteArticle(this.props.article_id)
-      .then(data => {
-        this.props.handleDeleteArticle(this.props.article_id, this.props.index);
 
-        if (data === {}) {
-          this.props.handleDeleteArticle(
-            this.props.article_id,
-            this.props.index
-          );
-          return `${this.props.article_id} deleted`;
-        }
-      })
-      .catch(err => {
-        handleErrors(err);
-      });
+  goDeleteArticle = async => api
+    .deleteArticle(this.props.article_id)
+    .then((data) => {
+      this.props.handleDeleteArticle(this.props.article_id, this.props.index);
+
+      if (data === {}) {
+        this.props.handleDeleteArticle(
+          this.props.article_id,
+          this.props.index
+        );
+        return `${this.props.article_id} deleted`;
+      }
+    })
+    .catch((err) => {
+      handleErrors(err);
+    });
   // handleErrors = err => {
   //   const errcontent = {
   //     errstatus: err.response.status,
