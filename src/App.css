@@ -1,3 +1,7 @@
+*{
+  font-family: 'Work Sans', sans-serif;
+
+}
 .App {
   text-align: center;
   display: grid;
@@ -246,10 +250,12 @@ display: inline-block
   padding-left: 10px;
 }
 .user-list {
-  margin: auto;
+  margin: 0;
+  padding: 0;
   list-style-type: none;
   width: 200px;
   text-align: left;
+
 }
 .user-list-div {
   align-items: center;
@@ -297,4 +303,38 @@ display: inline-block
 .newFormLine>textarea{
   width: 90%;
   height: 100px;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+ .loaded-users{
+  display: none;
+}
+.login-list{
+  display: inline-block;
+  text-align: left;
 }

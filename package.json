@@ -17,7 +17,7 @@
     "react-dom": "^16.6.3",
     "react-dotdotdot": "^1.2.3",
     "react-expand-collapse": "^0.2.0",
-    "react-scripts": "2.1.1"
+    "react-scripts": "^2.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
