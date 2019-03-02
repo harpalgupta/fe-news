@@ -11,17 +11,84 @@ class Comments extends Component {
     queryColumns: ['comment_id', 'votes', 'created_at', 'body', 'author']
   };
 
+  componentDidMount() {
+    const { article_id } = this.props;
+    api.fetchCommentsByArticle(article_id).then((comments) => {
+      this.setState(comments);
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { queries } = this.state;
+    const { article_id } = this.props;
+    if (prevState.queries !== queries) {
+      api
+        .fetchCommentsByArticle(article_id, queries)
+        .then((comments) => {
+          this.setState(comments);
+        })
+        .catch((err) => {
+          handleErrors(err);
+        });
+    }
+  }
+
+  handleUpdateVotes = (comment, index) => {
+    const { comments } = this.state;
+    const tmpComments = [...comments];
+    tmpComments[index] = comment;
+    this.setState({
+      comments: [...tmpComments]
+    });
+  };
+
+  handleAddComment = (newComment) => {
+    const { article_id, user } = this.props;
+    const { comments } = thsis.state;
+    api
+      .addNewComment(article_id, newComment, user.user_id)
+      .then((newComm) => {
+        newComm.comment.author = user.username;
+        this.setState(
+          { comments: [newComm.comment, ...comments] }
+        );
+      })
+      .catch((err) => {
+        handleErrors(err);
+      });
+  };
+
+  handleQuery = (queryItem, value) => {
+    const { queries } = this.state;
+    this.setState(
+      { queries: { ...queries, [queryItem]: value } },
+      () => {
+
+      }
+    );
+  };
+
+  handleDeleteComment = (comment_id, index) => {
+    const { comments } = this.state;
+    const tmpComments = comments;
+    tmpComments.splice(index, 1);
+    this.setState({ comments: tmpComments });
+  };
+
+
   render() {
+    const { article_id, user } = this.props;
+    const { queryColumns, comments } = this.state;
     return (
       <div className="content">
         <NewComment
-          article_id={this.props.article_id}
-          user_id={this.props.user.user_id}
+          article_id={article_id}
+          user_id={user.user_id}
           handleAddComment={this.handleAddComment}
         />
         <h2>
 Comments for Article ID:
-          {this.props.article_id}
+          {article_id}
         </h2>
         <div className="comment-query">
           <label>Sort by</label>
@@ -36,7 +103,7 @@ Comments for Article ID:
               Default(created_at)
             </option>
 
-            {this.state.queryColumns.map(column => (
+            {queryColumns.map(column => (
               <option key={column} value={column}>
                 {column}
               </option>
@@ -62,7 +129,7 @@ Comments for Article ID:
 
 
         </div>
-        {this.state.comments.map((comment, index) => (
+        {comments.map((comment, index) => (
           <div key={comment.comment_id} className="comment-entry">
 
             <Votes
@@ -72,8 +139,8 @@ Comments for Article ID:
               handleUpdateVotes={this.handleUpdateVotes}
               votes={comment.votes}
               author={comment.author}
-              article_id={this.props.article_id}
-              user={this.props.user}
+              article_id={article_id}
+              user={user}
             />
 
             <div className="comment">
@@ -81,14 +148,14 @@ Comments for Article ID:
 
             </div>
             <div className="comment-foot">
-              {comment.author === this.props.user.username ? (
+              {comment.author === user.username ? (
                 <div className="foot-item">
                       Comment Author: ME!!!
                   <DeleteComment
                     handleDeleteComment={this.handleDeleteComment}
                     comment_id={comment.comment_id}
                     index={index}
-                    article_id={this.props.article_id}
+                    article_id={article_id}
                   />
                 </div>
               ) : (
@@ -108,63 +175,6 @@ Comment Created_at :
         ))}
       </div>
     );
-  }
-
-
-  handleUpdateVotes = (comment, index) => {
-    const tmpComments = [...this.state.comments];
-    tmpComments[index] = comment;
-    this.setState({
-      comments: [...tmpComments]
-    });
-  };
-
-  handleAddComment = (newComment) => {
-    api
-      .addNewComment(this.props.article_id, newComment, this.props.user.user_id)
-      .then((newComm) => {
-        newComm.comment.author = this.props.user.username;
-        this.setState(
-          { comments: [newComm.comment, ...this.state.comments] }
-        );
-      })
-      .catch((err) => {
-        handleErrors(err);
-      });
-  };
-
-  handleQuery = (queryItem, value) => {
-    this.setState(
-      { queries: { ...this.state.queries, [queryItem]: value } },
-      () => {
-
-      }
-    );
-  };
-
-  handleDeleteComment = (comment_id, index) => {
-    const tmpComments = this.state.comments;
-    tmpComments.splice(index, 1);
-    this.setState({ comments: tmpComments });
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.queries !== this.state.queries) {
-      api
-        .fetchCommentsByArticle(this.props.article_id, this.state.queries)
-        .then((comments) => {
-          this.setState(comments);
-        })
-        .catch((err) => {
-          handleErrors(err);
-        });
-    }
-  }
-
-  componentDidMount() {
-    api.fetchCommentsByArticle(this.props.article_id).then((comments) => {
-      this.setState(comments);
-    });
   }
 }
 

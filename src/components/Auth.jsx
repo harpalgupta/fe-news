@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import Login from './Login';
 
 class Auth extends Component {
-  state = { username: '' };
-
   render() {
-    if (this.props.userValid) return this.props.children;
+    const { userValid, children, storeUser } = this.props;
+
+    if (userValid) return children;
     return (
       <div>
-        <Login login={this.props.storeUser} />
+        <Login login={storeUser} />
       </div>
     );
   }
