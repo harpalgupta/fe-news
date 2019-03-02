@@ -3,7 +3,20 @@ import * as api from '../api';
 import { handleErrors } from '../utils';
 
 class DeleteComment extends Component {
-  state = { output: '', errMsg: {} };
+  goDeleteComment = async => api
+    .deleteComment(this.props.article_id, this.props.comment_id)
+    .then((data) => {
+      this.props.handleDeleteComment(this.props.comment_id, this.props.index);
+
+      if (data === {}) {
+        this.props.handleDeleteComment(
+          this.props.comment_id,
+          this.props.index
+        );
+        return `${this.props.comment_id} deleted`;
+      }
+    })
+    .catch(err => handleErrors(err));
 
   render() {
     const artId = this.props.article_id * 1;
@@ -24,21 +37,6 @@ class DeleteComment extends Component {
       </div>
     );
   }
-
-  goDeleteComment = async => api
-    .deleteComment(this.props.article_id, this.props.comment_id)
-    .then((data) => {
-      this.props.handleDeleteComment(this.props.comment_id, this.props.index);
-
-      if (data === {}) {
-        this.props.handleDeleteComment(
-          this.props.comment_id,
-          this.props.index
-        );
-        return `${this.props.comment_id} deleted`;
-      }
-    })
-    .catch(err => handleErrors(err));
 }
 
 export default DeleteComment;
