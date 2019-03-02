@@ -16,9 +16,8 @@ class Votes extends Component {
       type,
       user,
       author,
-      currentVote
+
     } = this.props;
-    console.log(currentVote);
     return (
       <div className="vote">
         <button

@@ -299,8 +299,8 @@ Articles By Topic
             {this.formatArticle(article, index)}
           </div>
         ))}
-        <div className="moreButton">
-          <button type="button" disabled={disableMoreButton} onClick={this.fetchMoreArticles}>More Articles</button>
+        <div>
+          <button className="moreButton" type="button" disabled={disableMoreButton} onClick={this.fetchMoreArticles}>More Articles</button>
 
         </div>
       </div>

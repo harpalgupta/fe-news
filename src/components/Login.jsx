@@ -68,12 +68,12 @@ class Login extends Component {
               <h3>Valid Users:</h3>
               <div className={!this.state.delayed ? 'lds-dual-ring' : 'loaded-users'}>Getting Users..</div>
               <ul className={this.state.delayed ? 'user-list' : 'loaded-users'}>
-                {this.state.users.map((user) => {
+                {this.state.users.map((user, index) => {
                   const avtarurl = user.avatar_url.replace('https://', 'http://');
                   // console.log(avtarurl)
                   return (
                     <div className="user-entry">
-                      <li key={user.user_id}>
+                      <li id={index} key={user.user_id}>
                         {' '}
                         <img
                           className="userAvatar"
