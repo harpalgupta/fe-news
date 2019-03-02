@@ -97,8 +97,11 @@ class Articles extends Component {
     this.handleQuery('p', queries.p + 1);
   };
 
-  handleAddArticle = (newArticle) => {
-    api.addNewArticle(newArticle.topic, newArticle).then(({ article }) => {
+  handleAddArticle = (newArticle, username) => {
+    api.addNewArticle(newArticle.topic, newArticle).then(({ tmpArticle }) => {
+      // console.log('hi', this.state.articles[5]);
+      const article = tmpArticle;
+      article.author = username;
       this.setState({ articles: [article, ...this.state.articles] });
     });
   };

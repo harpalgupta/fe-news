@@ -109,7 +109,7 @@ class NewArticle extends Component {
     if (msg) alert(`please enter ${msg}`);
 
     event.preventDefault();
-    this.props.handleAddArticle(newart);
+    this.props.handleAddArticle(newart, this.props.user.username);
   };
 }
 
