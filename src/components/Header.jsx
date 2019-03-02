@@ -17,10 +17,10 @@ class Header extends Component {
 
         </div>
         <div className="LoginHeader">
-          {this.props.user.username ? (
-            <>
-                Logged In As
-              {' '}
+          <div className="loginUser">
+            {this.props.user.username ? (
+              <>
+
               {this.props.user.username}
               <div>
                 <img src="https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png" alt="user avtar pic" />
@@ -30,12 +30,13 @@ class Header extends Component {
                 <button onClick={this.props.logOut}>Log Out</button>
               </div>
             </>
-          ) : (
+            ) : (
             <>
 Not Logged in
               {this.props.user.username}
             </>
-          )}
+            )}
+          </div>
         </div>
       </>
     );

@@ -325,7 +325,7 @@ display: inline-block
 }
 .lds-dual-ring:after {
   content: " ";
-  display: block;
+  display: inline-block;
   width: 46px;
   height: 46px;
   margin: 1px;
@@ -352,3 +352,18 @@ display: inline-block
   text-align: left;
 }
 
+.loginUser{
+  display: block;
+}
+
+.article-foot__value{
+  display: inline;
+  padding-left: 10px;
+}
+
+.delete-button{
+  margin: 0;
+  padding: 0;
+  display: block;
+  
+}

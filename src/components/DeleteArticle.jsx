@@ -37,13 +37,14 @@ class DeleteArticle extends Component {
     }
 
     return (
-      <div>
+      <>
         <button type="button" onClick={this.goDeleteArticle}>
           DELETE Article ID
           {' '}
           {article_id}
         </button>
-      </div>
+
+      </>
     );
   }
 }

@@ -131,7 +131,7 @@ class Articles extends Component {
 
   formatArticle = (article, index) => {
     const { user } = this.props;
-
+    const artDate = new Date(article.created_at);
     return (
       <div key={article.article_id} className="article-entry">
         <div className="articletitle">{article.title}</div>
@@ -162,28 +162,42 @@ class Articles extends Component {
         <div key={article.article_id} className="article-foot">
           <div>
 Comments:
-            {article.comment_count}
+            <div className="article-foot__value">
+              {article.comment_count}
+            </div>
           </div>
+          Author:
+
           {article.author === user.username ? (
-            <div>
-              ME!!!
-              <DeleteArticle
-                handleDeleteArticle={this.handleDeleteArticle}
-                article_id={article.article_id}
-                index={index}
-              />
+            <div className="article-foot__value">
+                ME!!!
+              <div className="delete-button">
+                <DeleteArticle
+                  handleDeleteArticle={this.handleDeleteArticle}
+                  article_id={article.article_id}
+                  index={index}
+                />
+
+              </div>
+
             </div>
+
           ) : (
-            <div>
-              {' '}
-Author:
-              {article.author}
-            </div>
+            <>
+
+              <div className="article-foot__value">
+
+                {article.author}
+              </div>
+            </>
           )}
           <div>
-            {' '}
 Created_at:
-            {article.created_at}
+            <div className="article-foot__value">
+              {artDate.toLocaleDateString()}
+              {' '}
+              {artDate.toLocaleTimeString()}
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from '@reach/router';
 import * as api from '../api';
 import Comments from './Comments';
 
@@ -24,78 +23,94 @@ handleUpdateVotes = (article, index, votes) => {
   this.setState({ article: { ...article } });
 };
 
-  formatArticle = (article) => {
-    const { user } = this.props;
-    return (
-      <div key={article.article_id} className="article-entry">
+formatArticle = (article, index) => {
+  const { user } = this.props;
+  const artDate = new Date(article.created_at);
+  return (
+    <div key={article.article_id} className="article-entry">
+      <div className="articletitle">{article.title}</div>
+
+      <Votes
+        article_id={article.article_id}
+        type="article"
+        votes={article.votes}
+        index={index}
+        handleUpdateVotes={this.handleUpdateVotes}
+        user={user}
+        author={article.author}
+      />
+      <div className="article">
 
 
-        <Votes
-          article_id={article.article_id}
-          type="article"
-          votes={article.votes}
-          handleUpdateVotes={this.handleUpdateVotes}
-          user={user}
-          author={article.author}
-        />
+        {article.body}
 
-        <div className="article">
-          <Link
-            key={`${article.article_id}article`}
-            state={{ article }}
-            to={`/article/${article.article_id}`}
-          >
-            {article.title}
-            {article.body}
-          </Link>
-        </div>
 
-        <div key={article.article_id} className="article-foot">
-          <div>
+      </div>
+
+      <div key={article.article_id} className="article-foot">
+        <div>
 Comments:
+          <div className="article-foot__value">
             {article.comment_count}
           </div>
-          <div>
-            {' '}
-Author:
-            {article.author}
+        </div>
+        Author:
+
+        {article.author === user.username ? (
+          <div className="article-foot__value">
+              ME!!!
+
+
           </div>
-          <div>
-            {' '}
+
+        ) : (
+          <>
+
+            <div className="article-foot__value">
+
+              {article.author}
+            </div>
+          </>
+        )}
+        <div>
 Created_at:
-            {article.created_at}
+          <div className="article-foot__value">
+            {artDate.toLocaleDateString()}
+            {' '}
+            {artDate.toLocaleTimeString()}
           </div>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
-  render() {
-    const { article_id, user } = this.props;
-    const { article } = this.state;
-    const artId = article_id * 1;
-    if (Number.isNaN(artId)) {
-      const err = { response: { status: 0, data: { msg: '' } } };
+render() {
+  const { article_id, user } = this.props;
+  const { article } = this.state;
+  const artId = article_id * 1;
+  if (Number.isNaN(artId)) {
+    const err = { response: { status: 0, data: { msg: '' } } };
 
-      err.response.status = 400;
-      err.response.data.msg = 'Local Error Article Id must be a number';
-      handleErrors(err);
-      return <div />;
-    }
-
-    return (
-      <div className="content">
-        <h2>
-Article:
-          {article.title}
-        </h2>
-
-        <div>{this.formatArticle(article)}</div>
-
-        <Comments article_id={article_id} user={user} />
-      </div>
-    );
+    err.response.status = 400;
+    err.response.data.msg = 'Local Error Article Id must be a number';
+    handleErrors(err);
+    return <div />;
   }
+
+  return (
+    <div className="content">
+      <h2>
+Article:
+        {article.title}
+      </h2>
+
+      <div>{this.formatArticle(article)}</div>
+
+      <Comments article_id={article_id} user={user} />
+    </div>
+  );
+}
 }
 
 

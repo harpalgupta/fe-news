@@ -10,7 +10,15 @@ class Login extends Component {
 
   componentDidMount() {
     this.fetchUsers();
+    this.delayLoad();
   }
+
+  delayLoad =() => {
+    setTimeout(() => {
+      this.setState({ delayed: true });
+    }, 1000);
+  }
+
 
   fetchUsers = () => {
     api
@@ -58,8 +66,8 @@ class Login extends Component {
             </form>
             <div>
               <h3>Valid Users:</h3>
-              <div className={this.state.users.length === 0 ? 'lds-dual-ring' : 'loaded-users'}>Getting Users..</div>
-              <ul className="user-list">
+              <div className={!this.state.delayed ? 'lds-dual-ring' : 'loaded-users'}>Getting Users..</div>
+              <ul className={this.state.delayed ? 'user-list' : 'loaded-users'}>
                 {this.state.users.map((user) => {
                   const avtarurl = user.avatar_url.replace('https://', 'http://');
                   // console.log(avtarurl)
