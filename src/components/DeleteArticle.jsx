@@ -4,11 +4,30 @@ import * as api from '../api';
 import { handleErrors } from '../utils';
 
 class DeleteArticle extends Component {
-  state = { output: '', errMsg: {} };
+  goDeleteArticle = (async) => {
+    const { article_id, index, handleDeleteArticle } = this.props;
+    return api
+      .deleteArticle(article_id)
+      .then((data) => {
+        handleDeleteArticle(article_id, index);
+
+        if (data === {}) {
+          this.props.handleDeleteArticle(
+            article_id,
+            index
+          );
+          return `${article_id} deleted`;
+        }
+      })
+      .catch((err) => {
+        handleErrors(err);
+      });
+  }
 
   render() {
-    const artId = this.props.article_id * 1;
-    if (isNaN(artId)) {
+    const { article_id } = this.props;
+    const artId = article_id * 1;
+    if (Number.isNaN(artId)) {
       const err = { response: { status: 0, data: { msg: '' } } };
 
       err.response.status = 400;
@@ -19,43 +38,14 @@ class DeleteArticle extends Component {
 
     return (
       <div>
-        <button onClick={this.goDeleteArticle}>
+        <button type="button" onClick={this.goDeleteArticle}>
           DELETE Article ID
           {' '}
-          {this.props.article_id}
+          {article_id}
         </button>
       </div>
     );
   }
-
-  goDeleteArticle = async => api
-    .deleteArticle(this.props.article_id)
-    .then((data) => {
-      this.props.handleDeleteArticle(this.props.article_id, this.props.index);
-
-      if (data === {}) {
-        this.props.handleDeleteArticle(
-          this.props.article_id,
-          this.props.index
-        );
-        return `${this.props.article_id} deleted`;
-      }
-    })
-    .catch((err) => {
-      handleErrors(err);
-    });
-  // handleErrors = err => {
-  //   const errcontent = {
-  //     errstatus: err.response.status,
-  //     errMsg: err.response.data.msg
-  //   };
-  //   navigate("/error", {
-  //     state: {
-  //       errcontent,
-  //       replace: false
-  //     }
-  //   });
-  // };
 }
 
 export default DeleteArticle;

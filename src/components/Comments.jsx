@@ -44,7 +44,7 @@ class Comments extends Component {
 
   handleAddComment = (newComment) => {
     const { article_id, user } = this.props;
-    const { comments } = thsis.state;
+    const { comments } = this.state;
     api
       .addNewComment(article_id, newComment, user.user_id)
       .then((newComm) => {
