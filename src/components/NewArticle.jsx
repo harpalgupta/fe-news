@@ -4,12 +4,53 @@ import TopicSelector from './TopicSelector';
 class NewArticle extends Component {
   state = {
     body: '',
-    topic: '',
-    user: {},
-    selectedTopic: ''
+    selectedTopic: '',
+    title: ''
+  };
+
+  handleTopic = (selectedTopic) => {
+    this.setState({ selectedTopic });
+  };
+
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState(
+      {
+        [name]: value
+      },
+      () => {}
+    );
+  };
+
+  handleSubmit = (event) => {
+    const { title, body, selectedTopic } = this.state;
+    const { user, handleAddArticle } = this.props;
+    const newart = {
+      title,
+      body,
+      user_id: user.user_id,
+      topic: selectedTopic
+    };
+    let msg = '';
+
+    Object.keys(newart).forEach((article_item) => {
+      if (!newart[article_item]) {
+        if (article_item === 'body') msg += 'Article text, ';
+        else msg += `${article_item}, `;
+      }
+    });
+
+
+    if (msg) alert(`please enter ${msg}`);
+
+    event.preventDefault();
+    handleAddArticle(newart, user.username || JSON.parse(sessionStorage.user));
   };
 
   render() {
+    const { title, body } = this.state;
+    const { topics } = this.props;
+
     return (
       <div>
         <h2>Add New Article</h2>
@@ -24,7 +65,7 @@ class NewArticle extends Component {
                 </div>
 
                 <input
-                  value={this.state.title}
+                  value={title}
                   name="title"
                   onChange={(event) => {
                     this.handleChange(event);
@@ -40,7 +81,7 @@ class NewArticle extends Component {
                 </div>
                 <textarea
                   className="newArticleText"
-                  value={this.state.body}
+                  value={body}
                   name="body"
                   onChange={(event) => {
                     this.handleChange(event);
@@ -64,7 +105,7 @@ class NewArticle extends Component {
 
                   <TopicSelector
                     handleTopic={this.handleTopic}
-                    topics={this.props.topics}
+                    topics={topics}
                   />
                 </div>
 
@@ -77,40 +118,6 @@ class NewArticle extends Component {
       </div>
     );
   }
-
-  handleTopic = (selectedTopic) => {
-    this.setState({ selectedTopic });
-  };
-
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    this.setState(
-      {
-        [name]: value
-      },
-      () => {}
-    );
-  };
-
-  handleSubmit = (event) => {
-    const newart = {
-      title: this.state.title,
-      body: this.state.body,
-      user_id: this.props.user.user_id,
-      topic: this.state.selectedTopic
-    };
-    let msg = '';
-    for (const article_item in newart) {
-      if (!newart[article_item]) {
-        if (article_item === 'body') msg += 'Article text, ';
-        else msg += `${article_item}, `;
-      }
-    }
-    if (msg) alert(`please enter ${msg}`);
-
-    event.preventDefault();
-    this.props.handleAddArticle(newart, this.props.user.username);
-  };
 }
 
 export default NewArticle;

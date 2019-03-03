@@ -5,7 +5,8 @@ import { handleErrors } from '../utils';
 class Login extends Component {
   state = {
     user: '',
-    users: []
+    users: [],
+    delayed: false
   };
 
   componentDidMount() {
@@ -36,17 +37,21 @@ class Login extends Component {
   };
 
   handleSubmit = (event) => {
+    const { user } = this.state;
+    const { storeUser } = this.props;
     event.preventDefault();
     api
-      .checkUserValid(this.state.user)
-      .then(this.props.storeUser)
+      .checkUserValid(user)
+      .then(storeUser)
       .catch((err) => {
         handleErrors(err);
       });
   };
 
   render() {
-    if (this.props.user.username) return this.props.children;
+    const { user, children } = this.props;
+    const { delayed, users } = this.state;
+    if (user.username) return children;
 
     return (
       <div>
@@ -66,14 +71,17 @@ class Login extends Component {
             </form>
             <div>
               <h3>Valid Users:</h3>
-              <div className={!this.state.delayed ? 'lds-dual-ring' : 'loaded-users'}>Getting Users..</div>
-              <ul className={this.state.delayed ? 'user-list' : 'loaded-users'}>
-                {this.state.users.map((user, index) => {
+
+              <div className={!delayed ? 'lds-dual-ring' : 'loaded-users'}><div className="loading-text">Getting Users..</div></div>
+
+
+              <ul className={delayed && users.length > 0 ? 'user-list' : 'loaded-users'}>
+                {users.map((user) => {
                   const avtarurl = user.avatar_url.replace('https://', 'http://');
                   // console.log(avtarurl)
                   return (
-                    <div className="user-entry">
-                      <li id={index} key={user.user_id}>
+                    <div key={user.username} className="user-entry">
+                      <li key={user.username}>
                         {' '}
                         <img
                           className="userAvatar"

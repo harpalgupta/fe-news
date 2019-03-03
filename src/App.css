@@ -134,6 +134,10 @@ height: 20px;
   max-width: 70%;
   min-height: 20%;
 }
+.article-list>div:nth-child(even) div{
+  background-color: rgb(238, 237, 237);
+
+}
 .foot-item{
   padding:5px;
   text-align: left;
@@ -145,6 +149,13 @@ height: 20px;
   flex-direction: row;
 text-align: left;
 }
+.article-body{
+  text-align: justify;
+  padding-left:20px; 
+  padding-top:20px; 
+
+}
+
 .article-foot,
 .comment-foot {
   grid-area: foot;
@@ -159,6 +170,8 @@ text-align: left;
 text-align: left;
   justify-content: space-between;
   /* flex-direction: row; */
+  border-top:solid grey 1px;
+  padding: 10px 0;
 }
 .comment-query{
   text-align: left;
@@ -222,8 +235,22 @@ h2 {
 .votearrow {
   font-size: 20pt;
   font-weight: bolder;
+  background: none;
+  border: none;
+  padding: 2px;
+
 }
 
+.vote-up{
+  color: green;
+}
+
+.vote-down{
+  color: red;
+}
+.votearrow:disabled{
+  color: grey;
+}
 
 .loginForm {
   max-height: 20%;
@@ -326,6 +353,7 @@ display: inline-block
   display: inline-block;
   width: 64px;
   height: 64px;
+  content: "hi"
 }
 .lds-dual-ring:after {
   content: " ";
@@ -370,4 +398,8 @@ display: inline-block
   padding: 0;
   display: block;
   
+}
+
+.dotdot{
+  font-weight: bolder;
 }

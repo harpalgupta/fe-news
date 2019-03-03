@@ -8,6 +8,29 @@ class Votes extends Component {
     sessionVote: 0
   }
 
+
+  goUpdateCommentVotes = (vote) => {
+    const {
+      handleUpdateVotes, article_id, author, id, index
+    } = this.props;
+    api
+      .updateCommentVote(article_id, id, vote)
+      .then((tmpComment) => {
+        const comment = tmpComment;
+        comment.author = author;
+        handleUpdateVotes(comment, index);
+        // this.setState({ votes: this.state.votes + 1 });
+      });
+  };
+
+  goUpdateArticleVotes = (vote) => {
+    const { article_id, index, handleUpdateVotes } = this.props;
+    api.updateArticleVote(article_id, vote).then((article) => {
+      handleUpdateVotes(article, index);
+    });
+  };
+
+
   render() {
     const {
 
@@ -16,21 +39,24 @@ class Votes extends Component {
       type,
       user,
       author,
+      id
 
     } = this.props;
+    const { sessionVote } = this.state;
     return (
       <div className="vote">
         <button
-          key={`${this.props.id}UP`}
-          className="votearrow"
-          disabled={user.username === author || this.state.sessionVote === 1}
+          type="button"
+          key={`${id}UP`}
+          className="votearrow vote-up"
+          disabled={user.username === author || sessionVote === 1}
           onClick={() => {
             if (type === 'comment') {
               this.goUpdateCommentVotes(1);
-              this.setState({ sessionVote: this.state.sessionVote + 1 });
+              this.setState({ sessionVote: sessionVote + 1 });
             } else {
               this.goUpdateArticleVotes(1);
-              this.setState({ sessionVote: this.state.sessionVote + 1 });
+              this.setState({ sessionVote: sessionVote + 1 });
             }
           }}
         >
@@ -40,16 +66,17 @@ class Votes extends Component {
         Votes:
         {votes}
         <button
+          type="button"
           key={`${article_id}Down`}
-          className="votearrow"
-          disabled={user.username === author || this.state.sessionVote === -1 || votes <= 0}
+          className="votearrow vote-down"
+          disabled={user.username === author || sessionVote === -1 || votes <= 0}
           onClick={() => {
             if (type === 'comment') {
               this.goUpdateCommentVotes(-1);
-              this.setState({ sessionVote: this.state.sessionVote - 1 });
+              this.setState({ sessionVote: sessionVote - 1 });
             } else {
               this.goUpdateArticleVotes(-1);
-              this.setState({ sessionVote: this.state.sessionVote - 1 });
+              this.setState({ sessionVote: sessionVote - 1 });
             }
           }}
         >
@@ -60,22 +87,5 @@ class Votes extends Component {
       </div>
     );
   }
-
-  goUpdateCommentVotes = (vote) => {
-    api
-      .updateCommentVote(this.props.article_id, this.props.id, vote)
-      .then((comment) => {
-        comment.author = this.props.author;
-        this.props.handleUpdateVotes(comment, this.props.index);
-        // this.setState({ votes: this.state.votes + 1 });
-      });
-  };
-
-  goUpdateArticleVotes = (vote) => {
-    api.updateArticleVote(this.props.article_id, vote).then((article) => {
-      this.props.handleUpdateVotes(article, this.props.index);
-    });
-  };
 }
-
 export default Votes;

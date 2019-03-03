@@ -1,44 +1,35 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## This project is a news site a clone of Reddit
 
-In the project directory, you can run:
+Hosted at the following URL= https://harpal-nc-news.netlify.com
 
-### `npm start`
+Source code for frontend URL= https://github.com/harpalgupta/fe-news
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Backend Api hosted URL= https://knews-prod.herokuapp.com/api
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Source code for Backend URL= https://github.com/harpalgupta/BE2-NC-Knews-harpal
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You will be able to login using one of the given users on the Login page
 
-### `npm run build`
+You can view Articles by clicking on home
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You can sort the articles by various options using the drop down boxes above articles
+You can Vote up/down on an article
+You can retrieve more pages by scrolling to the bottom and pressing more
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Within the Articles view you can click on an individual article and this will show you the comments for the article and allow you to add a comment for this article and allow you to delete comments you have made
+Sort options are above the comments
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Pre requirements:
+You will have npm available
 
-### `npm run eject`
+To install locally:
+mkdir ~/fe-news
+cd ~/fe-news
+git clone https://github.com/harpalgupta/fe-news
+npm install
+(this will install the dependent packages from package.json including:react,reach-router)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+to run the app in development mode run "npm start"

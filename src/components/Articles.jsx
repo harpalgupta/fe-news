@@ -53,7 +53,7 @@ class Articles extends Component {
           );
         })
         .catch((err) => {
-          this.setState({ disableMoreButton: true });
+          if (err) this.setState({ disableMoreButton: true });
         });
     } else if (prevState.queries !== queries) {
       api
@@ -98,22 +98,27 @@ class Articles extends Component {
   };
 
   handleAddArticle = (newArticle, username) => {
-    api.addNewArticle(newArticle.topic, newArticle).then(({ tmpArticle }) => {
+    const { articles } = this.state;
+
+    api.addNewArticle(newArticle.topic, newArticle).then((tmpArticle) => {
       // console.log('hi', this.state.articles[5]);
-      const article = tmpArticle;
+      // console.log(tmpArticle);
+      const { article } = tmpArticle;
       article.author = username;
-      this.setState({ articles: [article, ...this.state.articles] });
+      this.setState({ articles: [article, ...articles] }, () => { });
     });
   };
 
   handleDeleteArticle = (article_id, index) => {
-    const tmpArticles = this.state.articles;
+    const { articles } = this.state;
+    const tmpArticles = articles;
     tmpArticles.splice(index, 1);
     this.setState({ articles: tmpArticles });
   };
 
   handleUpdateVotes = (article, index) => {
-    const tmpArticles = [...this.state.articles];
+    const { articles } = this.state;
+    const tmpArticles = [...articles];
     tmpArticles[index] = article;
     this.setState({
       articles: [...tmpArticles]
@@ -148,7 +153,7 @@ class Articles extends Component {
           user={user}
           author={article.author}
         />
-        <div className="article">
+        <div className="article-body">
           <Link
             key={`${article.article_id}article`}
             to={`/articles/${article.article_id}`}
@@ -296,13 +301,15 @@ Articles By Topic
             </option>
           </select>
         </div>
+        <div className="article-list">
 
-        {articles.map((article, index) => (
-          <div key={article.article_id}>
-            {this.formatArticle(article, index)}
-          </div>
-        ))}
-        <div>
+          {articles.map((article, index) => (
+            <div key={article.article_id}>
+              {this.formatArticle(article, index)}
+            </div>
+          ))}
+          <div />
+
           <button className="moreButton" type="button" disabled={disableMoreButton} onClick={this.fetchMoreArticles}>More Articles</button>
 
         </div>
