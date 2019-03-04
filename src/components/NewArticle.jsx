@@ -29,19 +29,20 @@ class NewArticle extends Component {
       title,
       body,
       user_id: user.user_id,
-      topic: selectedTopic
+      topic: selectedTopic,
+      newArticleError: ''
     };
-    let msg = '';
+    this.state.newArticleError = '';
 
     Object.keys(newart).forEach((article_item) => {
       if (!newart[article_item]) {
-        if (article_item === 'body') msg += 'Article text, ';
-        else msg += `${article_item}, `;
+        if (article_item === 'body') this.state.newArticleError += 'Article text, ';
+        else this.state.newArticleError += `${article_item}, `;
       }
     });
 
 
-    if (msg) alert(`please enter ${msg}`);
+    // if (this.state.newArticleError) alert(`please enter ${this.state.newArticleError}`);
 
     event.preventDefault();
     handleAddArticle(newart, user.username || JSON.parse(sessionStorage.user));
@@ -114,6 +115,12 @@ class NewArticle extends Component {
 
             </div>
           </form>
+
+          <div className="new-article-error">
+          Error:
+            {' '}
+            {this.state.newArticleError}
+          </div>
         </div>
       </div>
     );

@@ -4,7 +4,10 @@ import * as api from '../api';
 
 
 class NavBar extends Component {
-  state = { topics: [], selectedTopic: '' };
+  componentDidMount() {
+    const { topic } = this.props;
+    api.fetchAllTopics(topic).then(topics => this.setState(topics));
+  }
 
   render() {
     return (
@@ -14,10 +17,6 @@ class NavBar extends Component {
         </div>
       </div>
     );
-  }
-
-  componentDidMount() {
-    api.fetchAllTopics(this.props.topic).then(topics => this.setState(topics));
   }
 }
 
