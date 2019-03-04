@@ -218,7 +218,8 @@ Created_at:
       topics, selectedTopic, articles, disableMoreButton
     } = this.state;
     return (
-      <div className="content">
+
+      <div>
         <div className="new-article">
           <NewArticle
             handleAddArticle={this.handleAddArticle}
