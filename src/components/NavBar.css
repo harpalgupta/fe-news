@@ -1,0 +1,25 @@
+
+.navbar {
+  grid-area: navbar;
+  background-color: darkgray;
+  display: flex;
+  flex: space-around;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bolder;
+  font-size: 15px;
+  color: white;
+  height: 40px;
+
+}
+
+.navbar-link {
+  margin-right: 20px;
+  background-color: #b1b6a6;
+  padding: 10px;
+  vertical-align: auto;
+  
+}
+
+.navbar-link:hover,.navbar-link:active,.moreButton:hover,.moreButton:active{
+  border: solid rgba(255, 0, 0, 0.39) 1px;
+}

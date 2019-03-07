@@ -1,0 +1,103 @@
+
+.LoginHeader {
+  background-color: grey;
+
+  grid-area: loginheader;
+  display: inline-flex;
+  margin-top:0px;
+  font-weight: bolder;
+  color: white;
+  padding-top:10px;
+  padding-right: 5px;
+  flex-wrap: wrap;
+  justify-content: center
+  
+}
+
+
+.loginForm {
+  max-height: 20%;
+  align-content: center;
+  display: inline-block;
+
+}
+.valid-users{
+  background: rgba(0,0,0,0.8);
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin-top:20px; 
+
+}
+.valid-users h3{
+  padding: 0;
+  padding-bottom:15px; 
+  margin: 0;
+}
+
+.user-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 200px;
+  text-align: left;
+
+}
+.user-list-div {
+}
+
+
+.login-list{
+  display: inline-block;
+  text-align: left;
+}
+
+.usernameEntry{
+  display: inline;
+  padding-left: 10px;
+  vertical-align: bottom;
+}
+
+.userAvatar {
+  height: 20px;
+  margin-left: 20px;
+  vertical-align: bottom;
+  background-color: white;
+
+  
+}
+.user-entry {
+  padding-bottom: 10px;
+}
+
+
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  content: "hi"
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: inline-block;
+  width: 46px;
+  height: 46px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+ .loaded-users{
+  display: none;
+}
