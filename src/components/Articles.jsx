@@ -123,7 +123,7 @@ class Articles extends Component {
     const { user } = this.props;
     const artDate = new Date(article.created_at);
     return (
-      <div key={article.article_id} className="article-entry">
+      <>
         <div className="articletitle">{article.title}</div>
 
         <Votes
@@ -190,7 +190,7 @@ Created_at:
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   };
 
@@ -287,7 +287,7 @@ Articles By Topic
         <div className="article-list">
 
           {articles.map((article, index) => (
-            <div key={article.article_id}>
+            <div className="article-entry" key={article.article_id}>
               {this.formatArticle(article, index)}
             </div>
           ))}

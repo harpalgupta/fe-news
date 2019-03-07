@@ -7,7 +7,7 @@ class NewComment extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <h2>Add New Comment</h2>
 
         <div className="comment-entry">
@@ -28,7 +28,7 @@ class NewComment extends Component {
             <button className="addNewCommentButton" type="submit">Add New Comment</button>
           </form>
         </div>
-      </div>
+      </>
     );
   }
 

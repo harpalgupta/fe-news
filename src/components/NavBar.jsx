@@ -14,7 +14,13 @@ class NavBar extends Component {
     return (
       <div className="navbar">
         <div className="navbar-link">
-          <Link to="/articles">Home</Link>
+          <Link to="/articles">
+            <button className="navbar-button" type="button">
+            Home
+            </button>
+
+          </Link>
+
         </div>
       </div>
     );

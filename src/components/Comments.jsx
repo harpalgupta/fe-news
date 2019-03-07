@@ -80,7 +80,7 @@ class Comments extends Component {
     const { article_id, user } = this.props;
     const { queryColumns, comments } = this.state;
     return (
-      <div className="content">
+      <div>
         <NewComment
           article_id={article_id}
           user_id={user.user_id}
@@ -129,50 +129,64 @@ Comments for Article ID:
 
 
         </div>
-        {comments.map((comment, index) => (
-          <div key={comment.comment_id} className="comment-entry">
+        {comments.map((comment, index) => {
+          const commentDate = new Date(comment.created_at);
 
-            <Votes
-              type="comment"
-              index={index}
-              id={comment.comment_id}
-              handleUpdateVotes={this.handleUpdateVotes}
-              votes={comment.votes}
-              author={comment.author}
-              article_id={article_id}
-              user={user}
-            />
 
-            <div className="comment">
-              <p key={comment.comment_id}>{comment.body}</p>
+          return (
+            <div key={comment.comment_id} className="comment-entry">
 
-            </div>
-            <div className="comment-foot">
-              {comment.author === user.username ? (
-                <div className="foot-item">
+              <Votes
+                type="comment"
+                index={index}
+                id={comment.comment_id}
+                handleUpdateVotes={this.handleUpdateVotes}
+                votes={comment.votes}
+                author={comment.author}
+                article_id={article_id}
+                user={user}
+              />
+
+              <div className="comment">
+                <p key={comment.comment_id}>{comment.body}</p>
+
+              </div>
+              <div className="comment-foot">
+                {comment.author === user.username ? (
+                  <div className="foot-item">
                       Comment Author: ME!!!
-                  <DeleteComment
-                    handleDeleteComment={this.handleDeleteComment}
-                    comment_id={comment.comment_id}
-                    index={index}
-                    article_id={article_id}
-                  />
-                </div>
-              ) : (
-                <div className="foot-item">
-                  {' '}
+                    <DeleteComment
+                      handleDeleteComment={this.handleDeleteComment}
+                      comment_id={comment.comment_id}
+                      index={index}
+                      article_id={article_id}
+                    />
+                  </div>
+                ) : (
+                  <div className="foot-item">
+                    {' '}
 Comment Author:
-                  {comment.author}
-                </div>
-              )}
+                    <div className="comment-foot__value">
 
-              <div className="foot-item">
-Comment Created_at :
-                {comment.created_at}
+                      {comment.author}
+                    </div>
+                  </div>
+                )}
+
+                <div className="foot-item">
+Comment Created_at:
+                  <div className="comment-foot__value">
+
+                    {commentDate.toLocaleDateString()}
+                    {' '}
+                    {commentDate.toLocaleTimeString()}
+                  </div>
+
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     );
   }
