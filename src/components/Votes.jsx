@@ -2,6 +2,7 @@ import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
 import * as api from '../api';
+import './Votes.css';
 
 class Votes extends Component {
   state={

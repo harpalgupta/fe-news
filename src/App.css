@@ -211,12 +211,7 @@ h2 {
 
   font-weight: bolder;
 }
-.vote {
-  grid-area: vote;
-  /* background-color: rgb(236, 245, 242); */
-  /* justify-content: flex-end; */
-  padding-top: 20px;
-}
+
 
 
 .comment, .article {
@@ -224,36 +219,7 @@ h2 {
 
   padding: 20px;
 }
-/* article {
-  margin-bottom: 10px;
-  margin-left: 8%;
-  list-style-type: none;
-  border: 1px solid black;
-  background-color: bisque;
-  padding: 5px;
-  flex-basis: 80%;
-  text-decoration: none;
-} */
 
-.votearrow {
-  font-size: 20pt;
-  font-weight: bolder;
-  background: none;
-  border: none;
-  padding: 2px;
-
-}
-
-.vote-up{
-  color: green;
-}
-
-.vote-down{
-  color: red;
-}
-.votearrow:disabled{
-  color: grey;
-}
 
 .loginForm {
   max-height: 20%;
@@ -287,8 +253,6 @@ display: inline-block
 
 }
 
-
-
 .usernameEntry{
   display: inline;
   padding-left: 10px;
@@ -305,10 +269,7 @@ display: inline-block
   align-items: center;
 }
 
-.votearrow-hidden {
-  background-color: black;
-  color: yellow;
-}
+
 
 .userAvatar {
   height: 20px;

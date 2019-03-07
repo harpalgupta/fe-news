@@ -70,12 +70,6 @@ class Articles extends Component {
       api.fetchArticles(selectedTopic).then((articles) => {
         this.setState({ ...articles }, () => {});
       });
-
-      if (prevState.selectedTopic !== selectedTopic) {
-        api.fetchArticles(selectedTopic).then((articles) => {
-          this.setState({ ...articles }, () => {});
-        });
-      }
     }
   }
 
@@ -101,8 +95,6 @@ class Articles extends Component {
     const { articles } = this.state;
 
     api.addNewArticle(newArticle.topic, newArticle).then((tmpArticle) => {
-      // console.log('hi', this.state.articles[5]);
-      // console.log(tmpArticle);
       const { article } = tmpArticle;
       article.author = username;
       this.setState({ articles: [article, ...articles] }, () => { });
@@ -116,26 +108,16 @@ class Articles extends Component {
     this.setState({ articles: tmpArticles });
   };
 
-  handleUpdateVotes = (article, index) => {
+  handleUpdateVotes = (tmparticle, index) => {
     const { articles } = this.state;
-    const tmpArticles = [...articles];
-    tmpArticles[index] = article;
+    const tmpArticles = articles;
+    tmpArticles[index].votes = tmparticle.votes;
+
     this.setState({
       articles: [...tmpArticles]
     });
   };
 
-  storeUserVotes = (username, article_id, vote) => {
-    const { sessionVotes } = this.state;
-    this.setState(
-      {
-        sessionVotes: {
-          ...sessionVotes,
-          [username]: { article_id, vote }
-        }
-      }
-    );
-  };
 
   formatArticle = (article, index) => {
     const { user } = this.props;

@@ -1,0 +1,32 @@
+.vote {
+  grid-area: vote;
+  /* background-color: rgb(236, 245, 242); */
+  /* justify-content: flex-end; */
+  padding-top: 20px;
+}
+
+
+.votearrow {
+  font-size: 20pt;
+  font-weight: bolder;
+  background: none;
+  border: none;
+  padding: 2px;
+
+}
+
+.vote-up{
+  color: green;
+}
+
+.vote-down{
+  color: red;
+}
+.votearrow:disabled{
+  color: grey;
+}
+
+.votearrow-hidden {
+  background-color: black;
+  color: yellow;
+}
