@@ -156,38 +156,41 @@ Comments:
               {article.comment_count}
             </div>
           </div>
+          <div>
+
           Author:
 
-          {article.author === user.username ? (
-            <div className="article-foot__value">
+            {article.author === user.username ? (
+              <>
+                <div className="article-foot__value">
                 ME!!!
-              <div className="delete-button">
-                <DeleteArticle
-                  handleDeleteArticle={this.handleDeleteArticle}
-                  article_id={article.article_id}
-                  index={index}
-                />
+                </div>
 
-              </div>
 
-            </div>
+                <div className="delete-button">
+                  <DeleteArticle
+                    handleDeleteArticle={this.handleDeleteArticle}
+                    article_id={article.article_id}
+                    index={index}
+                  />
 
-          ) : (
+                </div>
+</>
+
+            ) : (
             <>
 
               <div className="article-foot__value">
-
                 {article.author}
               </div>
             </>
-          )}
-          <div>
+            )}
+          </div>
 Created_at:
-            <div className="article-foot__value">
-              {artDate.toLocaleDateString()}
-              {' '}
-              {artDate.toLocaleTimeString()}
-            </div>
+          <div className="article-foot__value">
+            {artDate.toLocaleDateString()}
+            {' '}
+            {artDate.toLocaleTimeString()}
           </div>
         </div>
       </>
