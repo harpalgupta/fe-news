@@ -118,19 +118,18 @@ html{
     border-top:solid grey 1px;
     padding: 10px 0;
   }
-  .comment-query{
-    text-align: left;
-    margin-left:40px;
-    padding-bottom: 20px;
-    font-family: 'Work Sans', sans-serif;
+  
 
-  }
   .sort-bar{
     text-align: left;
     margin-left:40px;
     padding-bottom: 20px;
     font-family: 'Work Sans', sans-serif;
 
+  }
+  
+  label{
+    padding-right: 10px;
   }
   label>div{
     padding-top: 15px;
@@ -164,9 +163,13 @@ html{
 
 
  input,textarea, select{
+    padding-left:5px; 
     border-radius: 5px;
     background-color: white;
-    padding: 5px;
+
+  }
+  .comment-sortbar select, .sort-bar select{
+    margin-right:10px; 
   }
   .newCommentForm,
   .newForm {
@@ -180,17 +183,8 @@ html{
     padding: 10px;
     align-items: left;
   }
-  .newFormLine >label {
-  padding-right: 10px;
-  vertical-align: text-top;
-  display: inline-block
-    
-  }
-  .newCommentBody{
-    padding-top:5px;
-    padding-bottom:5px;
-
-  }
+ 
+  
 
 
   .pfoot{
@@ -216,11 +210,11 @@ html{
   .newArticleOptions{
   margin-left:10px;
   }
-  .newCommentBody>textarea{
+  .newCommentBody textarea{
     width: 80%;
     height: 100px;
   }
-  .newFormLine>textarea{
+  .newFormLine textarea{
     width: 90%;
     height: 100px;
   }
@@ -266,8 +260,9 @@ html{
  
   button{
     border: solid rgba(117, 117, 117, 0.39) 1px;
-    background-color: rgb(220,220,220);
+    background-color: white;
     border-radius: 10px;
+    padding: 5px;
 
 
   }

@@ -4,6 +4,7 @@ import NewComment from './NewComment';
 import { handleErrors } from '../utils';
 import DeleteComment from './DeleteComment';
 import Votes from './Votes';
+import './Comments.css';
 
 class Comments extends Component {
   state = {
@@ -90,26 +91,27 @@ class Comments extends Component {
 Comments for Article ID:
           {article_id}
         </h2>
-        <div className="comment-query">
-          <label>Sort by</label>
-          <select
-            name="sort_by"
-            id="sort_by"
-            onChange={(event) => {
-              this.handleQuery('sort_by', event.target.value);
-            }}
-          >
-            <option key="all" value="">
+        <div className="comment-list-container">
+          <div className="comment-sortbar">
+            <label>Sort by</label>
+            <select
+              name="sort_by"
+              id="sort_by"
+              onChange={(event) => {
+                this.handleQuery('sort_by', event.target.value);
+              }}
+            >
+              <option key="all" value="">
               Default(created_at)
-            </option>
-
-            {queryColumns.map(column => (
-              <option key={column} value={column}>
-                {column}
               </option>
-            ))}
-          </select>
-          <div>
+
+              {queryColumns.map(column => (
+                <option key={column} value={column}>
+                  {column}
+                </option>
+              ))}
+            </select>
+          <>
             <label>Sort Ascending/Descending</label>
             <select
               name="sort_ascending"
@@ -125,16 +127,17 @@ Comments for Article ID:
               ascending
               </option>
             </select>
+          </>
+
+
           </div>
 
-
-        </div>
-        {comments.map((comment, index) => {
-          const commentDate = new Date(comment.created_at);
+          {comments.map((comment, index) => {
+            const commentDate = new Date(comment.created_at);
 
 
-          return (
-            <div key={comment.comment_id} className="comment-entry">
+            return (
+              <div key={comment.comment_id} className="comment-entry">
 
               <Votes
                 type="comment"
@@ -185,9 +188,11 @@ Comment Created_at:
                 </div>
               </div>
             </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
+
     );
   }
 }
