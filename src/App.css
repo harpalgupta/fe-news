@@ -132,8 +132,8 @@ html{
     font-family: 'Work Sans', sans-serif;
 
   }
-  label{
-    padding: 10px;
+  label>div{
+    padding-top: 15px;
   }
 
   a {
@@ -163,7 +163,11 @@ html{
   }
 
 
-
+ input,textarea, select{
+    border-radius: 5px;
+    background-color: white;
+    padding: 5px;
+  }
   .newCommentForm,
   .newForm {
     grid-area: articletitle;
@@ -188,14 +192,6 @@ html{
 
   }
 
-
-
-
-
-
-
-
-  
 
   .pfoot{
     grid-area: pfoot;
@@ -267,18 +263,20 @@ html{
     z-index: 2;
   }
 
+ 
+  button{
+    border: solid rgba(117, 117, 117, 0.39) 1px;
+    background-color: rgb(220,220,220);
+    border-radius: 10px;
+
+
+  }
+
   .moreButton{
     font-weight: bold;
-    font-family: sans-serif;
-    text-decoration: none;
-    border: solid rgba(255, 255, 255, 0.39) 1px;
-    border-radius: 25px;
+    border: solid rgba(71, 71, 71, 0) 1px;
 
   }
-  button{
-    border: solid rgba(255, 255, 255, 0.39) 1px;
-  }
-
   button:hover,button:active,.navbar-link:hover,.navbar-link:active,.moreButton:hover,.moreButton:active{
     border: solid rgba(255, 0, 0, 0.39) 1px;
     background-color: green;

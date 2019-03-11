@@ -296,9 +296,9 @@ Articles By Topic
           ))}
           <div />
 
-          <button className="moreButton" type="button" disabled={disableMoreButton} onClick={this.fetchMoreArticles}>More Articles</button>
 
         </div>
+        <button className="moreButton" type="button" disabled={disableMoreButton} onClick={this.fetchMoreArticles}>More Articles</button>
       </div>
     );
   }
