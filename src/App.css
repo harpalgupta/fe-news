@@ -148,8 +148,7 @@ html{
   }
   .articletitle {
     grid-area: articletitle;
-    
-
+    text-align: left;
     font-weight: bolder;
   }
 
@@ -203,16 +202,9 @@ html{
     font-weight: bolder;
 
   }
-  .addNewCommentButton{
-    font-weight: bolder;
-
-  }
+  
   .newArticleOptions{
   margin-left:10px;
-  }
-  .newCommentBody textarea{
-    width: 80%;
-    height: 100px;
   }
   .newFormLine textarea{
     width: 90%;
