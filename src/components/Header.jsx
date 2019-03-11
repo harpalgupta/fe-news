@@ -1,6 +1,9 @@
 
 import React, { Component } from 'react';
 import './Header.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
 
 class Header extends Component {
   // state = { username: "" };
@@ -22,11 +25,20 @@ class Header extends Component {
             {this.props.user.username ? (
               <>
 
-                {this.props.user.username}
-                <div>
-                  <img src="https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png" alt="user avtar pic" />
+                <>
+                  {' '}
+                  <div className="login-user-text">
+                    {this.props.user.username}
 
-                </div>
+                  </div>
+
+                  <div className="login-user-image">
+                    {/* <img src="https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png" alt="user avtar pic" /> */}
+                    <FontAwesomeIcon icon={faUser} />
+                  </div>
+
+                </>
+
                 <div className="logout-button">
                   <button onClick={this.props.logOut}>Log Out</button>
                 </div>

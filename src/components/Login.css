@@ -14,7 +14,9 @@
   
 }
 
-
+.login-page{
+  height: 100%;
+}
 .loginForm {
   max-height: 20%;
   align-content: center;

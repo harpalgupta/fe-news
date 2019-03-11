@@ -55,7 +55,7 @@ class Login extends Component {
     if (user.username) return children;
 
     return (
-      <div>
+      <>
         <h2>Login Page</h2>
         <div className="login-page">
           <div className="login-list">
@@ -85,14 +85,14 @@ class Login extends Component {
                       <li key={user.username}>
                         {' '}
                         <img
-                            className="userAvatar"
-                            src={avtarurl}
-                            alt={user.username}
-                            onError={(e) => {
+                          className="userAvatar"
+                          src={avtarurl}
+                          alt={user.username}
+                          onError={(e) => {
                               e.target.onerror = null;
                               e.target.src = 'https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png';
                             }}
-                          />
+                        />
                         <div className="usernameEntry">{user.username}</div>
                       </li>
                     </div>
@@ -102,7 +102,7 @@ class Login extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
