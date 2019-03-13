@@ -5,7 +5,26 @@ class NewComment extends Component {
     body: ''
   };
 
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState(
+      {
+        [name]: value
+      },
+      () => {}
+    );
+  };
+
+  handleSubmit = (event) => {
+    const { handleAddComment } = this.props;
+    const { body } = this.state;
+    event.preventDefault();
+    handleAddComment(body);
+  };
+
   render() {
+    const { body } = this.state;
+
     return (
       <>
         <h2>Add New Comment</h2>
@@ -17,7 +36,7 @@ class NewComment extends Component {
             </div>
             <div className="newCommentBody">
               <textarea
-                value={this.state.body}
+                value={body}
                 name="body"
                 onChange={(event) => {
                   this.handleChange(event);
@@ -31,21 +50,6 @@ class NewComment extends Component {
       </>
     );
   }
-
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    this.setState(
-      {
-        [name]: value
-      },
-      () => {}
-    );
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.handleAddComment(this.state.body);
-  };
 }
 
 export default NewComment;

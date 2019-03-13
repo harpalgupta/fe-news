@@ -8,7 +8,6 @@ import NewArticle from './NewArticle';
 import DeleteArticle from './DeleteArticle';
 import Votes from './Votes';
 
-
 class Articles extends Component {
   state = {
     articles: [],
@@ -16,25 +15,19 @@ class Articles extends Component {
     selectedTopic: '',
     newArticle: {},
     queries: { p: 1 },
-    sessionVotes: {},
     disableMoreButton: false
   };
 
   componentDidMount() {
     const { selectedTopic } = this.state;
-    api
-      .fetchAllTopics(selectedTopic)
-      .then(topics => this.setState(topics));
+    api.fetchAllTopics(selectedTopic).then(topics => this.setState(topics));
     api.fetchArticles(selectedTopic).then((articles) => {
       this.setState({ ...articles });
     });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      newArticle, queries, selectedTopic
-    } = this.state;
-
+    const { newArticle, queries, selectedTopic } = this.state;
 
     if (prevState.newArticle !== newArticle) {
       this.setState({
@@ -73,16 +66,13 @@ class Articles extends Component {
     }
   }
 
-
   handleTopic = (selectedTopic) => {
     this.setState({ selectedTopic });
   };
 
   handleQuery = (queryItem, value) => {
     const { queries } = this.state;
-    this.setState(
-      { queries: { ...queries, [queryItem]: value } }
-    );
+    this.setState({ queries: { ...queries, [queryItem]: value } });
   };
 
   fetchMoreArticles = () => {
@@ -97,7 +87,7 @@ class Articles extends Component {
     api.addNewArticle(newArticle.topic, newArticle).then((tmpArticle) => {
       const { article } = tmpArticle;
       article.author = username;
-      this.setState({ articles: [article, ...articles] }, () => { });
+      this.setState({ articles: [article, ...articles] }, () => {});
     });
   };
 
@@ -117,7 +107,6 @@ class Articles extends Component {
       articles: [...tmpArticles]
     });
   };
-
 
   formatArticle = (article, index) => {
     const { user } = this.props;
@@ -140,32 +129,20 @@ class Articles extends Component {
             key={`${article.article_id}article`}
             to={`/articles/${article.article_id}`}
           >
-            <Dotdotdot
-              clamp={5}
-            >
-              {article.body}
-
-            </Dotdotdot>
+            <Dotdotdot clamp={5}>{article.body}</Dotdotdot>
           </Link>
         </div>
 
         <div key={article.article_id} className="article-foot">
           <div>
-Comments:
-            <div className="article-foot__value">
-              {article.comment_count}
-            </div>
+            Comments:
+            <div className="article-foot__value">{article.comment_count}</div>
           </div>
           <div>
-
-          Author:
-
+            Author:
             {article.author === user.username ? (
               <>
-                <div className="article-foot__value">
-                ME!!!
-                </div>
-
+                <div className="article-foot__value">ME!!!</div>
 
                 <div className="delete-button">
                   <DeleteArticle
@@ -173,20 +150,15 @@ Comments:
                     article_id={article.article_id}
                     index={index}
                   />
-
                 </div>
               </>
-
             ) : (
               <>
-
-                <div className="article-foot__value">
-                {article.author}
-              </div>
+                <div className="article-foot__value">{article.author}</div>
               </>
             )}
           </div>
-Article Created:
+          Article Created:
           <div className="article-foot__value">
             {artDate.toLocaleDateString()}
             {' '}
@@ -203,7 +175,6 @@ Article Created:
       topics, selectedTopic, articles, disableMoreButton
     } = this.state;
     return (
-
       <div>
         <div className="new-article">
           <NewArticle
@@ -216,7 +187,7 @@ Article Created:
         {selectedTopic ? (
           <div>
             <h2>
-Articles By Topic
+              Articles By Topic
               {selectedTopic}
             </h2>
           </div>
@@ -288,17 +259,21 @@ Articles By Topic
           </select>
         </div>
         <div className="article-list">
-
           {articles.map((article, index) => (
             <div className="article-entry" key={article.article_id}>
               {this.formatArticle(article, index)}
             </div>
           ))}
           <div />
-
-
         </div>
-        <button className="moreButton" type="button" disabled={disableMoreButton} onClick={this.fetchMoreArticles}>More Articles</button>
+        <button
+          className="moreButton"
+          type="button"
+          disabled={disableMoreButton}
+          onClick={this.fetchMoreArticles}
+        >
+          More Articles
+        </button>
       </div>
     );
   }

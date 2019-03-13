@@ -50,9 +50,7 @@ class Comments extends Component {
       .addNewComment(article_id, newComment, user.user_id)
       .then((newComm) => {
         newComm.comment.author = user.username;
-        this.setState(
-          { comments: [newComm.comment, ...comments] }
-        );
+        this.setState({ comments: [newComm.comment, ...comments] });
       })
       .catch((err) => {
         handleErrors(err);
@@ -61,12 +59,7 @@ class Comments extends Component {
 
   handleQuery = (queryItem, value) => {
     const { queries } = this.state;
-    this.setState(
-      { queries: { ...queries, [queryItem]: value } },
-      () => {
-
-      }
-    );
+    this.setState({ queries: { ...queries, [queryItem]: value } }, () => {});
   };
 
   handleDeleteComment = (comment_id, index) => {
@@ -75,7 +68,6 @@ class Comments extends Component {
     tmpComments.splice(index, 1);
     this.setState({ comments: tmpComments });
   };
-
 
   render() {
     const { article_id, user } = this.props;
@@ -88,7 +80,7 @@ class Comments extends Component {
           handleAddComment={this.handleAddComment}
         />
         <h2>
-Comments for Article ID:
+          Comments for Article ID:
           {article_id}
         </h2>
         <div className="comment-list-container">
@@ -102,7 +94,7 @@ Comments for Article ID:
               }}
             >
               <option key="all" value="">
-              Default(created_at)
+                Default(created_at)
               </option>
 
               {queryColumns.map(column => (
@@ -114,31 +106,27 @@ Comments for Article ID:
             <>
               <label>Sort Ascending/Descending</label>
               <select
-              name="sort_ascending"
-              id="sort_ascending"
-              onChange={(event) => {
-                this.handleQuery('sort_ascending', event.target.value);
-              }}
-            >
-              <option key="sort_descending" value="false">
-              descending
-              </option>
-              <option key="sort_ascending" value="true">
-              ascending
-              </option>
-            </select>
+                name="sort_ascending"
+                id="sort_ascending"
+                onChange={(event) => {
+                  this.handleQuery('sort_ascending', event.target.value);
+                }}
+              >
+                <option key="sort_descending" value="false">
+                  descending
+                </option>
+                <option key="sort_ascending" value="true">
+                  ascending
+                </option>
+              </select>
             </>
-
-
           </div>
 
           {comments.map((comment, index) => {
             const commentDate = new Date(comment.created_at);
 
-
             return (
               <div key={comment.comment_id} className="comment-entry">
-
                 <Votes
                   type="comment"
                   index={index}
@@ -152,47 +140,42 @@ Comments for Article ID:
 
                 <div className="comment">
                   <p key={comment.comment_id}>{comment.body}</p>
-
                 </div>
                 <div className="comment-foot">
                   {comment.author === user.username ? (
-                  <div className="foot-item">
+                    <div className="foot-item">
                       Comment Author: ME!!!
-                    <DeleteComment
-                      handleDeleteComment={this.handleDeleteComment}
-                      comment_id={comment.comment_id}
-                      index={index}
-                      article_id={article_id}
-                    />
-                  </div>
-                ) : (
-                  <div className="foot-item">
-                    {' '}
-Comment Author:
-                    <div className="comment-foot__value">
+                      <DeleteComment
+                        handleDeleteComment={this.handleDeleteComment}
+                        comment_id={comment.comment_id}
+                        index={index}
+                        article_id={article_id}
+                      />
+                    </div>
+                  ) : (
+                    <div className="foot-item">
+                      {' '}
+                      Comment Author:
+                      <div className="comment-foot__value">
+                        {comment.author}
+                      </div>
+                    </div>
+                  )}
 
-                      {comment.author}
+                  <div className="foot-item">
+                    Comment Created:
+                    <div className="comment-foot__value">
+                      {commentDate.toLocaleDateString()}
+                      {' '}
+                      {commentDate.toLocaleTimeString()}
                     </div>
                   </div>
-                )}
-
-                  <div className="foot-item">
-Comment Created:
-                  <div className="comment-foot__value">
-
-                    {commentDate.toLocaleDateString()}
-                    {' '}
-                    {commentDate.toLocaleTimeString()}
-                  </div>
-
-                </div>
                 </div>
               </div>
             );
           })}
         </div>
       </div>
-
     );
   }
 }

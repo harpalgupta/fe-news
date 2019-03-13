@@ -6,7 +6,8 @@ import './NavBar.css';
 
 class NavBar extends Component {
   componentDidMount() {
-    api.fetchAllTopics(this.props.topic).then(topics => this.setState(topics));
+    const { topic } = this.props;
+    api.fetchAllTopics(topic).then(topics => this.setState(topics));
   }
 
 
