@@ -175,18 +175,18 @@ Comments:
                   />
 
                 </div>
-</>
+              </>
 
             ) : (
-            <>
+              <>
 
-              <div className="article-foot__value">
+                <div className="article-foot__value">
                 {article.author}
               </div>
-            </>
+              </>
             )}
           </div>
-Created_at:
+Article Created:
           <div className="article-foot__value">
             {artDate.toLocaleDateString()}
             {' '}

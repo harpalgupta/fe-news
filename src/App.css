@@ -20,7 +20,7 @@ html{
     text-align: center;
     display: grid;
     grid-template-columns:  5fr 1fr;
-    grid-template-rows:2fr 1fr 15fr 1fr;
+    grid-template-rows:2fr 1fr 25fr 1fr;
     grid-template-areas:
       "header loginheader" "navbar navbar " "content content" "pfoot pfoot" ;
     height: 100vh;
@@ -104,18 +104,12 @@ html{
   .article-foot,
   .comment-foot {
     grid-area: foot;
-    /* display: flex;
-    flex: 1; */
-
-    /* text-align: left; */
-    /* border: 1px solid black; */
     margin-top: 10px;
     text-decoration: none;
-    color: blue;
+    color: #400406;
   text-align: left;
     justify-content: space-between;
-    /* flex-direction: row; */
-    border-top:solid grey 1px;
+        border-top:solid grey 1px;
     padding: 10px 0;
   }
   
@@ -251,10 +245,12 @@ html{
 
  
   button{
-    border: solid rgba(117, 117, 117, 0.39) 1px;
+    border: solid #690b0e 1px;
     background-color: white;
     border-radius: 10px;
-    padding: 5px;
+    padding: 8px;
+    transition: background 0.8s;
+    display: inline-block;
 
 
   }
@@ -262,10 +258,11 @@ html{
   .moreButton{
     font-weight: bold;
     border: solid rgba(71, 71, 71, 0) 1px;
+    margin-top: 40px;
 
   }
   button:hover,button:active,.navbar-link:hover,.navbar-link:active,.moreButton:hover,.moreButton:active{
-    border: solid rgba(255, 0, 0, 0.39) 1px;
-    background-color: green;
-    color: black
+    border: solid #690b0e 1px;
+    background-color: #690b0e;
+    color: white
   }

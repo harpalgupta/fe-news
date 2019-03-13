@@ -111,9 +111,9 @@ Comments for Article ID:
                 </option>
               ))}
             </select>
-          <>
-            <label>Sort Ascending/Descending</label>
-            <select
+            <>
+              <label>Sort Ascending/Descending</label>
+              <select
               name="sort_ascending"
               id="sort_ascending"
               onChange={(event) => {
@@ -127,7 +127,7 @@ Comments for Article ID:
               ascending
               </option>
             </select>
-          </>
+            </>
 
 
           </div>
@@ -139,23 +139,23 @@ Comments for Article ID:
             return (
               <div key={comment.comment_id} className="comment-entry">
 
-              <Votes
-                type="comment"
-                index={index}
-                id={comment.comment_id}
-                handleUpdateVotes={this.handleUpdateVotes}
-                votes={comment.votes}
-                author={comment.author}
-                article_id={article_id}
-                user={user}
-              />
+                <Votes
+                  type="comment"
+                  index={index}
+                  id={comment.comment_id}
+                  handleUpdateVotes={this.handleUpdateVotes}
+                  votes={comment.votes}
+                  author={comment.author}
+                  article_id={article_id}
+                  user={user}
+                />
 
-              <div className="comment">
-                <p key={comment.comment_id}>{comment.body}</p>
+                <div className="comment">
+                  <p key={comment.comment_id}>{comment.body}</p>
 
-              </div>
-              <div className="comment-foot">
-                {comment.author === user.username ? (
+                </div>
+                <div className="comment-foot">
+                  {comment.author === user.username ? (
                   <div className="foot-item">
                       Comment Author: ME!!!
                     <DeleteComment
@@ -176,8 +176,8 @@ Comment Author:
                   </div>
                 )}
 
-                <div className="foot-item">
-Comment Created_at:
+                  <div className="foot-item">
+Comment Created:
                   <div className="comment-foot__value">
 
                     {commentDate.toLocaleDateString()}
@@ -186,8 +186,8 @@ Comment Created_at:
                   </div>
 
                 </div>
+                </div>
               </div>
-            </div>
             );
           })}
         </div>
