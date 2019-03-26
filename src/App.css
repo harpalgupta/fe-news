@@ -25,8 +25,8 @@ html{
       "header loginheader" "navbar navbar " "content content" "pfoot pfoot" ;
     height: 100vh;
     font-family: 'Work Sans', sans-serif;
+  }
 
-<<<<<<< HEAD
 .navbar-link {
   margin-right: 20px;
   background-color: #b1b6a6;
@@ -40,10 +40,6 @@ html{
 .navbar-link:hover,.navbar-link:active,.moreButton:hover,.moreButton:active{
   border-color:  rgba(255, 0, 0, 0.39);
 }
-=======
-  }
-
->>>>>>> fd4300cf364112956a44791a495676d14701d529
 
 
   .sidebar {
@@ -221,7 +217,6 @@ html{
     height: 100px;
   }
 
-<<<<<<< HEAD
 .moreButton{
   font-weight: bold;
   font-family: sans-serif;
@@ -231,8 +226,6 @@ html{
   padding: 5px 10px;
 
 }
-=======
->>>>>>> fd4300cf364112956a44791a495676d14701d529
 
   .loginUser{
     display: block;

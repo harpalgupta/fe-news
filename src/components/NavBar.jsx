@@ -9,10 +9,6 @@ class NavBar extends Component {
     const { topic } = this.props;
     api.fetchAllTopics(topic).then(topics => this.setState(topics));
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> fd4300cf364112956a44791a495676d14701d529
 
   render() {
     return (
