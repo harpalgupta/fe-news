@@ -10,6 +10,7 @@ class NavBar extends Component {
     api.fetchAllTopics(topic).then(topics => this.setState(topics));
   }
 
+
   render() {
     return (
       <div className="navbar">
