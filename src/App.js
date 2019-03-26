@@ -42,34 +42,39 @@ class App extends Component {
         <NavBar handleTopic={this.handleTopic} />
         <SideBar />
         <div className="content">
-          <Login
-            storeUser={this.storeUser}
+
+          <div className="content-background">
+              <div className="overlay">
+
+
+              <Login
+                storeUser={this.storeUser}
             // user={this.state.user}
-            user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ''}
-          >
-            <Router>
-              <Articles
-                path="/articles"
-                topic={this.state.selectedTopic}
-                user={
+                user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ''}
+              >
+                <Router>
+                  <Articles
+                    path="/articles"
+                    topic={this.state.selectedTopic}
+                    user={
                   sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
 
                 }
-                default
-              />
-              <Topics path="/topics/*" />
+                    default
+                  />
+                  <Topics path="/topics/*" />
 
-              <Article
-                path="/articles/:article_id"
-                user={
+                  <Article
+                    path="/articles/:article_id"
+                    user={
                   sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
                 }
-              />
+                  />
 
-              <DeleteArticle path="/articles/:article_id/delete" />
-              <DeleteComment path="/articles/:article_id/comments/:comment_id/delete" />
-            </Router>
-          </Login>
+                  <DeleteArticle path="/articles/:article_id/delete" />
+                  <DeleteComment path="/articles/:article_id/comments/:comment_id/delete" />
+                </Router>
+              </Login>
 
           <>
             <Router>
@@ -77,10 +82,14 @@ class App extends Component {
             </Router>
           </>
 
-        </div>
-        <Footer />
+            </div>
+              <Footer />
 
+            </div>
+        </div>
       </div>
+
+
     );
   }
 }

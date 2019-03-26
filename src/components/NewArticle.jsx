@@ -61,46 +61,51 @@ class NewArticle extends Component {
             <div>
               <div className="newFormLine">
                 <div>
-                  <label htmlFor="title">Title</label>
+                  <label htmlFor="title">
+Title
+                    {' '}
+                    <div>
+                      <input
+                        value={title}
+                        name="title"
+                        onChange={(event) => {
+                          this.handleChange(event);
+                        }}
+                      />
+                    </div>
+
+                  </label>
 
                 </div>
 
-                <input
-                  value={title}
-                  name="title"
-                  onChange={(event) => {
-                    this.handleChange(event);
-                  }}
-                />
 
               </div>
               <div className="newFormLine">
                 <div>
-                  <label htmlFor="body">Article Text</label>
+                  <label htmlFor="body">
+Article Text
+                    <div>
+                      <textarea
+                        className="newArticleText"
+                        value={body}
+                        name="body"
+                        onChange={(event) => {
+                          this.handleChange(event);
+                        }}
+                        rows="5"
+                        cols="50"
+                        wrap="soft"
+                      />
+                    </div>
+
+                  </label>
 
 
                 </div>
-                <textarea
-                  className="newArticleText"
-                  value={body}
-                  name="body"
-                  onChange={(event) => {
-                    this.handleChange(event);
-                  }}
-                  rows="5"
-                  cols="50"
-                  wrap="soft"
-                />
+
               </div>
 
-              {/* <label htmlFor="topic">Topic</label>
-            <input
-              value={this.state.topic}
-              name="topic"
-              onChange={event => {
-                this.handleChange(event);
-              }}
-            /> */}
+
               <div className="newArticleOptions">
                 <div className="newArticleTopicSelect">
 

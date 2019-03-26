@@ -4,7 +4,7 @@ import * as api from '../api';
 import { handleErrors } from '../utils';
 
 class DeleteArticle extends Component {
-  goDeleteArticle = (async) => {
+  goDeleteArticle = () => {
     const { article_id, index, handleDeleteArticle } = this.props;
     return api
       .deleteArticle(article_id)
@@ -12,12 +12,13 @@ class DeleteArticle extends Component {
         handleDeleteArticle(article_id, index);
 
         if (data === {}) {
-          this.props.handleDeleteArticle(
+          handleDeleteArticle(
             article_id,
             index
           );
           return `${article_id} deleted`;
         }
+        return null;
       })
       .catch((err) => {
         handleErrors(err);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../api';
 import { handleErrors } from '../utils';
+import './Login.css';
 
 class Login extends Component {
   state = {
@@ -54,7 +55,7 @@ class Login extends Component {
     if (user.username) return children;
 
     return (
-      <div>
+      <>
         <h2>Login Page</h2>
         <div className="login-page">
           <div className="login-list">
@@ -69,7 +70,7 @@ class Login extends Component {
               />
               <button type="submit">Login</button>
             </form>
-            <div>
+            <div className="valid-users">
               <h3>Valid Users:</h3>
 
               <div className={!delayed || users.length === 0 ? 'lds-dual-ring' : 'loaded-users'}><div className="loading-text">Getting Users..</div></div>
@@ -88,9 +89,9 @@ class Login extends Component {
                           src={avtarurl}
                           alt={user.username}
                           onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = 'https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png';
-                          }}
+                              e.target.onerror = null;
+                              e.target.src = 'https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png';
+                            }}
                         />
                         <div className="usernameEntry">{user.username}</div>
                       </li>
@@ -101,8 +102,7 @@ class Login extends Component {
             </div>
           </div>
         </div>
-
-      </div>
+      </>
     );
   }
 }

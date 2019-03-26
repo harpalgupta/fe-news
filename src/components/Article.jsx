@@ -19,8 +19,17 @@ class Article extends Component {
   }
 
 
-handleUpdateVotes = (article, index, votes) => {
-  this.setState({ article: { ...article } });
+// handleUpdateVotes = (article, index, votes) => {
+//   this.setState({ article: { ...article } });
+// };
+handleUpdateVotes = (tmparticle) => {
+  const { article } = this.state;
+  const tmpArticle = article;
+  tmpArticle.votes = tmparticle.votes;
+
+  this.setState({
+    article: tmpArticle
+  });
 };
 
 formatArticle = (article, index) => {
@@ -99,7 +108,7 @@ render() {
   }
 
   return (
-    <div className="content">
+    <>
       <h2>
 Article:
         {article.title}
@@ -108,7 +117,7 @@ Article:
       <div>{this.formatArticle(article)}</div>
 
       <Comments article_id={article_id} user={user} />
-    </div>
+    </>
   );
 }
 }

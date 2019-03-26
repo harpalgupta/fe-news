@@ -9,62 +9,6 @@ class SubmitArticle extends Component {
     newForm: { title: '', user_id: this.props.user.user_id, body: '' }
   };
 
-  render() {
-    return (
-      <div className="content">
-        <div>
-          <form
-            className="newArticleForm"
-            onSubmit={(event) => {
-              this.handleSubmit(event);
-            }}
-          >
-            <div>
-              <label htmlFor="topic">Topic</label>
-              <input
-                value={this.state.newForm.topic}
-                name="topic"
-                onChange={(event) => {
-                  this.handleChange(event);
-                }}
-              />
-              <label htmlFor="title">Article title</label>
-              <input
-                value={this.state.newForm.title}
-                name="title"
-                onChange={(event) => {
-                  this.handleChange(event);
-                }}
-              />
-            </div>
-            <div>
-              <label htmlFor="userid">User ID</label>
-              <input
-                value={this.state.newForm.user_id}
-                name="user_id"
-                onChange={(event) => {
-                  this.handleChange(event);
-                }}
-                disabled
-              />
-            </div>
-            <div>
-              <label htmlFor="body">Article Text</label>
-              <input
-                value={this.state.newForm.body}
-                name="body"
-                onChange={(event) => {
-                  this.handleChange(event);
-                }}
-              />
-            </div>
-
-            <button type="submit">submit</button>
-          </form>
-        </div>
-      </div>
-    );
-  }
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -80,8 +24,9 @@ class SubmitArticle extends Component {
   };
 
   handleSubmit = (event) => {
+    const { newForm } = this.state;
     event.preventDefault();
-    this.handleAddArticle(this.state.newForm);
+    this.handleAddArticle(newForm);
   };
 
   handleAddArticle = (newArticle) => {
@@ -92,6 +37,65 @@ class SubmitArticle extends Component {
         handleErrors(err);
       });
   };
+
+  render() {
+    const { newForm } = this.state;
+
+    return (
+      <div className="content">
+        <div>
+          <form
+            className="newArticleForm"
+            onSubmit={(event) => {
+              this.handleSubmit(event);
+            }}
+          >
+            <div>
+              <label htmlFor="topic">Topic</label>
+              <input
+                value={newForm.topic}
+                name="topic"
+                onChange={(event) => {
+                  this.handleChange(event);
+                }}
+              />
+              <label htmlFor="title">Article title</label>
+              <input
+                value={newForm.title}
+                name="title"
+                onChange={(event) => {
+                  this.handleChange(event);
+                }}
+              />
+            </div>
+            <div>
+              <label htmlFor="userid">User ID</label>
+              <input
+                value={newForm.user_id}
+                name="user_id"
+                onChange={(event) => {
+                  this.handleChange(event);
+                }}
+                disabled
+              />
+            </div>
+            <div>
+              <label htmlFor="body">Article Text</label>
+              <input
+                value={newForm.body}
+                name="body"
+                onChange={(event) => {
+                  this.handleChange(event);
+                }}
+              />
+            </div>
+
+            <button type="submit">submit</button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default SubmitArticle;

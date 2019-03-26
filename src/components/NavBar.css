@@ -1,0 +1,28 @@
+
+.navbar {
+  grid-area: navbar;
+  background-color: darkgray;
+  display: flex;
+  flex: space-around;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bolder;
+  font-size: 15px;
+  color: white;
+  height: 40px;
+
+}
+
+.navbar-link {
+  margin-right: 20px;
+  background-color: #b1b6a6;
+  vertical-align: auto;
+  
+}
+.navbar-button{
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  
+}
+
+
