@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import './TopicSelector.css';
 
 class TopicSelector extends Component {
   render() {
-    const { handleTopic, topics } = this.props;
+    const { handleTopic, topics, errorLabel } = this.props;
     return (
       <select
+        className={errorLabel}
         name="topicselector"
         id="topicselector"
         onChange={(event) => {
