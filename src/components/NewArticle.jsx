@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TopicSelector from './TopicSelector';
 import './NewArticle.css';
-import { addNewArticle } from '../api';
+// import { addNewArticle } from '../api';
 
 class NewArticle extends Component {
   state = {
@@ -126,6 +126,7 @@ Title
                         onChange={(event) => {
                           this.handleChange(event);
                         }}
+
                       />
                     </div>
 
@@ -145,16 +146,21 @@ Article Text
                        // ="newArticleText"
                         value={body}
                         name="body"
-                        onFocus={(event) => {
-                          this.handleChange(event);
-                        }}
-                        onBlur={(event) => {
+                        // onFocus={(event) => {
+                        //   this.handleChange(event);
+                        // }}
+                        // onBlur={(event) => {
+                        //   this.handleChange(event);
+                        // }}
+
+                        // onChange={(event) => {
+                        //   this.handleChange(event);
+                        // }}
+
+                        onInput={(event) => {
                           this.handleChange(event);
                         }}
 
-                        onChange={(event) => {
-                          this.handleChange(event);
-                        }}
                         rows="5"
                         cols="50"
                         wrap="soft"

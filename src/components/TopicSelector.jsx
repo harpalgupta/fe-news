@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './TopicSelector.css';
 
 class TopicSelector extends Component {
+  state={
+
+  }
+
   render() {
     const { handleTopic, topics, errorLabel } = this.props;
     return (
@@ -10,6 +14,12 @@ class TopicSelector extends Component {
         name="topicselector"
         id="topicselector"
         onChange={(event) => {
+          handleTopic(event.target.value);
+        }}
+        onClick={(event) => {
+          handleTopic(event.target.value);
+        }}
+        onInput={(event) => {
           handleTopic(event.target.value);
         }}
       >

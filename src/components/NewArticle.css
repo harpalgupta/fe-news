@@ -1,0 +1,10 @@
+.newTitle.article-invalid input , .newArticleText.article-invalid, .topicselector-error{
+  border-width: 5px;
+  border-color: red;
+}
+
+.newArticleSubmitButton.button-disabled, .newArticleSubmitButton:hover.button-disabled:hover , .newArticleSubmitButton:active .button-disabled:active, .newArticleSubmitButton button:active {
+  color: grey;
+  background: rgba(128, 128, 128, 0.575);
+}
+
