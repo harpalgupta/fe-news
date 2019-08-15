@@ -1,8 +1,8 @@
 
-import { navigate } from '@reach/router';
+import {  navigate } from '@reach/router';
 
 
-const handleErrors = (err) => {
+export const handleErrors = (err) => {
   {
     const errcontent = {
       errstatus: err.response.status,
@@ -16,5 +16,3 @@ const handleErrors = (err) => {
     });
   }
 };
-
-export default handleErrors;
