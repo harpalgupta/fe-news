@@ -17,4 +17,4 @@ const handleErrors = (err) => {
   }
 };
 
-module.exports = handleErrors;
+export default handleErrors;
