@@ -33,6 +33,7 @@ class App extends Component {
   };
 
   render() {
+    const { selectedTopic } = this.state;
     return (
       <div className="App">
         <Header
@@ -44,7 +45,7 @@ class App extends Component {
         <div className="content">
 
           <div className="content-background">
-              <div className="overlay">
+            <div className="overlay">
 
 
               <Login
@@ -55,7 +56,7 @@ class App extends Component {
                 <Router>
                   <Articles
                     path="/articles"
-                    topic={this.state.selectedTopic}
+                    topic={selectedTopic}
                     user={
                   sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
 
@@ -76,16 +77,16 @@ class App extends Component {
                 </Router>
               </Login>
 
-          <>
-            <Router>
-              <Errors path="/error" />
-            </Router>
-          </>
+              <>
+                <Router>
+                  <Errors path="/error" />
+                </Router>
+              </>
 
             </div>
-              <Footer />
+            <Footer />
 
-            </div>
+          </div>
         </div>
       </div>
 

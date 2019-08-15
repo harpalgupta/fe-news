@@ -16,6 +16,15 @@ class NewArticle extends Component {
 
   };
 
+  handleReset = ()=>{
+    this.setState(
+      {
+        body:'',
+        selectedTopic:'',
+        title:''
+    })
+  }
+
 
   handleTopic = (selectedTopic) => {
     this.setState({ selectedTopic }, () => { this.verifySubmit(); console.log('HIIII', this.state.selectedTopic, 'bl'); });
@@ -33,7 +42,7 @@ class NewArticle extends Component {
 
   verifySubmit = () => {
     const {
-      title, selectedTopic, body, newTopicError, newBodyError, newTitleError, errorDetected
+      title, selectedTopic, body,
     } = this.state;
     console.log('verifying', selectedTopic);
 
@@ -41,7 +50,7 @@ class NewArticle extends Component {
     else this.setState({ newTitleError: true }, () => this.checkError());
 
     if (body) {
-      this.setState({ newBodyError: false });
+      this.setState({ newBodyError: false }, () => this.checkError());
     } else this.setState({ newBodyError: true }, () => this.checkError());
 
     if (selectedTopic === '') {
@@ -56,7 +65,7 @@ class NewArticle extends Component {
 
   checkError =() => {
     const {
-      title, selectedTopic, body, newTopicError, newBodyError, newTitleError, errorDetected
+       newTopicError, newBodyError, newTitleError, errorDetected
     } = this.state;
     console.log('in check error', this.state);
     if (newTitleError || newBodyError || newTopicError) {
@@ -91,7 +100,9 @@ class NewArticle extends Component {
     // if (!this.state.errorDetected) {
     //   console.log('hi', this.state);
     handleAddArticle(newart, user.username || JSON.parse(sessionStorage.user));
+    this.handleReset();
     // } else alert(`please enter ${this.state.newart.newArticleError}`);
+    
 
     event.preventDefault();
   };
@@ -110,7 +121,7 @@ class NewArticle extends Component {
               <div>
                 <div>
                   <label htmlFor="title">
-Title
+                    Title
                     {' '}
                     <div className={`newTitle ${this.state.newTitleError ? 'article-invalid' : ''}`}>
                       <input
@@ -139,7 +150,7 @@ Title
               <div className="newFormLine">
                 <div>
                   <label htmlFor="body">
-Article Text
+                      Article Text
                     <div>
                       <textarea
                         className={`newArticleText ${this.state.newBodyError ? 'article-invalid' : ''}`}
@@ -153,13 +164,13 @@ Article Text
                         //   this.handleChange(event);
                         // }}
 
-                        // onChange={(event) => {
-                        //   this.handleChange(event);
-                        // }}
-
-                        onInput={(event) => {
+                        onChange={(event) => {
                           this.handleChange(event);
                         }}
+
+                        // onInput={(event) => {
+                        //   this.handleChange(event);
+                        // }}
 
                         rows="5"
                         cols="50"
@@ -191,12 +202,6 @@ Article Text
 
             </div>
           </form>
-
-          <div className="new-article-error">
-          Error:
-            {' '}
-            {this.state.newArticleError}
-          </div>
         </div>
       </div>
     );
