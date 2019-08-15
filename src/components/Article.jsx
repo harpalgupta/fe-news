@@ -5,6 +5,8 @@ import Comments from './Comments';
 import { handleErrors } from '../utils';
 import FormattedArticle from './FormattedArticle';
 
+
+
 class Article extends Component {
   state = {
     article: { votes: 0 },
@@ -16,6 +18,11 @@ class Article extends Component {
       this.setState({ article });
     });
   }
+
+  handleDeleteArticle = (article_id, index) => {
+  console.log('in handle delte article for single articles')
+  this.setState({article:{}})
+  };
 
 
   // handleUpdateVotes = (article, index, votes) => {
@@ -46,16 +53,20 @@ class Article extends Component {
     }
 
     return (
-      <>
-        <h2>
-          Article:
-        {article.title}
-        </h2>
+      <div>
+         <h2>{article.title?article.title:"Deleted Article"}</h2>
+          {article.title?
+          <div className="article-list">
 
-        <div>{FormattedArticle(article, 1,user,this.handleUpdateVotes)}</div>
 
-        <Comments article_id={article_id} user={user} />
-      </>
+            <div className="article-entry" >
+            {article.title?FormattedArticle(true,article, 0,user,this.handleUpdateVotes,this.handleDeleteArticle):"Deleted"}
+
+          
+            </div>
+            <Comments article_id={article_id} user={user} />
+          </div>:<div className="article-list"></div>}
+      </div>
     );
   }
 }

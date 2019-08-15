@@ -196,7 +196,7 @@ class Articles extends Component {
         <div className="article-list">
           {articles.map((article, index) => (
             <div className="article-entry" key={article.article_id}>
-              {FormattedArticle(article, index,user,this.handleUpdateVotes)}
+              {FormattedArticle(false,article, index,user,this.handleUpdateVotes,this.handleDeleteArticle)}
             </div>
           ))}
           <div />

@@ -5,7 +5,7 @@ import Dotdotdot from 'react-dotdotdot';
 import DeleteArticle from './DeleteArticle';
 import Votes from './Votes';
 
-function FormattedArticle(article, index, user,handleUpdateVotes) {
+function FormattedArticle(singleArticle,article, index, user,handleUpdateVotes,handleDeleteArticle) {
     const artDate = new Date(article.created_at);
     return (
         <>
@@ -21,12 +21,12 @@ function FormattedArticle(article, index, user,handleUpdateVotes) {
                 author={article.author}
             />
             <div className="article-body">
-                <Link
+                {singleArticle?article.body:<Link
                     key={`${article.article_id}article`}
                     to={`/articles/${article.article_id}`}
                 >
                     <Dotdotdot clamp={5}>{article.body}</Dotdotdot>
-                </Link>
+                </Link>}
             </div>
 
             <div key={article.article_id} className="article-foot">
@@ -46,7 +46,7 @@ function FormattedArticle(article, index, user,handleUpdateVotes) {
 
                             <div className="delete-button">
                                 <DeleteArticle
-                                    handleDeleteArticle={this.handleDeleteArticle}
+                                    handleDeleteArticle={handleDeleteArticle}
                                     article_id={article.article_id}
                                     index={index}
                                 />
