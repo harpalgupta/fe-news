@@ -20,8 +20,8 @@ class Article extends Component {
   }
 
   handleDeleteArticle = (article_id, index) => {
-  console.log('in handle delte article for single articles')
-  this.setState({article:{}})
+    console.log('in handle delte article for single articles')
+    this.setState({ article: {} })
   };
 
 
@@ -54,18 +54,18 @@ class Article extends Component {
 
     return (
       <div>
-         <h2>{article.title?article.title:"Deleted Article"}</h2>
-          {article.title?
+        <h2>{article.title ? article.title : "Deleted Article"}</h2>
+        {article.title ?
           <div className="article-list">
 
 
             <div className="article-entry" >
-            {article.title?FormattedArticle(true,article, 0,user,this.handleUpdateVotes,this.handleDeleteArticle):"Deleted"}
+              {article.title ? FormattedArticle(true, article, 0, user, this.handleUpdateVotes, this.handleDeleteArticle) : "Deleted"}
 
-          
+
             </div>
             <Comments article_id={article_id} user={user} />
-          </div>:<div className="article-list"></div>}
+          </div> : <div className="article-list"></div>}
       </div>
     );
   }

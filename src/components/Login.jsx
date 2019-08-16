@@ -15,7 +15,7 @@ class Login extends Component {
     this.delayLoad();
   }
 
-  delayLoad =() => {
+  delayLoad = () => {
     setTimeout(() => {
       this.setState({ delayed: true });
     }, 1000);
@@ -57,9 +57,7 @@ class Login extends Component {
     return (
       <div className="login-page">
         <div className="login-body">
-        <h2>Login Page</h2>
-
-          <div className="login-list">
+          <div>
             <form className="loginForm" onSubmit={this.handleSubmit}>
               <input
                 className="loginInput"
@@ -71,6 +69,11 @@ class Login extends Component {
               />
               <button type="submit">Login</button>
             </form>
+
+          </div>
+
+          <div className="login-list">
+
             <div className="valid-users">
               <h3>Valid Users:</h3>
 
@@ -90,9 +93,9 @@ class Login extends Component {
                           src={avtarurl}
                           alt={user.username}
                           onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src = 'https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png';
-                            }}
+                            e.target.onerror = null;
+                            e.target.src = 'https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png';
+                          }}
                         />
                         <div className="usernameEntry">{user.username}</div>
                       </li>
@@ -102,6 +105,12 @@ class Login extends Component {
               </ul>
             </div>
           </div>
+        </div>
+        <div className="login-info">
+          <h4>Frontend Source Code  <a href="https://github.com/harpalgupta/fe-news" > https://github.com/harpalgupta/fe-news </a> </h4>
+          <h4>Backend Api <a href="https://knews-prod.herokuapp.com/api" > https://knews-prod.herokuapp.com/api </a> </h4>
+          <h4>Swagger Docs for Backend Api<a href="https://knews-prod.herokuapp.com/swagger" > https://knews-prod.herokuapp.com/swagger </a> </h4>
+          <h4>Backend Source Code <a href="https://github.com/harpalgupta/BE2-NC-Knews-harpal" > https://github.com/harpalgupta/BE2-NC-Knews-harpal </a> </h4>
         </div>
       </div>
     );
