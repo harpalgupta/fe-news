@@ -39,7 +39,7 @@ class DeleteArticle extends Component {
 
     return (
       <>
-        <button type="button" onClick={this.goDeleteArticle}>
+        <button className="deleteButton" type="button" onClick={this.goDeleteArticle}>
           DELETE Article
           {' '}
         </button>

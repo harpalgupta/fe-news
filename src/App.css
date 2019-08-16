@@ -255,12 +255,15 @@ html{
     margin-top: 5px;
   }  
 
-  .moreButton{
+  .moreButton, .deleteButton{
     font-weight: bold;
     border: solid rgba(71, 71, 71, 0) 1px;
     margin-top: 40px;
     color:#690b0e;
 
+  }
+  .deleteButton{
+    margin-top: 0px;
   }
   button:hover,button:active,.navbar-link:hover,.navbar-link:active,.moreButton:hover,.moreButton:active{
     border: solid #690b0e 1px;
