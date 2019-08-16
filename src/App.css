@@ -41,7 +41,7 @@ html{
     background-color: lightgray;
     justify-content: center;
     width: 100%;
-    height: calc(100% - 10px);
+    height: calc(100% - 80px);
     padding-bottom: 20px;
   }
   .article-entry,
@@ -179,7 +179,6 @@ html{
   .pfoot{
     grid-area: pfoot;
     background-color:#B8002D;
-    padding: 10px;
     text-align: left;
     min-height: 80px;
     padding-left: 0px;

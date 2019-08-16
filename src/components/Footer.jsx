@@ -26,29 +26,18 @@ class Footer extends PureComponent {
                         <div>Harpal Gupta</div>
 
                         <button className="ShowInfoButton" onClick={this.setShowInfo}>
-                            ->{showInfo?'Hide ':'Show '}Source Code Info
+                            ->{showInfo ? 'Hide ' : 'Show '}Source Code Info
                         </button>
-                        <div className={showInfo?"srcCode":"hidden"}>
-                        <p>
-                        <a href="https://github.com/harpalgupta/fe-news" rel="noopener noreferrer" target="_blank">Frontend Source code</a>
-                        </p>
-                        <p>
-                        <a href="https://knews-prod.herokuapp.com/api" rel="noopener noreferrer" target="_blank">Backend Api</a>
-                        </p>
-                        <p>
-                        <a href="https://knews-prod.herokuapp.com/swagger" rel="noopener noreferrer" target="_blank">Backend Api Swagger Docs</a>
-                        </p>
-                        <p>
-                        <a href="https://github.com/harpalgupta/BE2-NC-Knews-harpal" rel="noopener noreferrer" target="_blank">Source code for Backend URL</a> 
-                        </p>
-                
+                        <div className={showInfo ? "srcCode" : "hidden"}>
+
+                            <a href="https://github.com/harpalgupta/fe-news" rel="noopener noreferrer" target="_blank">Frontend Source code</a>
+                            <a href="https://knews-prod.herokuapp.com/api" rel="noopener noreferrer" target="_blank">Backend Api</a>
+                            <a href="https://knews-prod.herokuapp.com/swagger" rel="noopener noreferrer" target="_blank">Backend Api Swagger Docs</a>
+                            <a href="https://github.com/harpalgupta/BE2-NC-Knews-harpal" rel="noopener noreferrer" target="_blank">Source code for Backend URL</a>
                         </div>
 
                     </div>
-
-
                 </div>
-
             </div>
         )
     }
