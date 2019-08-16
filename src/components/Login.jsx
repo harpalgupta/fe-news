@@ -55,9 +55,10 @@ class Login extends Component {
     if (user.username) return children;
 
     return (
-      <>
+      <div className="login-page">
+        <div className="login-body">
         <h2>Login Page</h2>
-        <div className="login-page">
+
           <div className="login-list">
             <form className="loginForm" onSubmit={this.handleSubmit}>
               <input
@@ -102,7 +103,7 @@ class Login extends Component {
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

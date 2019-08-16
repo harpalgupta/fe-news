@@ -16,6 +16,12 @@
 
 .login-page{
   height: 100%;
+  display: flex;
+  margin-left:20%;
+}
+.login-body{
+margin-top:10px;
+justify-content: flex-start;
 }
 .loginForm {
   max-height: 20%;
