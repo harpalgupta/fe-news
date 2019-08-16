@@ -39,14 +39,14 @@ class Header extends Component {
 
                 </>
 
-                  <button className="logout-button" onClick={this.props.logOut}>Log Out</button>
+                <button className="logout-button" onClick={this.props.logOut}>Log Out</button>
               </>
             ) : (
-              <>
-Not Logged in
+                <>
+                  Not Logged in
                 {this.props.user.username}
-              </>
-            )}
+                </>
+              )}
           </div>
         </div>
       </>

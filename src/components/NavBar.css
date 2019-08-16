@@ -9,6 +9,8 @@
   font-size: 15px;
   color: white;
   height: 40px;
+  height: 100%;
+
 
 }
 
@@ -16,6 +18,7 @@
   margin-right: 20px;
   background-color: #b1b6a6;
   vertical-align: auto;
+  height: 100%;
   
 }
 .navbar-button{

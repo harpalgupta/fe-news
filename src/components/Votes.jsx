@@ -5,7 +5,7 @@ import * as api from '../api';
 import './Votes.css';
 
 class Votes extends Component {
-  state={
+  state = {
     sessionVote: 0
   }
 

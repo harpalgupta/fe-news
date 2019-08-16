@@ -50,7 +50,7 @@ class App extends Component {
 
               <Login
                 storeUser={this.storeUser}
-            // user={this.state.user}
+                // user={this.state.user}
                 user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ''}
               >
                 <Router>
@@ -58,9 +58,9 @@ class App extends Component {
                     path="/articles"
                     topic={selectedTopic}
                     user={
-                  sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
+                      sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
 
-                }
+                    }
                     default
                   />
                   <Topics path="/topics/*" />
@@ -68,8 +68,8 @@ class App extends Component {
                   <Article
                     path="/articles/:article_id"
                     user={
-                  sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
-                }
+                      sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
+                    }
                   />
 
                   <DeleteArticle path="/articles/:article_id/delete" />

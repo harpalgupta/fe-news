@@ -5,7 +5,7 @@ import Dotdotdot from 'react-dotdotdot';
 import DeleteArticle from './DeleteArticle';
 import Votes from './Votes';
 
-function FormattedArticle(singleArticle,article, index, user,handleUpdateVotes,handleDeleteArticle) {
+function FormattedArticle(singleArticle, article, index, user, handleUpdateVotes, handleDeleteArticle) {
     const artDate = new Date(article.created_at);
     return (
         <>
@@ -21,7 +21,7 @@ function FormattedArticle(singleArticle,article, index, user,handleUpdateVotes,h
                 author={article.author}
             />
             <div className="article-body">
-                {singleArticle?article.body:<Link
+                {singleArticle ? article.body : <Link
                     key={`${article.article_id}article`}
                     to={`/articles/${article.article_id}`}
                 >

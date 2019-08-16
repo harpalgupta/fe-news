@@ -1,5 +1,5 @@
 
-import {  navigate } from '@reach/router';
+import { navigate } from '@reach/router';
 
 
 export const handleErrors = (err) => {

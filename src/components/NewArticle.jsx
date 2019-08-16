@@ -16,13 +16,13 @@ class NewArticle extends Component {
 
   };
 
-  handleReset = ()=>{
+  handleReset = () => {
     this.setState(
       {
-        body:'',
-        selectedTopic:'',
-        title:''
-    })
+        body: '',
+        selectedTopic: '',
+        title: ''
+      })
   }
 
 
@@ -63,9 +63,9 @@ class NewArticle extends Component {
     return null;
   }
 
-  checkError =() => {
+  checkError = () => {
     const {
-       newTopicError, newBodyError, newTitleError, errorDetected
+      newTopicError, newBodyError, newTitleError, errorDetected
     } = this.state;
     console.log('in check error', this.state);
     if (newTitleError || newBodyError || newTopicError) {
@@ -102,7 +102,7 @@ class NewArticle extends Component {
     handleAddArticle(newart, user.username || JSON.parse(sessionStorage.user));
     this.handleReset();
     // } else alert(`please enter ${this.state.newart.newArticleError}`);
-    
+
 
     event.preventDefault();
   };
@@ -117,62 +117,62 @@ class NewArticle extends Component {
 
         <div className="article-entry">
           <form className="newForm" onSubmit={this.handleSubmit}>
-            
-                <div className="newFormLine">
-                    <h3>Title</h3>
-                    <div className={`newTitle ${this.state.newTitleError ? 'article-invalid' : ''}`}>
-                      <input
-                        value={title}
-                        name="title"
-                        onFocus={(event) => {
-                          this.handleChange(event);
-                        }}
-                        onBlur={(event) => {
-                          this.handleChange(event);
-                        }}
-                        onChange={(event) => {
-                          this.handleChange(event);
-                        }}
-                      />
-                    </div>
-                  
-                </div>
-                
 
-                      <h3>Article Text</h3>
-
-                    <div>
-                      <textarea
-                        className={`newArticleText ${this.state.newBodyError ? 'article-invalid' : ''}`}
-                        value={body}
-                        name="body"
-                     
-                        onChange={(event) => {
-                          this.handleChange(event);
-                        }}
-
-                        rows="5"
-                        cols="50"
-                        wrap="soft"
-                      />
-                    </div>
-
-
-              <div className="newArticleOptions newFormLine">
-                <div className={`newArticleTopicSelect ${this.state.newTopicError ? 'article-invalid' : ''} `}>
-                      <h3>Topic</h3>
-                  
-
-                  <TopicSelector
-                    errorLabel={this.state.newTopicError ? 'topicselector-error' : ''}
-                    handleTopic={this.handleTopic}
-                    topics={topics}
-
-                  />
-                </div>
-
-                <button disabled={this.state.errorDetected} className={this.state.errorDetected ? 'button-disabled newArticleSubmitButton' : 'newArticleSubmitButton'} type="submit">Add New Article</button>
+            <div className="newFormLine">
+              <h3>Title</h3>
+              <div className={`newTitle ${this.state.newTitleError ? 'article-invalid' : ''}`}>
+                <input
+                  value={title}
+                  name="title"
+                  onFocus={(event) => {
+                    this.handleChange(event);
+                  }}
+                  onBlur={(event) => {
+                    this.handleChange(event);
+                  }}
+                  onChange={(event) => {
+                    this.handleChange(event);
+                  }}
+                />
               </div>
+
+            </div>
+
+
+            <h3>Article Text</h3>
+
+            <div>
+              <textarea
+                className={`newArticleText ${this.state.newBodyError ? 'article-invalid' : ''}`}
+                value={body}
+                name="body"
+
+                onChange={(event) => {
+                  this.handleChange(event);
+                }}
+
+                rows="5"
+                cols="50"
+                wrap="soft"
+              />
+            </div>
+
+
+            <div className="newArticleOptions newFormLine">
+              <div className={`newArticleTopicSelect ${this.state.newTopicError ? 'article-invalid' : ''} `}>
+                <h3>Topic</h3>
+
+
+                <TopicSelector
+                  errorLabel={this.state.newTopicError ? 'topicselector-error' : ''}
+                  handleTopic={this.handleTopic}
+                  topics={topics}
+
+                />
+              </div>
+
+              <button disabled={this.state.errorDetected} className={this.state.errorDetected ? 'button-disabled newArticleSubmitButton' : 'newArticleSubmitButton'} type="submit">Add New Article</button>
+            </div>
 
           </form>
         </div>

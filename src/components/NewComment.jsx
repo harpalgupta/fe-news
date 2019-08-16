@@ -11,7 +11,7 @@ class NewComment extends Component {
       {
         [name]: value
       },
-      () => {}
+      () => { }
     );
   };
 
@@ -32,7 +32,7 @@ class NewComment extends Component {
         <div className="comment-entry">
           <form className="newCommentForm" onSubmit={this.handleSubmit}>
             <div className="newCommentLabel">
-          Comment Text
+              Comment Text
             </div>
             <div className="newCommentBody">
               <textarea

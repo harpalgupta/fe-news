@@ -15,7 +15,7 @@ class Login extends Component {
     this.delayLoad();
   }
 
-  delayLoad =() => {
+  delayLoad = () => {
     setTimeout(() => {
       this.setState({ delayed: true });
     }, 1000);
@@ -55,11 +55,9 @@ class Login extends Component {
     if (user.username) return children;
 
     return (
-      <div className="login-page">
         <div className="login-body">
-        <h2>Login Page</h2>
-
-          <div className="login-list">
+          <h2>Login Page</h2>
+          <div>
             <form className="loginForm" onSubmit={this.handleSubmit}>
               <input
                 className="loginInput"
@@ -71,6 +69,11 @@ class Login extends Component {
               />
               <button type="submit">Login</button>
             </form>
+
+          </div>
+
+          <div className="login-list">
+
             <div className="valid-users">
               <h3>Valid Users:</h3>
 
@@ -90,9 +93,9 @@ class Login extends Component {
                           src={avtarurl}
                           alt={user.username}
                           onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src = 'https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png';
-                            }}
+                            e.target.onerror = null;
+                            e.target.src = 'https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png';
+                          }}
                         />
                         <div className="usernameEntry">{user.username}</div>
                       </li>
@@ -101,9 +104,11 @@ class Login extends Component {
                 })}
               </ul>
             </div>
+            
           </div>
+
         </div>
-      </div>
+       
     );
   }
 }
