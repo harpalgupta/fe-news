@@ -26,10 +26,15 @@
   padding-top: 15px;
 }
 .logout-button{
+  margin-top:2px;
   padding-top: 5px;
   padding-bottom: 10px;
-
+  color: #690b0e;
 }
+.logout-button:hover .logout-button:active{
+  color: white;
+}
+
 @media only screen and (max-width: 376px) {
   .header{
     padding-bottom: 5px;

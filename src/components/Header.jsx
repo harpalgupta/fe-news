@@ -39,9 +39,7 @@ class Header extends Component {
 
                 </>
 
-                <div className="logout-button">
-                  <button onClick={this.props.logOut}>Log Out</button>
-                </div>
+                  <button className="logout-button" onClick={this.props.logOut}>Log Out</button>
               </>
             ) : (
               <>
