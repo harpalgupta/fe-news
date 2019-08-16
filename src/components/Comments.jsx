@@ -59,7 +59,7 @@ class Comments extends Component {
 
   handleQuery = (queryItem, value) => {
     const { queries } = this.state;
-    this.setState({ queries: { ...queries, [queryItem]: value } }, () => {});
+    this.setState({ queries: { ...queries, [queryItem]: value } }, () => { });
   };
 
   handleDeleteComment = (comment_id, index) => {
@@ -153,14 +153,14 @@ class Comments extends Component {
                       />
                     </div>
                   ) : (
-                    <div className="foot-item">
-                      {' '}
-                      Comment Author:
+                      <div className="foot-item">
+                        {' '}
+                        Comment Author:
                       <div className="comment-foot__value">
-                        {comment.author}
+                          {comment.author}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
                   <div className="foot-item">
                     Comment Created:

@@ -39,7 +39,7 @@ class Articles extends Component {
         .then(({ articles }) => {
           this.setState(
             { articles: [...this.state.articles, ...articles] },
-            () => {}
+            () => { }
           );
         })
         .catch((err) => {
@@ -58,7 +58,7 @@ class Articles extends Component {
 
     if (prevState.selectedTopic !== selectedTopic) {
       api.fetchArticles(selectedTopic).then((articles) => {
-        this.setState({ ...articles }, () => {});
+        this.setState({ ...articles }, () => { });
       });
     }
   }
@@ -84,7 +84,7 @@ class Articles extends Component {
     api.addNewArticle(newArticle.topic, newArticle).then((tmpArticle) => {
       const { article } = tmpArticle;
       article.author = username;
-      this.setState({ articles: [article, ...articles] }, () => {});
+      this.setState({ articles: [article, ...articles] }, () => { });
     });
   };
 
@@ -123,15 +123,15 @@ class Articles extends Component {
         {selectedTopic ? (
           <div>
             <h2>
-              Articles By {selectedTopic} Topic              
+              Articles By {selectedTopic} Topic
             </h2>
           </div>
         ) : (
-          <div>
-            {' '}
-            <h2>Articles</h2>
-          </div>
-        )}
+            <div>
+              {' '}
+              <h2>Articles</h2>
+            </div>
+          )}
 
         <div className="sort-bar">
           <select
@@ -196,7 +196,7 @@ class Articles extends Component {
         <div className="article-list">
           {articles.map((article, index) => (
             <div className="article-entry" key={article.article_id}>
-              {FormattedArticle(false,article, index,user,this.handleUpdateVotes,this.handleDeleteArticle)}
+              {FormattedArticle(false, article, index, user, this.handleUpdateVotes, this.handleDeleteArticle)}
             </div>
           ))}
           <div />

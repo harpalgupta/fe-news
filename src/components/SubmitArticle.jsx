@@ -19,7 +19,7 @@ class SubmitArticle extends Component {
           [name]: value
         }
       }),
-      () => {}
+      () => { }
     );
   };
 

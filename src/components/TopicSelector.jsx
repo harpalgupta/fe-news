@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './TopicSelector.css';
 
 class TopicSelector extends Component {
-  state={
+  state = {
 
   }
 
