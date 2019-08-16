@@ -23,9 +23,7 @@
   display: inline-block;
 
 }
-.loginForm button{
-  margin-left:15px; 
-}
+
 
 .valid-users{
   background: rgba(0,0,0,0.8);

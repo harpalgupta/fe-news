@@ -173,12 +173,9 @@ html{
 
   .newFormLine {
     justify-items: left;
-    padding: 10px;
     align-items: left;
+    margin-bottom: 10px;
   }
- 
-  
-
 
   .pfoot{
     grid-area: pfoot;
@@ -195,16 +192,12 @@ html{
   .newArticleSubmitButton{
     font-weight: bolder;
 
-  }
-  
-  .newArticleOptions{
-  margin-left:10px;
-  }
+  }  
+
   .newFormLine textarea{
     width: 90%;
     height: 100px;
   }
-
 
   .loginUser{
     display: block;
@@ -245,20 +238,25 @@ html{
 
  
   button{
-    border: solid #690b0e 1px;
+    border: solid #998384 1px;
     background-color: white;
     border-radius: 10px;
     padding: 8px;
     transition: background 0.8s;
     display: inline-block;
-
+    color: white;
 
   }
+  .loginForm>button{
+    margin-left:15px; 
+    color: #690b0e;
+  }  
 
   .moreButton{
     font-weight: bold;
     border: solid rgba(71, 71, 71, 0) 1px;
     margin-top: 40px;
+    color:#690b0e;
 
   }
   button:hover,button:active,.navbar-link:hover,.navbar-link:active,.moreButton:hover,.moreButton:active{

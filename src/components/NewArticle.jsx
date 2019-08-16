@@ -117,12 +117,9 @@ class NewArticle extends Component {
 
         <div className="article-entry">
           <form className="newForm" onSubmit={this.handleSubmit}>
-            <div>
-              <div>
-                <div>
-                  <label htmlFor="title">
-                    Title
-                    {' '}
+            
+                <div className="newFormLine">
+                    <h3>Title</h3>
                     <div className={`newTitle ${this.state.newTitleError ? 'article-invalid' : ''}`}>
                       <input
                         value={title}
@@ -133,44 +130,26 @@ class NewArticle extends Component {
                         onBlur={(event) => {
                           this.handleChange(event);
                         }}
-
                         onChange={(event) => {
                           this.handleChange(event);
                         }}
-
                       />
                     </div>
-
-                  </label>
-
+                  
                 </div>
+                
 
+                      <h3>Article Text</h3>
 
-              </div>
-              <div className="newFormLine">
-                <div>
-                  <label htmlFor="body">
-                      Article Text
                     <div>
                       <textarea
                         className={`newArticleText ${this.state.newBodyError ? 'article-invalid' : ''}`}
-                       // ="newArticleText"
                         value={body}
                         name="body"
-                        // onFocus={(event) => {
-                        //   this.handleChange(event);
-                        // }}
-                        // onBlur={(event) => {
-                        //   this.handleChange(event);
-                        // }}
-
+                     
                         onChange={(event) => {
                           this.handleChange(event);
                         }}
-
-                        // onInput={(event) => {
-                        //   this.handleChange(event);
-                        // }}
 
                         rows="5"
                         cols="50"
@@ -178,16 +157,11 @@ class NewArticle extends Component {
                       />
                     </div>
 
-                  </label>
 
-
-                </div>
-
-              </div>
-
-
-              <div className="newArticleOptions">
-                <div className={`newArticleTopicSelect ${this.state.newTopicError ? 'article-invalid' : ''}`}>
+              <div className="newArticleOptions newFormLine">
+                <div className={`newArticleTopicSelect ${this.state.newTopicError ? 'article-invalid' : ''} `}>
+                      <h3>Topic</h3>
+                  
 
                   <TopicSelector
                     errorLabel={this.state.newTopicError ? 'topicselector-error' : ''}
@@ -200,7 +174,6 @@ class NewArticle extends Component {
                 <button disabled={this.state.errorDetected} className={this.state.errorDetected ? 'button-disabled newArticleSubmitButton' : 'newArticleSubmitButton'} type="submit">Add New Article</button>
               </div>
 
-            </div>
           </form>
         </div>
       </div>
