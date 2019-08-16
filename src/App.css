@@ -3,7 +3,7 @@
 }
 html{
     height: 100vh;
-    background-color: yellow;
+    background-color: grey;
   }
   *{
     font-family: 'Work Sans', sans-serif;
@@ -14,16 +14,15 @@ html{
     margin: 0;
     color: white;
     height: 100vh;
-
   }
   .App {
     text-align: center;
     display: grid;
     grid-template-columns:  5fr 1fr;
-    grid-template-rows:2fr 1fr 25fr 1fr;
+    grid-template-rows:2fr 1fr 24fr 1fr;
     grid-template-areas:
-      "header loginheader" "navbar navbar " "content content" "pfoot pfoot" ;
-    height: 100vh;
+      "header loginheader" "navbar navbar" "content content" "pfoot pfoot" ;
+    height: 100%;
     font-family: 'Work Sans', sans-serif;
 
   }
@@ -182,7 +181,9 @@ html{
     background-color:#B8002D;
     padding: 10px;
     text-align: left;
-    height: 40px;
+    min-height: 80px;
+    padding-left: 0px;
+    width:100%;
   }
 
   .newArticleOptions >div{
@@ -229,6 +230,7 @@ html{
     background-size: cover;
   height: 100%;
   z-index: 1;
+  width: 100%;
   }
   .overlay{
     background-color: rgba(0, 0, 0, 0.3);
@@ -250,6 +252,7 @@ html{
   .loginForm>button{
     margin-left:15px; 
     color: #690b0e;
+    margin-top: 5px;
   }  
 
   .moreButton{
@@ -263,4 +266,29 @@ html{
     border: solid #690b0e 1px;
     background-color: #690b0e;
     color: white
+  }
+  .ShowInfoButton, .ShowInfoButton:hover, .ShowInfoButton:active{
+    background: none;
+    border: none;
+  }
+  .footerContent{
+    padding: 10px;
+  }
+  .srcCode{
+    display: flex;
+  }
+  .srcCode>p{
+    padding: 5px;
+    flex-flow: row;
+    flex-wrap: wrap;
+  }
+  .hidden{
+    visibility: hidden;
+    display: none;
+  }
+  .footerContent a{
+    padding-right: 30px;
+  }
+  .footerContent a:hover{
+    color: white;
   }

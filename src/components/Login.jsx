@@ -55,8 +55,8 @@ class Login extends Component {
     if (user.username) return children;
 
     return (
-      <div className="login-page">
         <div className="login-body">
+          <h2>Login Page</h2>
           <div>
             <form className="loginForm" onSubmit={this.handleSubmit}>
               <input
@@ -104,15 +104,11 @@ class Login extends Component {
                 })}
               </ul>
             </div>
+            
           </div>
+
         </div>
-        <div className="login-info">
-          <h4>Frontend Source Code  <a href="https://github.com/harpalgupta/fe-news" > https://github.com/harpalgupta/fe-news </a> </h4>
-          <h4>Backend Api <a href="https://knews-prod.herokuapp.com/api" > https://knews-prod.herokuapp.com/api </a> </h4>
-          <h4>Swagger Docs for Backend Api<a href="https://knews-prod.herokuapp.com/swagger" > https://knews-prod.herokuapp.com/swagger </a> </h4>
-          <h4>Backend Source Code <a href="https://github.com/harpalgupta/BE2-NC-Knews-harpal" > https://github.com/harpalgupta/BE2-NC-Knews-harpal </a> </h4>
-        </div>
-      </div>
+       
     );
   }
 }
