@@ -1,18 +1,5 @@
 
-.LoginHeader {
-  background-color: grey;
 
-  grid-area: loginheader;
-  display: inline-flex;
-  margin-top:0px;
-  font-weight: bolder;
-  color: white;
-  padding-top:10px;
-  padding-right: 5px;
-  flex-wrap: wrap;
-  justify-content: center
-  
-}
 
 .login-page{
   height: 100%;

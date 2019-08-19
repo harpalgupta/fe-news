@@ -18,7 +18,7 @@ html{
   .App {
     text-align: center;
     display: grid;
-    grid-template-columns:  5fr 1fr;
+    grid-template-columns:  5fr 3fr;
     grid-template-rows:2fr 1fr 24fr 1fr;
     grid-template-areas:
       "header loginheader" "navbar navbar" "content content" "pfoot pfoot" ;
@@ -199,10 +199,6 @@ html{
     height: 100px;
   }
 
-  .loginUser{
-    display: block;
-  }
-
   .article-foot__value, .comment-foot__value{
     display: inline;
     padding-left: 10px;
@@ -246,6 +242,8 @@ html{
     transition: background 0.8s;
     display: inline-block;
     color: white;
+    cursor:pointer;
+
 
   }
   .loginForm>button{
@@ -257,7 +255,7 @@ html{
   .moreButton, .deleteButton{
     font-weight: bold;
     border: solid rgba(71, 71, 71, 0) 1px;
-    margin-top: 40px;
+    margin-top: 10px;
     color:#690b0e;
 
   }
@@ -272,17 +270,25 @@ html{
   .ShowInfoButton, .ShowInfoButton:hover, .ShowInfoButton:active{
     background: none;
     border: none;
+    outline: none;
   }
   .footerContent{
     padding: 10px;
   }
   .srcCode{
     display: flex;
+    margin-left: 5%;
   }
   .srcCode>p{
     padding: 5px;
     flex-flow: row;
     flex-wrap: wrap;
+  }
+  .srcCode a{
+    color: rgb(201, 190, 190);
+    transition: color 0.8s;
+
+
   }
   .hidden{
     visibility: hidden;
@@ -292,5 +298,15 @@ html{
     padding-right: 30px;
   }
   .footerContent a:hover{
-    color: white;
+    color: black;
+  }
+ 
+
+  @media only screen and (max-width: 376px) {
+    .App {
+    
+      grid-template-columns:  5fr 1fr;
+    
+  
+    }
   }
