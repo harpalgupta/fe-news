@@ -9,7 +9,6 @@ class Votes extends Component {
     sessionVote: 0
   }
 
-
   goUpdateCommentVotes = (vote) => {
     const {
       handleUpdateVotes, article_id, author, id, index

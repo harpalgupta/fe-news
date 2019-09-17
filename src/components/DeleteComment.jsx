@@ -33,7 +33,7 @@ class DeleteComment extends Component {
 
     return (
       <div>
-        <button onClick={this.goDeleteComment}>DELETE</button>
+        <button type="button" onClick={this.goDeleteComment}>DELETE</button>
       </div>
     );
   }

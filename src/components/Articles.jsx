@@ -24,11 +24,13 @@ class Articles extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { newArticle, queries, selectedTopic } = this.state;
+    const {
+      newArticle, queries, selectedTopic,
+    } = this.state;
 
     if (prevState.newArticle !== newArticle) {
       this.setState({
-        articles: [...this.state.articles, newArticle]
+        articles: [...prevState.articles, newArticle]
       });
     }
     if (prevState.queries.p !== queries.p) {
@@ -38,7 +40,7 @@ class Articles extends Component {
         })
         .then(({ articles }) => {
           this.setState(
-            { articles: [...this.state.articles, ...articles] },
+            { articles: [...prevState.articles, ...articles] },
             () => { }
           );
         })
@@ -123,15 +125,19 @@ class Articles extends Component {
         {selectedTopic ? (
           <div>
             <h2>
-              Articles By {selectedTopic} Topic
+              Articles By
+              {' '}
+              {selectedTopic}
+              {' '}
+Topic
             </h2>
           </div>
         ) : (
-            <div>
-              {' '}
-              <h2>Articles</h2>
-            </div>
-          )}
+          <div>
+            {' '}
+            <h2>Articles</h2>
+          </div>
+        )}
 
         <div className="sort-bar">
           <select
@@ -151,7 +157,6 @@ class Articles extends Component {
               </option>
             ))}
           </select>
-
           <label>Sort by</label>
           <select
             name="sort_by"
@@ -196,7 +201,8 @@ class Articles extends Component {
         <div className="article-list">
           {articles.map((article, index) => (
             <div className="article-entry" key={article.article_id}>
-              {FormattedArticle(false, article, index, user, this.handleUpdateVotes, this.handleDeleteArticle)}
+              {FormattedArticle(false, article, index, user,
+                this.handleUpdateVotes, this.handleDeleteArticle)}
             </div>
           ))}
           <div />

@@ -8,7 +8,6 @@ class NewArticle extends Component {
     body: '',
     selectedTopic: '',
     title: '',
-    newArticleError: [],
     errorDetected: true,
     newTitleError: true,
     newBodyError: true,
@@ -22,12 +21,13 @@ class NewArticle extends Component {
         body: '',
         selectedTopic: '',
         title: ''
-      })
+      }
+    );
   }
 
 
   handleTopic = (selectedTopic) => {
-    this.setState({ selectedTopic }, () => { this.verifySubmit(); console.log('HIIII', this.state.selectedTopic, 'bl'); });
+    this.setState({ selectedTopic }, () => { this.verifySubmit(); });
   };
 
   handleChange = (event) => {
@@ -44,7 +44,7 @@ class NewArticle extends Component {
     const {
       title, selectedTopic, body,
     } = this.state;
-    console.log('verifying', selectedTopic);
+    // console.log('verifying', selectedTopic);
 
     if (title) this.setState({ newTitleError: false });
     else this.setState({ newTitleError: true }, () => this.checkError());
@@ -54,7 +54,6 @@ class NewArticle extends Component {
     } else this.setState({ newBodyError: true }, () => this.checkError());
 
     if (selectedTopic === '') {
-      console.log('BLAH');
       this.setState({ newTopicError: true }, () => this.checkError());
     } else this.setState({ newTopicError: false });
 
@@ -65,18 +64,20 @@ class NewArticle extends Component {
 
   checkError = () => {
     const {
-      newTopicError, newBodyError, newTitleError, errorDetected
+      newTopicError, newBodyError, newTitleError
     } = this.state;
-    console.log('in check error', this.state);
+    // console.log('in check error', this.state);
     if (newTitleError || newBodyError || newTopicError) {
-      this.setState({ errorDetected: true }, () => console.log('errorDetected', errorDetected));
-    } else this.setState({ errorDetected: false }, () => console.log('errorDetected', errorDetected));
+      this.setState({ errorDetected: true });
+    } else this.setState({ errorDetected: false });
 
     return false;
   }
 
   handleSubmit = (event) => {
-    const { title, body, selectedTopic } = this.state;
+    const {
+      title, body, selectedTopic
+    } = this.state;
     const { user, handleAddArticle } = this.props;
     const newart = {
       title,
@@ -85,30 +86,18 @@ class NewArticle extends Component {
       topic: selectedTopic,
     };
 
-    // addNewArticle(selectedTopic, newart);
 
-    // Object.keys(newart).forEach((article_item) => {
-    //   if (!newart[article_item]) {
-    //     console.log('hi');
-    //     if (article_item === 'body') this.setState({ newArticleError: `${this.state.newArticleError} Article text, ` });
-    //     else this.setState({ newArticleError: `${this.state.newArticleError} ${article_item}, ` });
-    //   }
-    // });
-
-    // if (this.state.newart.newArticleError !== '') alert(`please enter ${this.state.newart.newArticleError}`);
-
-    // if (!this.state.errorDetected) {
-    //   console.log('hi', this.state);
     handleAddArticle(newart, user.username || JSON.parse(sessionStorage.user));
     this.handleReset();
-    // } else alert(`please enter ${this.state.newart.newArticleError}`);
 
 
     event.preventDefault();
   };
 
   render() {
-    const { title, body } = this.state;
+    const {
+      title, body, newTitleError, newBodyError, newTopicError, errorDetected
+    } = this.state;
     const { topics } = this.props;
 
     return (
@@ -120,7 +109,7 @@ class NewArticle extends Component {
 
             <div className="newFormLine">
               <h3>Title</h3>
-              <div className={`newTitle ${this.state.newTitleError ? 'article-invalid' : ''}`}>
+              <div className={`newTitle ${newTitleError ? 'article-invalid' : ''}`}>
                 <input
                   value={title}
                   name="title"
@@ -143,7 +132,7 @@ class NewArticle extends Component {
 
             <div>
               <textarea
-                className={`newArticleText ${this.state.newBodyError ? 'article-invalid' : ''}`}
+                className={`newArticleText ${newBodyError ? 'article-invalid' : ''}`}
                 value={body}
                 name="body"
 
@@ -159,19 +148,19 @@ class NewArticle extends Component {
 
 
             <div className="newArticleOptions newFormLine">
-              <div className={`newArticleTopicSelect ${this.state.newTopicError ? 'article-invalid' : ''} `}>
+              <div className={`newArticleTopicSelect ${newTopicError ? 'article-invalid' : ''} `}>
                 <h3>Topic</h3>
 
 
                 <TopicSelector
-                  errorLabel={this.state.newTopicError ? 'topicselector-error' : ''}
+                  errorLabel={newTopicError ? 'topicselector-error' : ''}
                   handleTopic={this.handleTopic}
                   topics={topics}
 
                 />
               </div>
 
-              <button disabled={this.state.errorDetected} className={this.state.errorDetected ? 'button-disabled newArticleSubmitButton' : 'newArticleSubmitButton'} type="submit">Add New Article</button>
+              <button disabled={errorDetected} className={errorDetected ? 'button-disabled newArticleSubmitButton' : 'newArticleSubmitButton'} type="submit">Add New Article</button>
             </div>
 
           </form>

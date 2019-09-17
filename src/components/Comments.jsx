@@ -153,14 +153,14 @@ class Comments extends Component {
                       />
                     </div>
                   ) : (
-                      <div className="foot-item">
-                        {' '}
+                    <div className="foot-item">
+                      {' '}
                         Comment Author:
                       <div className="comment-foot__value">
-                          {comment.author}
-                        </div>
+                        {comment.author}
                       </div>
-                    )}
+                    </div>
+                  )}
 
                   <div className="foot-item">
                     Comment Created:

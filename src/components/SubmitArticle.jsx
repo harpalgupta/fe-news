@@ -9,7 +9,6 @@ class SubmitArticle extends Component {
     newForm: { title: '', user_id: this.props.user.user_id, body: '' }
   };
 
-
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState(

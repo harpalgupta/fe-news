@@ -19,8 +19,7 @@ class Login extends Component {
     setTimeout(() => {
       this.setState({ delayed: true });
     }, 1000);
-  }
-
+  };
 
   fetchUsers = () => {
     api
@@ -55,60 +54,66 @@ class Login extends Component {
     if (user.username) return children;
 
     return (
-        <div className="login-body">
-          <h2>Login Page</h2>
-          <div>
-            <form className="loginForm" onSubmit={this.handleSubmit}>
-              <input
-                className="loginInput"
-                value={this.state.user}
-                onChange={this.handleChange}
-                pattern=".{4,}"
-                required
-                title="4 characters minimum"
-              />
-              <button type="submit">Login</button>
-            </form>
-
-          </div>
-
-          <div className="login-list">
-
-            <div className="valid-users">
-              <h3>Valid Users:</h3>
-
-              <div className={!delayed || users.length === 0 ? 'lds-dual-ring' : 'loaded-users'}><div className="loading-text">Getting Users..</div></div>
-
-
-              <ul className={delayed && users.length !== 0 ? 'user-list' : 'loaded-users'}>
-                {users.map((user) => {
-                  const avtarurl = user.avatar_url.replace('https://', 'http://');
-                  // console.log(avtarurl)
-                  return (
-                    <div key={user.username} className="user-entry">
-                      <li key={user.username}>
-                        {' '}
-                        <img
-                          className="userAvatar"
-                          src={avtarurl}
-                          alt={user.username}
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = 'https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png';
-                          }}
-                        />
-                        <div className="usernameEntry">{user.username}</div>
-                      </li>
-                    </div>
-                  );
-                })}
-              </ul>
-            </div>
-            
-          </div>
-
+      <div className="login-body">
+        <h2>Login Page</h2>
+        <div>
+          <form className="loginForm" onSubmit={this.handleSubmit}>
+            <input
+              className="loginInput"
+              value={this.state.user}
+              onChange={this.handleChange}
+              pattern=".{4,}"
+              required
+              title="4 characters minimum"
+            />
+            <button type="submit">Login</button>
+          </form>
         </div>
-       
+
+        <div className="login-list">
+          <div className="valid-users">
+            <h3>Valid Users:</h3>
+
+            <div
+              className={
+                !delayed || users.length === 0
+                  ? 'lds-dual-ring'
+                  : 'loaded-users'
+              }
+            >
+              <div className="loading-text">Getting Users..</div>
+            </div>
+
+            <ul
+              className={
+                delayed && users.length !== 0 ? 'user-list' : 'loaded-users'
+              }
+            >
+              {users.map((user) => {
+                const avtarurl = user.avatar_url.replace('https://', 'http://');
+                // console.log(avtarurl)
+                return (
+                  <div key={user.username} className="user-entry">
+                    <li key={user.username}>
+                      {' '}
+                      <img
+                        className="userAvatar"
+                        src={avtarurl}
+                        alt={user.username}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = 'https://img.icons8.com/ios-glyphs/30/000000/gender-neutral-user.png';
+                        }}
+                      />
+                      <div className="usernameEntry">{user.username}</div>
+                    </li>
+                  </div>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </div>
     );
   }
 }
