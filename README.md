@@ -12,7 +12,7 @@ Source code for Backend URL= https://github.com/harpalgupta/BE2-NC-Knews-harpal
 
 
 
-##Pre requirements:
+## Pre requirements:
 You will have npm available
 
 To install locally:
