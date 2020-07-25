@@ -60,11 +60,7 @@
 }
 
 
-.login-list{
-  display: inline-block;
-  text-align: left;
-  
-}
+
 
 .usernameEntry{
   display: inline;
@@ -115,4 +111,13 @@
 
  .loaded-users{
   display: none;
+}
+
+
+@media only screen and (min-width: 376px) {
+  .login-list{
+    display: inline-block;
+    text-align: left;
+    
+  }
 }

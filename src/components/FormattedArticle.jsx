@@ -15,8 +15,10 @@ function FormattedArticle(
 ) {
   const artDate = new Date(article.created_at);
   return (
-    <>
-      <div className="articletitle">{article.title}</div>
+    <div className="card bg-dark">
+      <div className="card-title">
+        <h4>{article.title}</h4>
+      </div>
 
       <Votes
         article_id={article.article_id}
@@ -27,7 +29,7 @@ function FormattedArticle(
         user={user}
         author={article.author}
       />
-      <div className="article-body">
+      <div className="card-body">
         {singleArticle ? (
           article.body
         ) : (
@@ -40,7 +42,7 @@ function FormattedArticle(
         )}
       </div>
 
-      <div key={article.article_id} className="article-foot">
+      <div key={article.article_id} className="card-footer">
         <div>
           Topic:
           <div className="article-foot__value">{article.topic}</div>
@@ -76,7 +78,7 @@ function FormattedArticle(
           {artDate.toLocaleTimeString()}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

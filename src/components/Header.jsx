@@ -16,7 +16,7 @@ class Header extends Component {
           />
           <div className="header-text">K-News</div>
         </div>
-        <div className="LoginHeader">
+        <div className="LoginHeader m-0">
           <div className="loginHeaderContent">
             <div className="loginUser">
               {this.props.user.username ? (
@@ -32,7 +32,7 @@ class Header extends Component {
                     </div>
                   </div>
 
-                  <button className="logout-button" onClick={this.props.logOut}>
+                  <button className="btn btn-info" onClick={this.props.logOut}>
                     Log Out
                   </button>
                 </>

@@ -59,7 +59,7 @@ class Article extends Component {
             <div className="article-list">
 
 
-              <div className="article-entry">
+              <div>
                 {article.title ? FormattedArticle(true, article, 0, user, this.handleUpdateVotes, this.handleDeleteArticle) : 'Deleted'}
 
 
