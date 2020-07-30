@@ -57,7 +57,7 @@ class Login extends Component {
       <div className="col-row col-sm-6">
         <h2 className="ml-0">Login Page</h2>
         <div>
-          <form className="float-left col-sm-12 pl-0" onSubmit={this.handleSubmit}>
+          <form className="float-left col-sm-12 p-0" onSubmit={this.handleSubmit}>
             <div className="input-group mb-3">
               <input
                 type="text"

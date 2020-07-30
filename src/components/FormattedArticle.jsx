@@ -15,8 +15,9 @@ function FormattedArticle(
 ) {
   const artDate = new Date(article.created_at);
   return (
-    <div className="card bg-dark">
-      <div className="card-title">
+    <div className="card bg-dark mt-5">
+    <div className="card-body">
+    <div className="card-title">
         <h4>{article.title}</h4>
       </div>
 
@@ -29,7 +30,7 @@ function FormattedArticle(
         user={user}
         author={article.author}
       />
-      <div className="card-body">
+      <div className="card-text">
         {singleArticle ? (
           article.body
         ) : (
@@ -78,6 +79,7 @@ function FormattedArticle(
           {artDate.toLocaleTimeString()}
         </div>
       </div>
+    </div>
     </div>
   );
 }

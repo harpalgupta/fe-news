@@ -112,8 +112,9 @@ class Articles extends Component {
     const {
       topics, selectedTopic, articles, disableMoreButton
     } = this.state;
-    return (
-      <div>
+    return (<div className="row">
+    <div className="col-sm-1"></div>
+      <div className="col-sm-10 pt-5">
         <div className="new-article">
           <NewArticle
             handleAddArticle={this.handleAddArticle}
@@ -213,6 +214,7 @@ Topic
         )}
         <div />
 
+      </div>
       </div>
     );
   }

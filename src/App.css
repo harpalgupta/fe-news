@@ -300,6 +300,14 @@ html{
   .footerContent a:hover{
     color: black;
   }
+
+  .card{
+    opacity: .9;
+  }
+
+  .card-text > a{
+    color: white
+  }
  
 
   @media only screen and (max-width: 376px) {

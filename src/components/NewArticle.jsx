@@ -101,10 +101,10 @@ class NewArticle extends Component {
     const { topics } = this.props;
 
     return (
-      <div>
-        <h2>Add New Article</h2>
+      <div className="card bg-dark">
+        <h2 className="card-title">Add New Article</h2>
 
-        <div className="article-entry">
+        <div className="card-body">
           <form className="newForm" onSubmit={this.handleSubmit}>
 
             <div className="newFormLine">
@@ -160,7 +160,7 @@ class NewArticle extends Component {
                 />
               </div>
 
-              <button disabled={errorDetected} className={errorDetected ? 'button-disabled newArticleSubmitButton' : 'newArticleSubmitButton'} type="submit">Add New Article</button>
+              <button disabled={errorDetected} className={errorDetected ? 'button-disabled btn btn-info' : 'btn btn-info'} type="submit">Add New Article</button>
             </div>
 
           </form>
