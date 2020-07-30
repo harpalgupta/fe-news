@@ -83,21 +83,24 @@ class Login extends Component {
         </div>
 
         <div className="">
-          <div className="card bg-dark">
+          <div className="valid-user card bg-dark">
             <div className="card-title">
               <h3>Valid Users:</h3>
             </div>
 
-
-            <div
-              className={
+            <div className="loading-section">
+              <div
+                className={
                 !delayed || users.length === 0
                   ? 'lds-dual-ring'
                   : 'loaded-users'
               }
-            >
-              <div className="loading-text">Getting Users..</div>
+              >
+                <div className="loading-text">Getting Users..</div>
+              </div>
+
             </div>
+
 
             <ul
               className={

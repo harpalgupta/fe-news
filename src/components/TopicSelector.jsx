@@ -24,7 +24,7 @@ class TopicSelector extends Component {
         }}
       >
         <option key="Select a Topic" value="">
-          all topics
+          select topic
         </option>
 
         {topics.map(topic => (
