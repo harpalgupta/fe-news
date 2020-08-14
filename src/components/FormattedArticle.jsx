@@ -23,7 +23,7 @@ function FormattedArticle(
 
 
         <div className="row">
-          <div className="col-sm-1 p-0">
+          <div className="col-sm-2 p-0">
             {' '}
             <Votes
               article_id={article.article_id}
@@ -35,7 +35,7 @@ function FormattedArticle(
               author={article.author}
             />
           </div>
-          <div className="card-text col-sm-11 float-right">
+          <div className="text-left card-text col-sm-10 pr-5">
             {singleArticle ? (
               article.body
             ) : (
@@ -48,9 +48,9 @@ function FormattedArticle(
             )}
           </div>
         </div>
+        <hr />
 
-
-        <div key={article.article_id} className="card-footer">
+        <div key={article.article_id} className="card-footer bg-secondary text-left">
           <div>
           Topic:
             <div className="article-foot__value">{article.topic}</div>

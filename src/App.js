@@ -48,8 +48,8 @@ class App extends Component {
 
           <div className="content-background">
             <div className="overlay row">
-              <div className="col  col-sm-2" />
-              <div className="col-sm-8">
+              <div className="col  col-sm-2 col-md-1" />
+              <div className="col-sm-8 col-md-11">
                 <Login
                   storeUser={this.storeUser}
                 // user={this.state.user}

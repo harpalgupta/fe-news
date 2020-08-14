@@ -322,3 +322,7 @@ html{
   
     }
   }
+
+  hr{
+    border-color: rgba(175, 177, 175,0.8);
+  }
