@@ -54,35 +54,53 @@ class Login extends Component {
     if (user.username) return children;
 
     return (
-      <div className="login-body">
-        <h2>Login Page</h2>
+      <div className="col-row col-sm-6">
+        <h2 className="ml-0">Login Page</h2>
         <div>
-          <form className="loginForm" onSubmit={this.handleSubmit}>
-            <input
-              className="loginInput"
-              value={this.state.user}
-              onChange={this.handleChange}
-              pattern=".{4,}"
-              required
-              title="4 characters minimum"
-            />
-            <button type="submit">Login</button>
+          <form className="float-left col-sm-12 p-0" onSubmit={this.handleSubmit}>
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Login User"
+                aria-label="Login User"
+                aria-describedby="basic-addon2"
+                value={this.state.user}
+                onChange={this.handleChange}
+                pattern=".{4,}"
+                required
+                title="4 characters minimum"
+              />
+              <div className="input-group-append">
+                <button className="btn btn-info" type="submit">Login</button>
+              </div>
+
+
+            </div>
           </form>
+
+
         </div>
 
-        <div className="login-list">
-          <div className="valid-users">
-            <h3>Valid Users:</h3>
+        <div className="">
+          <div className="valid-user card bg-dark">
+            <div className="card-title">
+              <h3>Valid Users:</h3>
+            </div>
 
-            <div
-              className={
+            <div className="loading-section">
+              <div
+                className={
                 !delayed || users.length === 0
                   ? 'lds-dual-ring'
                   : 'loaded-users'
               }
-            >
-              <div className="loading-text">Getting Users..</div>
+              >
+                <div className="loading-text">Getting Users..</div>
+              </div>
+
             </div>
+
 
             <ul
               className={

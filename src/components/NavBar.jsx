@@ -13,16 +13,20 @@ class NavBar extends Component {
 
   render() {
     return (
+
       <div className="navbar">
-        <div className="navbar-link">
-          <Link to="/articles">
-            <button className="navbar-button" type="button">
+        <div className="navbar" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+              <Link to="/articles">
               Home
-            </button>
+              </Link>
 
-          </Link>
-
+            </li>
+          </ul>
         </div>
+
+
       </div>
     );
   }

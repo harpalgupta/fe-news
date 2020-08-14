@@ -300,6 +300,18 @@ html{
   .footerContent a:hover{
     color: black;
   }
+
+  .card{
+    opacity: .9;
+  }
+
+  .card-text > a{
+    color: white
+  }
+
+  .valid-user{
+    height: 300px;
+  }
  
 
   @media only screen and (max-width: 376px) {
@@ -309,4 +321,8 @@ html{
     
   
     }
+  }
+
+  hr{
+    border-color: rgba(175, 177, 175,0.8);
   }

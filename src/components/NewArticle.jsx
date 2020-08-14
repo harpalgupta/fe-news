@@ -101,15 +101,18 @@ class NewArticle extends Component {
     const { topics } = this.props;
 
     return (
-      <div>
-        <h2>Add New Article</h2>
+      <div className="card bg-dark">
+        <h2 className="card-title">Add New Article</h2>
 
-        <div className="article-entry">
+        <div className="card-body">
           <form className="newForm" onSubmit={this.handleSubmit}>
 
             <div className="newFormLine">
-              <h3>Title</h3>
-              <div className={`newTitle ${newTitleError ? 'article-invalid' : ''}`}>
+
+              <div className={`newTitle input-group mb-3 ${newTitleError ? 'article-invalid' : ''}`}>
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon3">Title</span>
+                </div>
                 <input
                   value={title}
                   name="title"
@@ -125,14 +128,15 @@ class NewArticle extends Component {
                 />
               </div>
 
+
             </div>
 
-
-            <h3>Article Text</h3>
-
-            <div>
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text">Article Text</span>
+              </div>
               <textarea
-                className={`newArticleText ${newBodyError ? 'article-invalid' : ''}`}
+                className={`form-control newArticleText ${newBodyError ? 'article-invalid' : ''}`}
                 value={body}
                 name="body"
 
@@ -144,23 +148,21 @@ class NewArticle extends Component {
                 cols="50"
                 wrap="soft"
               />
+              {' '}
+
             </div>
 
 
             <div className="newArticleOptions newFormLine">
               <div className={`newArticleTopicSelect ${newTopicError ? 'article-invalid' : ''} `}>
-                <h3>Topic</h3>
-
-
                 <TopicSelector
                   errorLabel={newTopicError ? 'topicselector-error' : ''}
                   handleTopic={this.handleTopic}
                   topics={topics}
-
                 />
               </div>
 
-              <button disabled={errorDetected} className={errorDetected ? 'button-disabled newArticleSubmitButton' : 'newArticleSubmitButton'} type="submit">Add New Article</button>
+              <button disabled={errorDetected} className={errorDetected ? 'button-disabled btn btn-info' : 'btn btn-info'} type="submit">Add New Article</button>
             </div>
 
           </form>

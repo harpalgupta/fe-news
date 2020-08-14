@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.css';
+
 import React, { Component } from 'react';
 import './App.css';
 import { Router } from '@reach/router';
@@ -45,46 +47,49 @@ class App extends Component {
         <div className="content">
 
           <div className="content-background">
-            <div className="overlay">
-
-
-              <Login
-                storeUser={this.storeUser}
+            <div className="overlay row">
+              <div className="col  col-sm-2 col-md-1" />
+              <div className="col-sm-8 col-md-11">
+                <Login
+                  storeUser={this.storeUser}
                 // user={this.state.user}
-                user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ''}
-              >
-                <Router>
-                  <Articles
-                    path="/articles"
-                    topic={selectedTopic}
-                    user={
+                  user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ''}
+                >
+                  <Router>
+                    <Articles
+                      path="/articles"
+                      topic={selectedTopic}
+                      user={
                       sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
 
                     }
-                    default
-                  />
-                  <Topics path="/topics/*" />
+                      default
+                    />
+                    <Topics path="/topics/*" />
 
-                  <Article
-                    path="/articles/:article_id"
-                    user={
+                    <Article
+                      path="/articles/:article_id"
+                      user={
                       sessionStorage.user ? JSON.parse(sessionStorage.user) : ''
                     }
-                  />
+                    />
 
-                  <DeleteArticle path="/articles/:article_id/delete" />
-                  <DeleteComment path="/articles/:article_id/comments/:comment_id/delete" />
-                </Router>
-              </Login>
+                    <DeleteArticle path="/articles/:article_id/delete" />
+                    <DeleteComment path="/articles/:article_id/comments/:comment_id/delete" />
+                  </Router>
+                </Login>
 
-              <>
-                <Router>
-                  <Errors path="/error" />
-                </Router>
-              </>
+                <>
+                  <Router>
+                    <Errors path="/error" />
+                  </Router>
+                </>
+
+              </div>
+              <Footer />
+
 
             </div>
-            <Footer />
 
           </div>
         </div>

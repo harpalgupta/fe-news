@@ -48,7 +48,7 @@ class Votes extends Component {
         <button
           type="button"
           key={`${id}UP`}
-          className="votearrow vote-up"
+          className="votearrow vote-up col-sm-12"
           disabled={user.username === author || sessionVote === 1}
           onClick={() => {
             if (type === 'comment') {
@@ -63,12 +63,15 @@ class Votes extends Component {
           {' '}
           <FontAwesomeIcon icon={faArrowUp}>voteUp</FontAwesomeIcon>
         </button>
+        <p className="col-sm-12 m-0">
         Votes:
-        {votes}
+
+          {votes}
+        </p>
         <button
           type="button"
           key={`${article_id}Down`}
-          className="votearrow vote-down"
+          className="votearrow vote-down col-sm-12"
           disabled={user.username === author || sessionVote === -1 || votes <= 0}
           onClick={() => {
             if (type === 'comment') {

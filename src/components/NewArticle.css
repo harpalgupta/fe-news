@@ -1,5 +1,5 @@
 .newTitle.article-invalid input , .newArticleText.article-invalid, .topicselector-error{
-  border-width: 5px;
+  border-width: 2px;
   border-color: red;
 }
 

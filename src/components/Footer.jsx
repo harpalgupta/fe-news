@@ -21,7 +21,7 @@ class Footer extends PureComponent {
 
         <div className="pfoot">
           <div>
-            <div className="footerContent">
+            <div className="footerContent ml-5">
               <div>Harpal Gupta</div>
 
               <button type="button" className="ShowInfoButton" onClick={this.setShowInfo}>

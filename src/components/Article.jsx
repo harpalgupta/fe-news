@@ -52,14 +52,16 @@ class Article extends Component {
     }
 
     return (
-      <div>
-        <h2>{article.title ? article.title : 'Deleted Article'}</h2>
+      <div className="row">
+      <div className="col-sm-1"></div>
+ <div className="col-sm-10">
+        {/* <h2>{article.title ? article.title : 'Deleted Article'}</h2> */}
         {article.title
           ? (
             <div className="article-list">
 
 
-              <div className="article-entry">
+              <div>
                 {article.title ? FormattedArticle(true, article, 0, user, this.handleUpdateVotes, this.handleDeleteArticle) : 'Deleted'}
 
 
@@ -68,6 +70,8 @@ class Article extends Component {
             </div>
           ) : <div className="article-list" />}
       </div>
+      </div>
+     
     );
   }
 }
