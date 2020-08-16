@@ -19,7 +19,7 @@ class Footer extends PureComponent {
       const { showInfo } = this.state;
       return (
 
-        <div className="pfoot">
+        <div className="pfoot col-sm-12">
           <div>
             <div className="footerContent ml-5">
               <div>Harpal Gupta</div>

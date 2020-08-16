@@ -37,18 +37,17 @@ class App extends Component {
   render() {
     const { selectedTopic } = this.state;
     return (
-      <div className="App">
+      <div className="App row">
         <Header
           user={sessionStorage.user ? JSON.parse(sessionStorage.user) : ''}
           logOut={this.logOut}
         />
         <NavBar handleTopic={this.handleTopic} />
-        <SideBar />
-        <div className="content">
+        <div className="content col-sm-12 pr-0">
 
-          <div className="content-background">
-            <div className="overlay row">
-              <div className="col  col-sm-2 col-md-1" />
+          <div className="content-background col-sm-12">
+            <div className="overlay row pt-5">
+
               <div className="col-sm-8 col-md-11">
                 <Login
                   storeUser={this.storeUser}

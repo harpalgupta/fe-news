@@ -8,15 +8,21 @@ class Header extends Component {
   render() {
     return (
       <>
-        <div className="header">
-          <img
-            className="header-img"
-            src="https://northcoders.com/images/logos/learn_to_code_manchester_rw_second.png"
-            alt="northcoders logo"
-          />
-          <div className="header-text">K-News</div>
+        <div className="header col-sm-12">
+          <div className="col row">
+            <div className="col-sm-4 text-left">
+              <img
+                className="header-img"
+                src="https://northcoders.com/images/logos/learn_to_code_manchester_rw_second.png"
+                alt="northcoders logo"
+              />
+            </div>
+
+            <div className="header-text">K-News</div>
+          </div>
+
         </div>
-        <div className="LoginHeader m-0">
+        <div className="LoginHeader m-0 col-sm-12">
           <div className="loginHeaderContent">
             <div className="loginUser">
               {this.props.user.username ? (
