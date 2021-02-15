@@ -21,6 +21,7 @@ export const fetchArticles = async (topic, queries) => {
     url = url.replace(/&$/, '');
   }
   const { data } = await axios.get(url);
+  console.log(data);
   return data;
 };
 

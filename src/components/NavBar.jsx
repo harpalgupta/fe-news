@@ -14,7 +14,7 @@ class NavBar extends Component {
   render() {
     return (
 
-      <div className="navbar">
+      <div className="navbar col-12">
         <div className="navbar" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">

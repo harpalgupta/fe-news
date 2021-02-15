@@ -45,7 +45,8 @@ class Articles extends Component {
           );
         })
         .catch((err) => {
-          if (err) this.setState({ disableMoreButton: true });
+          console.log('in catch');
+          if (err) this.setState({ disableMoreButton: true }, () => {});
         });
     } else if (prevState.queries !== queries) {
       api
@@ -124,112 +125,103 @@ class Articles extends Component {
               handleTopic={this.handleTopic}
             />
           </div>
-          {selectedTopic ? (
-            <div>
-              <h2>
-              Articles By
-                {' '}
-                {selectedTopic}
-                {' '}
-Topic
-              </h2>
-            </div>
-          ) : (
-            <div>
-              {' '}
-              <h2>Articles</h2>
-              <div className="card bg-secondary">
-                <div className="card-body p-1" />
 
-                <div className="row">
+          <div>
+            {' '}
 
-                  <div className="col-md-3 col-sm-3">
-                    <select
+            <h2 className="text-capitalize">{selectedTopic || 'Articles'}</h2>
+            <div className="card bg-secondary">
+              <div className="card-body p-1" />
 
-                      name="topicselector"
-                      id="topicselector"
-                      onChange={(event) => {
-                        this.handleTopic(event.target.value);
-                      }}
-                    >
-                      <option key="all" value="">
+              <div className="row">
+
+                <div className="col-4">
+                  <label>Topic</label>
+
+                  <select
+
+                    name="topicselector"
+                    id="topicselector"
+                    onChange={(event) => {
+                      this.handleTopic(event.target.value);
+                    }}
+                  >
+                    <option key="all" value="">
               all topics
-                      </option>
+                    </option>
 
-                      {topics.map(topic => (
-                        <option key={topic.slug} value={topic.slug}>
-                          {topic.slug}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="col-md-5 col-sm-9">
-                    <label>Sort by</label>
-                    <select
-                      name="sort_by"
-                      id="sort_by"
-                      onChange={(event) => {
-                        this.handleQuery('sort_by', event.target.value);
-                      }}
-                    >
-                      <option key="all" value="">
-              Created Date
+                    {topics.map(topic => (
+                      <option key={topic.slug} value={topic.slug}>
+                        {topic.slug}
                       </option>
-                      <option key="title" value="title">
-              Title
-                      </option>
-                      <option key="votes" value="votes">
-              Votes
-                      </option>
-                      <option key="topics" value="topics">
-              Topic
-                      </option>
-                    </select>
-                  </div>
-
-
-                  <div className="col-md-4 col-sm-12 text-left">
-                    <label>Sort</label>
-                    <select
-                      name="sort_ascending"
-                      id="sort_ascending"
-                      onChange={(event) => {
-                        this.handleQuery('sort_ascending', event.target.value);
-                      }}
-                    >
-                      <option key="sort_descending" value="false">
-              Descending
-                      </option>
-                      <option key="sort_ascending" value="true">
-              Ascending
-                      </option>
-                    </select>
-                  </div>
+                    ))}
+                  </select>
                 </div>
 
-              </div>
-              <div className="article-list">
-                {articles.map((article, index) => (
-                  <div className="" key={article.article_id}>
-                    {FormattedArticle(false, article, index, user,
-                      this.handleUpdateVotes, this.handleDeleteArticle)}
-                  </div>
-                ))}
-                <div />
-              </div>
-              <button
-                className="moreButton"
-                type="button"
-                disabled={disableMoreButton}
-                onClick={this.fetchMoreArticles}
-              >
-          More Articles
-              </button>
-            </div>
-          )}
-          <div />
+                <div className="col-4">
+                  <label>Sort by</label>
+                  <select
+                    name="sort_by"
+                    id="sort_by"
+                    onChange={(event) => {
+                      this.handleQuery('sort_by', event.target.value);
+                    }}
+                  >
+                    <option key="all" value="">
+              Created Date
+                    </option>
+                    <option key="title" value="title">
+              Title
+                    </option>
+                    <option key="votes" value="votes">
+              Votes
+                    </option>
+                    <option key="topics" value="topics">
+              Topic
+                    </option>
+                  </select>
+                </div>
 
+
+                <div className="col-4">
+                  <label>Sort</label>
+                  <select
+                    name="sort_ascending"
+                    id="sort_ascending"
+                    onChange={(event) => {
+                      this.handleQuery('sort_ascending', event.target.value);
+                    }}
+                  >
+                    <option key="sort_descending" value="false">
+              Descending
+                    </option>
+                    <option key="sort_ascending" value="true">
+              Ascending
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+            <div className="article-list">
+              {articles.map((article, index) => (
+                <div className="" key={article.article_id}>
+                  {FormattedArticle(false, article, index, user,
+                    this.handleUpdateVotes, this.handleDeleteArticle)}
+                </div>
+              ))}
+              <div />
+            </div>
+            <button
+              className="moreButton"
+              type="button"
+              disabled={disableMoreButton}
+              hidden={disableMoreButton}
+              onClick={this.fetchMoreArticles}
+            >
+          More Articles
+            </button>
+          </div>
         </div>
       </div>
     );

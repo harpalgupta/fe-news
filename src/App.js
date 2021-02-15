@@ -44,9 +44,9 @@ class App extends Component {
         />
         <NavBar handleTopic={this.handleTopic} />
         <SideBar />
-        <div className="content">
+        <div className={sessionStorage.user ? 'content' : 'content h-100'}>
 
-          <div className="content-background">
+          <div className={sessionStorage.user ? 'content-background' : 'content-background h-100'}>
             <div className="overlay row">
               <div className="col  col-sm-2 col-md-1" />
               <div className="col-sm-8 col-md-11">

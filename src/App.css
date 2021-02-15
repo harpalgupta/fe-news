@@ -17,11 +17,6 @@ html{
   }
   .App {
     text-align: center;
-    display: grid;
-    grid-template-columns:  5fr 3fr;
-    grid-template-rows:2fr 1fr 24fr 1fr;
-    grid-template-areas:
-      "header loginheader" "navbar navbar" "content content" "pfoot pfoot" ;
     height: 100%;
     font-family: 'Work Sans', sans-serif;
 
@@ -223,7 +218,6 @@ html{
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-  height: 100%;
   z-index: 1;
   width: 100%;
   }
