@@ -48,8 +48,7 @@ class App extends Component {
 
           <div className={sessionStorage.user ? 'content-background' : 'content-background h-100'}>
             <div className="overlay row">
-              <div className="col  col-sm-2 col-md-1" />
-              <div className="col-sm-8 col-md-11">
+              <div className="ml-5 col-10">
                 <Login
                   storeUser={this.storeUser}
                 // user={this.state.user}
