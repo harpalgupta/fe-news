@@ -135,7 +135,7 @@ class Articles extends Component {
 
               <div className="row">
 
-                <div className="col-4">
+                <div className="col-6 col-md-4">
                   <label>Topic</label>
 
                   <select
@@ -158,7 +158,7 @@ class Articles extends Component {
                   </select>
                 </div>
 
-                <div className="col-4">
+                <div className="col-6 col-md-4">
                   <label>Sort by</label>
                   <select
                     name="sort_by"
@@ -168,7 +168,7 @@ class Articles extends Component {
                     }}
                   >
                     <option key="all" value="">
-              Created Date
+              Date
                     </option>
                     <option key="title" value="title">
               Title
@@ -183,7 +183,7 @@ class Articles extends Component {
                 </div>
 
 
-                <div className="col-4">
+                <div className="col-6 col-md-4">
                   <label>Sort</label>
                   <select
                     name="sort_ascending"
