@@ -136,7 +136,7 @@ class Articles extends Component {
               <div className="row">
 
                 <div className="col-6 col-md-4">
-                  <label>Topic</label>
+                  <label htmlFor="topicselector">Topic</label>
 
                   <select
 
