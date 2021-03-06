@@ -13,9 +13,10 @@ export const fetchArticles = async (topic, queries) => {
   }
   if (queries) {
     queryStr = '?';
-    for (const query in queries) {
+
+    queries.forEach((query) => {
       queryStr += `${query}=${queries[query]}&`;
-    }
+    });
 
     url += queryStr;
     url = url.replace(/&$/, '');
@@ -31,7 +32,8 @@ export const fetchAllTopics = async () => {
   return data;
 };
 export const checkUserValid = async (username) => {
-  const url = `${BASEURL}/users/${username}`;
+  const cleanedUser = username.toLowerCase();
+  const url = `${BASEURL}/users/${cleanedUser}`;
   const { data } = await axios.get(url);
   return data;
 };
@@ -41,9 +43,9 @@ export const fetchCommentsByArticle = async (article_id, queries) => {
   let queryStr = '';
   if (queries) {
     queryStr = '?';
-    for (const query in queries) {
+    queries.forEach((query) => {
       queryStr += `${query}=${queries[query]}&`;
-    }
+    });
 
     url += queryStr;
     url = url.replace(/&$/, '');
@@ -64,7 +66,8 @@ export const updateVotes = async (type, article_id, inc, comment_id) => {
     const body = { inc_votes: inc };
     const { data } = await axios.patch(url, body);
     return data;
-  } if (type === 'comment') {
+  }
+  if (type === 'comment') {
     const url = `${BASEURL}/articles/${article_id}/comments/${comment_id}`;
     const body = { inc_votes: inc };
     const { data } = await axios.patch(url, body);

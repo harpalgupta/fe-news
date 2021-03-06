@@ -8,10 +8,10 @@ import logo from '../resources/img/Nc.png';
 export default function Header(props) {
   const { user, logOut } = props;
   return (
-    <div className="header pl-4 d-flex justify-content-between">
+    <div className="header pl-4 pr-2 ">
       <img className="header-img" src={logo} alt="northcoders logo" />
-      <div className="header-text">K-News</div>
-      <div className="LoginHeader m-0">
+      <div className="header-text pl-2">K-News</div>
+      <div className="LoginHeader m-0 p-0">
         <div className="loginHeaderContent">
           <div className="loginUser">
             {user.username ? (
@@ -32,7 +32,7 @@ export default function Header(props) {
                 </button>
               </>
             ) : (
-              <div className="not-loggedin">Not Logged in</div>
+              <div className="not-loggedin" />
             )}
           </div>
         </div>
