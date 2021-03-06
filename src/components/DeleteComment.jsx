@@ -20,6 +20,8 @@ class DeleteComment extends Component {
     .catch(err => handleErrors(err));
 
   render() {
+    const { article_id, comment_id } = this.props;
+
     const artId = article_id * 1;
     const comId = comment_id * 1;
 
